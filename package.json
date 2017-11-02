@@ -1,0 +1,22 @@
+{
+  "name": "ronda",
+  "version": "0.0.0",
+  "description": "Ronda es un proyecto de contenidos digitales con fines educativos para que todos podamos participar y acceder.",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dte-ba/ronda.git"
+  },
+  "keywords": [
+    "Ronda"
+  ],
+  "author": "Dte-ba",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Dte-ba/ronda/issues"
+  },
+  "homepage": "https://github.com/Dte-ba/ronda#readme"
+}
