@@ -1,6 +1,7 @@
 'use strict';
 
 import path from 'path';
+import runSequence from 'run-sequence';
 
 export default (gulp, plugins, config) => {
 
@@ -24,7 +25,14 @@ export default (gulp, plugins, config) => {
 
 	trask_('inject:scss:app', gulp, plugins, appOps);
 
-	gulp.task('inject:scss', ['inject:scss:ui', 'inject:scss:app']);
+	gulp.task('inject:scss', (cb) => {
+		runSequence(['inject:scss:ui', 'inject:scss:app'], cb);
+	});
+
+	
+	gulp.task('inject', (cb) => {
+		runSequence(['inject:scss'], cb);
+	});
 }
 
 function transform_(ops) {

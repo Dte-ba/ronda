@@ -207,6 +207,16 @@ module.exports = function makeWebpackConfig(options) {
         );
     }
 
+    config.devServer = {
+        contentBase: './client/',
+        stats: {
+            modules: false,
+            cached: false,
+            colors: true,
+            chunk: false
+        }
+    };
+
     config.cache = DEV;
 
     return config;
