@@ -28,3 +28,9 @@ node_modules
 
 # Visual Studio Code
 .vscode
+
+# Temporal stuff
+.tmp
+
+# Build
+dist
