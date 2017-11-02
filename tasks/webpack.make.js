@@ -140,7 +140,7 @@ module.exports = function makeWebpackConfig(options) {
     if(!TEST) {
         let htmlConfig = {
             template: 'client/_index.html',
-            filename: '../client/index.html',
+            filename: '../../client/index.html',
             alwaysWriteToDisk: true
         }
         config.plugins.push(

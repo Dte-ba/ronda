@@ -19,10 +19,13 @@ let config = {
 
 tasksFactory(gulp, plugins, config);
 
+gulp.task('watch', ['watch:inject']);
+
 gulp.task('serve', cb => {
 	runSequence(
 			[
-					'clean:tmp', 'inject'
+					'clean:tmp', 
+					'inject'
 			],
 			'webpack:dev',
 			'start:server',
@@ -34,7 +37,8 @@ gulp.task('serve', cb => {
 gulp.task('serve:debug', cb => {
 	runSequence(
 			[
-					'clean:tmp', 'inject'
+					'clean:tmp', 
+					'inject'
 			],
 			'webpack:dev',
 			['start:server:debug'],
@@ -44,9 +48,3 @@ gulp.task('serve:debug', cb => {
 });
 
 gulp.task('clean:tmp', () => del(['.tmp/**/*'], {dot: true}));
-
-gulp.task('watch', (cb) => {
-	gulp.watch('./tmp/**,*', (cb) => {
-		plugins.util('are some changes on ./tmp');
-	});
-});

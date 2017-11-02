@@ -2,9 +2,12 @@
 
 import path from 'path';
 import runSequence from 'run-sequence';
+import _ from 'lodash';
 
 export default (gulp, plugins, config) => {
 
+	//
+	// inject:scss:ui
 	let uiOps = {
 		src: path.join(config.root, 'client/ui/scss/_components.scss'),
 		files: [`${config.root}/client/ui/components/**/*.scss`],
@@ -14,7 +17,9 @@ export default (gulp, plugins, config) => {
 	};
 
 	trask_('inject:scss:ui', gulp, plugins, uiOps);
-
+	
+	//
+	// inject:scss:app
 	let appOps = {
 		src: path.join(config.root, 'client/styles/_components.scss'),
 		files: [`${config.root}/client/{app,curador,social}/**/*.scss`],
@@ -25,13 +30,50 @@ export default (gulp, plugins, config) => {
 
 	trask_('inject:scss:app', gulp, plugins, appOps);
 
-	gulp.task('inject:scss', (cb) => {
-		runSequence(['inject:scss:ui', 'inject:scss:app'], cb);
-	});
+	//
+	// JOIN
+	gulp.task('inject:scss', ['inject:scss:ui', 'inject:scss:app']);
 
+	// relase watch
+	gulp.task('watch:inject', () => {
+
+		plugins.watch(uiOps.files, plugins.batch((events, done) => {
+			fileAddOrDelete_(events, (someNewOrDelete) => {
+				if (!someNewOrDelete) 
+					return done();
+
+				gulp.start('inject:scss:ui', done);
+			});
+		}));
+
+		plugins.watch(appOps.files, plugins.batch((events, done) => {
+
+			fileAddOrDelete_(events, (someNewOrDelete) => {
+				if (!someNewOrDelete) 
+					return done();
+
+				gulp.start('inject:scss:app', done);
+			});
+
+		}));
+	});
 	
+	//
+	// RELEASE
 	gulp.task('inject', (cb) => {
 		runSequence(['inject:scss'], cb);
+	});
+}
+
+//
+// helpers
+function fileAddOrDelete_(events, cb) {
+	let files = [];
+	events.on('data', file => {
+		files.push(file);
+	}).on('end', () => {
+		let some = _.some(_.map(files, f => f.event), e => /(add|unlink)/.test(e));
+		cb(some);
 	});
 }
 
