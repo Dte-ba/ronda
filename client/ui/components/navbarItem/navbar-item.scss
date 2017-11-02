@@ -1,0 +1,77 @@
+.rd-navbar {
+	&__item {
+		display: block;
+		cursor: pointer;
+		color: $grey-color;
+		transition: $transition-default;
+	}
+
+	//
+	// navigation
+	&__nav--navigation &__item {
+		text-align: center;
+		backface-visibility: hidden;
+
+		&:not(.rd-navbar__item--selected):hover {
+			transform: translateY(-1px);
+		}
+
+		&:active, &:focus {
+			transform: translateY(0px);
+		}
+	}
+
+	&__nav--navigation &__item:not(:last-child) {
+		margin-right: 2.5rem;
+	}
+
+	&__nav--navigation &__item--icon {
+		font-size: 4.5rem;
+		vertical-align: middle;
+	}
+
+	&__nav--navigation &__item--caption {
+		display: block;
+		line-height: normal;
+	}
+	
+	//
+	// dropdown
+	&__nav--dropdown {
+		
+	}
+
+	//
+	// tools
+
+	&__tools &__item {
+		padding: 0.2rem;
+		background-color: orangered;
+		@include ronda-shape;	
+	}
+	
+}
+
+//
+// section colors
+.rd-navbar__nav--navigation,
+.rd-navbar__nav--dropdown {
+	.rd-navbar__item {
+		&:active, &:hover, &:focus, &.rd-navbar__item--selected {
+			.rd-navbar__item--caption {
+				color: $light-color-primary;
+			}
+		}
+	}
+
+	@each $key, $section in $sections {
+		.rd-navbar__item[data-rd-section="#{$key}"],
+		.rd-navbar__item[rd-section="#{$key}"] {
+			&:active, &.rd-navbar__item--selected {
+				.rd-navbar__item--icon {
+					color: map-get($section, color);
+				}
+			}
+		}
+	}
+}
