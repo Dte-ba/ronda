@@ -2,7 +2,7 @@
 	&__item {
 		display: block;
 		cursor: pointer;
-		color: $grey-color;
+		color: $color-grey;
 		transition: $transition-default;
 	}
 
@@ -59,18 +59,7 @@
 	.rd-navbar__item {
 		&:active, &:hover, &:focus, &.rd-navbar__item--selected {
 			.rd-navbar__item--caption {
-				color: $light-color-primary;
-			}
-		}
-	}
-
-	@each $key, $section in $sections {
-		.rd-navbar__item[data-rd-section="#{$key}"],
-		.rd-navbar__item[rd-section="#{$key}"] {
-			&:active, &.rd-navbar__item--selected {
-				.rd-navbar__item--icon {
-					color: map-get($section, color);
-				}
+				color: $color-black;
 			}
 		}
 	}

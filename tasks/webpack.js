@@ -10,7 +10,12 @@ export default (gulp, plugins, config) => {
     return gulp.src(webpackDevConfig.entry.app)
         .pipe(plugins.plumber())
         .pipe(webpack(webpackDevConfig))
-        .pipe(gulp.dest('.tmp'));
+				.pipe(gulp.dest('.tmp'))
+				.on('end', () => {
+					console.log('==============================================');
+					console.log('webpack:dev ends');
+					console.log('==============================================');
+				});
 	});
 
 	gulp.task('webpack:dist', function() {

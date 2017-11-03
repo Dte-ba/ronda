@@ -1,0 +1,50 @@
+h1 { font-size: $h1-font-size; }
+
+h2 { font-size: $h2-font-size; }
+
+h3 { font-size: $h3-font-size; }
+
+h4 { font-size: $h4-font-size; }
+
+h5 { font-size: $h5-font-size; }
+
+h6 { font-size: $h6-font-size; }
+
+h1, h2, h3, h4, h5, h6 {
+	small {
+		font-size: 0.7em;
+		color: $color-grey;
+	}
+}
+
+
+.rd__text--caption {
+	font-weight: $roboto-regular;
+	font-size: $caption-font-size;
+}
+
+// the headpost thing
+.rd__headpost {
+	font-family: Dosis;
+
+	&--title {
+		font-weight: $dosis-bold;
+		font-size: $headpost-title-font-size;
+	}
+
+	&--subtitle {
+		font-weight: $dosis-bold;
+		font-size: $headpost-subtitle-font-size;
+	}
+
+	a, strong {
+		font-family: inherit;
+		text-decoration: none;
+		color: inherit;
+	}
+
+	p.#{&} {
+		font-weight: $dosis-regular;
+		font-size: $headpost-p-font-size;
+	}
+}

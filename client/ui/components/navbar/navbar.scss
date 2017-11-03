@@ -6,7 +6,7 @@
 	width: 100%;
 	min-width: $screen-min-width;
 	z-index: $navbar-z-index;
-	background-color: $navbar-background-color;
+	background-color: $color-white;
 
 	&__content {
 		display: flex;
@@ -34,7 +34,7 @@
 			position: relative;
 			width: 100%;
 			height: 3px;
-			background-color: $grey-color;
+			background-color: $color-grey;
 			border-radius: 100px;
 
 			&::before {
@@ -44,7 +44,7 @@
 				position: absolute;
 				width: 100%;
 				height: 3px;
-				background-color: $grey-color;
+				background-color: $color-grey;
 				border-radius: inherit;
 			}
 
@@ -56,7 +56,7 @@
 				position: absolute;
 				width: 100%;
 				height: 3px;
-				background-color: $grey-color;
+				background-color: $color-grey;
 				border-radius: inherit;
 			}
 		}
@@ -111,7 +111,7 @@
 			width: 70px;
 			top: -4;
 			left: 10px;
-			background-color: $navbar-background-color;
+			background-color: $color-white;
 			z-index: $navbar-z-index + 2;
 			@include opacity-transition();
 		}
@@ -192,9 +192,5 @@
 		align-items: center;
 		justify-content: center;
 	}
-
-	/*************************
-	 * NAVBAR ITEMS
-	 */
 
 }
