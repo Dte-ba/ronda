@@ -105,6 +105,41 @@ module.exports = function makeWebpackConfig(options) {
                             loader: "sass-loader", // compiles Sass to CSS
                         }
                     ]
+                }, {
+                    // ASSET LOADER
+                    // Reference: https://github.com/webpack/file-loader
+                    // Copy png, jpg, jpeg, gif, svg, woff, woff2, ttf, eot files to output
+                    // Rename the file using the asset hash
+                    // Pass along the updated reference to your code
+                    // You can add here any file extension you want to get copied to your output
+                    test: /\.(svg|woff|woff2|ttf|eot)([\?]?.*)$/,
+                    use: [
+                        {
+                            loader: 'file-loader',
+                            options: {
+                                name: '[name].[ext]',
+                                //publicPath: 'assets/'
+                            } 
+                        }
+                    ]
+                    
+                }, {
+                    // ASSET LOADER
+                    // Reference: https://github.com/webpack/file-loader
+                    // Copy png, jpg, jpeg, gif, svg, woff, woff2, ttf, eot files to output
+                    // Rename the file using the asset hash
+                    // Pass along the updated reference to your code
+                    // You can add here any file extension you want to get copied to your output
+                    test: /\.(png|jpg|jpeg|gif|svg)([\?]?.*)$/,
+                    use: [
+                        {
+                            loader: 'file-loader',
+                            options: {
+                                name: '[name].[ext]',
+                                //publicPath: 'assets/'
+                            } 
+                        }
+                    ]
                 }
             ]
         }

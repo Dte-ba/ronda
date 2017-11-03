@@ -19,21 +19,22 @@ h1, h2, h3, h4, h5, h6 {
 
 
 .rd__text--caption {
-	font-weight: $roboto-regular;
+	font-weight: $font-primary-regular;
 	font-size: $caption-font-size;
 }
 
 // the headpost thing
 .rd__headpost {
-	font-family: Dosis;
-
+	font-family: $font-family-secondary;
+	font-weight: $font-weight-secondary;
+	
 	&--title {
-		font-weight: $dosis-bold;
+		font-weight: $font-secondary-bold;
 		font-size: $headpost-title-font-size;
 	}
 
 	&--subtitle {
-		font-weight: $dosis-bold;
+		font-weight: $font-secondary-bold;;
 		font-size: $headpost-subtitle-font-size;
 	}
 
@@ -44,7 +45,8 @@ h1, h2, h3, h4, h5, h6 {
 	}
 
 	p.#{&} {
-		font-weight: $dosis-regular;
+		font-family: inherit;
+		font-weight: $font-secondary-bold;;
 		font-size: $headpost-p-font-size;
 	}
 }

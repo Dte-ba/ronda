@@ -12,7 +12,8 @@
 		text-align: center;
 		backface-visibility: hidden;
 
-		&:not(.rd-navbar__item--selected):hover {
+		&:not(.rd-navbar__item--selected):hover,
+		&:not(.rd-navbar__item--selected):focus {
 			transform: translateY(-1px);
 		}
 

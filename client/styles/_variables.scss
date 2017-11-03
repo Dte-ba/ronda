@@ -29,6 +29,11 @@ $sections: (
 // ------------------------------
 // Override ronda-ui variables
 //
+$ronda-font-path: '../assets/fonts';
+
+$navbar-height: 80px;
+$navbar-height-scrolled: 60px;
+
 $color-primary: 			$color-red-900;
 $color-primary-light:	$color-red-500;
 $color-primary-dark:  darken($color-red-900, 10);

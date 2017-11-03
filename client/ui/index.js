@@ -13,5 +13,5 @@ let requirements = [
 ];
 
 module.exports = angular
-									.module('ronda.ui', [])
+									.module('ronda.ui', requirements)
 									.name;

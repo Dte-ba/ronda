@@ -13,6 +13,8 @@ import ngLoader from 'angular-loading-bar';
 import { appConfig } from './app.config';
 
 // componentes
+import header from './header/header.component';
+import footer from './footer/footer.component';
 import home from './home/home.component';
 
 let requirements = [
@@ -23,6 +25,8 @@ let requirements = [
 	ngSanitize,
 	ngLoader,
 
+	header,
+	footer,
 	home
 ];
 

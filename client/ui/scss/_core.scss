@@ -1,6 +1,6 @@
 * {
-	font-family: $font-family;
-	font-weight: $font-weight;
+	font-family: $font-family-primary;
+	font-weight: $font-weight-primary;
 	margin: 0;
 	padding: 0;
 }
@@ -19,4 +19,24 @@ html {
 body {
 	font-size: $body-font-size;
 	color: $color-black;
+}
+
+// ------------------------------
+// Transitions
+//
+@-webkit-keyframes _opacityTransition {
+	from { opacity: 0; }
+		to { opacity: 1; }
+} 
+
+@keyframes moveToBottom {
+	0% {
+			opacity: 0;
+			transform: translateY(-.3rem);
+	}
+
+	100% {
+			opacity: 1;
+			transform: translate(0);
+	}
 }

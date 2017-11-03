@@ -1,33 +1,43 @@
 // ------------------------------
+// Paths
+//
+$ronda-font-path: '../fonts' !default;
+
+
+// ------------------------------
 // Typography
 //
 
+$font-family-primary: Roboto, 'Helvetica Neue', sans-serif !default;
+$font-family-secondary: Dosis, 'Helvetica Neue', sans-serif !default;
+
 // Roboto weights
-$roboto-light:      300;
-$roboto-regular:    400;
-$roboto-medium:     500;
-$roboto-bold:       700;
-$roboto-black-bold: 900;
+$font-primary-light:      300 !default;
+$font-primary-regular:    400 !default;
+$font-primary-medium:     500 !default;
+$font-primary-bold:       700 !default;
+$font-primary-black-bold: 900 !default;
 
 // Dosis weights
-$dosis-extra-light: 200;
-$dosis-light:       300;
-$dosis-regular:     400;
-$dosis-medium:      500;
-$dosis-semi-bold:   600;
-$dosis-bold:        700;
-$dosis-extra-bold:  800;
+$font-secondary-extra-light: 200 !default;
+$font-secondary-light:       300 !default;
+$font-secondary-regular:     400 !default;
+$font-secondary-medium:      500 !default;
+$font-secondary-semi-bold:   600 !default;
+$font-secondary-bold:        700 !default;
+$font-secondary-extra-bold:  800 !default;
 
-$font-family: Roboto, 'Helvetica Neue', sans-serif !default;
+$font-weight-primary:   $font-primary-regular !default;
+$font-weight-secondary: $font-secondary-regular !default;
+
 // the default font-size on the browsers is 16px
 // this value is calculated by 10px/16px = 62.5%, 1rem = 10px, 
 // simplify the way to set sizes based on the rem unit
 // when you need set the size to a variable element
 // example 15px = 15rem
-$font-size:   	 62.5% !default;
-$font-weight: 	 $roboto-regular !default;
-$body-font-size: 1.6rem !default;
+$font-size:   	 			62.5% !default;
 
+$body-font-size: 			1.6rem !default;
 $h1-font-size: 								4.2rem !default;
 $h2-font-size: 								3.2rem !default;
 $h3-font-size: 								2.8rem !default;

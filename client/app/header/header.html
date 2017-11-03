@@ -1,0 +1,17 @@
+<rd-navbar logo="assets/ronda-logo.svg" logo-scrolled="assets/ronda-logo-header.svg">
+	<rd-navbar-navigation>
+		<rd-navbar-item 
+			ng-repeat="item in $ctrl.navbarItems" 
+			ng-model="item" 
+			navbar-item-selected="item.section === $ctrl.selected"
+			ng-click="$ctrl.itemClicked(item)"
+			tabindex="0"/>
+	</rd-navbar-navigation>
+	<rd-navbar-tools>
+		<rd-navbar-item navbar-item-icon="ri ri-lupa" navbar-item-selected="true"/>
+		<rd-navbar-item navbar-item-icon="mi mi-home"/>
+		<rd-navbar-item navbar-item-icon="ri ri-mochila"/>
+	</rd-navbar-tools>
+	<rd-navbar-body>
+	</rd-navbar-body>
+</rd-navbar>
