@@ -34,9 +34,9 @@ $ronda-font-path: '../assets/fonts';
 $navbar-height: 80px;
 $navbar-height-scrolled: 60px;
 
-$color-primary: 			$color-red-900;
+$color-primary: 			$color-red-600;
 $color-primary-light:	$color-red-500;
-$color-primary-dark:  darken($color-red-900, 10);
+$color-primary-dark:  $color-red-900;
 
 $color-white: 				#fff   ;
 $color-grey: 					#bcbcbc;

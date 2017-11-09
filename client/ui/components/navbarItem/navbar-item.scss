@@ -1,67 +1,9 @@
 .rd-navbar {
-	&__item {
-		display: block;
-		cursor: pointer;
-		color: $color-grey;
-		transition: $transition-default;
-	}
-
-	//
-	// navigation
-	&__nav--navigation &__item {
-		text-align: center;
-		backface-visibility: hidden;
-
-		&:not(.rd-navbar__item--selected):hover,
-		&:not(.rd-navbar__item--selected):focus {
-			transform: translateY(-1px);
-		}
-
-		&:active, &:focus {
-			transform: translateY(0px);
-		}
-	}
-
 	&__nav--navigation &__item:not(:last-child) {
 		margin-right: 2.5rem;
 	}
 
-	&__nav--navigation &__item--icon {
-		font-size: 4.5rem;
-		vertical-align: middle;
-	}
-
-	&__nav--navigation &__item--caption {
-		display: block;
-		line-height: normal;
-	}
-	
-	//
-	// dropdown
-	&__nav--dropdown {
-		
-	}
-
-	//
-	// tools
-
-	&__tools &__item {
-		padding: 0.2rem;
-		background-color: orangered;
-		@include ronda-shape;	
-	}
-	
-}
-
-//
-// section colors
-.rd-navbar__nav--navigation,
-.rd-navbar__nav--dropdown {
-	.rd-navbar__item {
-		&:active, &:hover, &:focus, &.rd-navbar__item--selected {
-			.rd-navbar__item--caption {
-				color: $color-black;
-			}
-		}
+	&__tools &__item:not(:last-child) {
+		margin-right: .5rem;
 	}
 }

@@ -8,9 +8,8 @@
 	</md-button>
 
 	<!-- BRAND-->
-	<a href="#" class="rd-navbar__brand" aria-label="Ir al home">
-		<img class="rd-navbar__logo" ng-src="{{$rdNavbarController.logo}}" alt="Logo">
-		<img class="rd-navbar__logo--scrolled" ng-src="{{$rdNavbarController.logoScrolled}}" alt="Logo">
+	<a href="#" class="rd-navbar__brand" aria-label="Ir al home" ng-transclude="brand">
+		
 	</a>
 	
 	<!-- HORIZONTAL NAVIGATION -->
@@ -19,4 +18,13 @@
 
 	<!-- TOOLS -->
 	<div class="rd-navbar__tools" ng-transclude="tools"></div>
+
+	<!-- PROFILE -->
+	<div class="rd-navbar__profile" ng-transclude="profile"></div>
+</div>
+<!-- VERTICAL NAVIGATION -->
+<div flex class="rd-navbar__dropdown" md-whiteframe="4" ng-show="$rdNavbarController.dropdownOpened">
+	<div class="rd-navbar__dropdown--background"></div>
+	<div class="rd-navbar__dropdown--items" ng-transclude="items"></div>
+	<div class="rd-navbar__dropdown--tools" ng-transclude="tools"></div>
 </div>

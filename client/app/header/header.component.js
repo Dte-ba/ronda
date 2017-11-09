@@ -4,7 +4,7 @@ import angular from 'angular';
 class HeaderComponent {
   /*@ngInject*/
   constructor($element) {
-    this.selected = 'actividades';
+    this.selected = '';
     
     this.navbarItems = [
       { section: 'propuestas', icon: 'ri ri-propuestas', caption: 'Propuestas' },

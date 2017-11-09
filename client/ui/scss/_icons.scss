@@ -13,7 +13,9 @@
   font-family: 'ronda';
   font-weight: normal;
   font-style: normal;
-  font-size: 24px;  /* Preferred icon size */
+  //Preferred icon size is 24px but 28px 
+  //fix size for same size of material icons
+  font-size: 28px;  
   display: inline-block;
   line-height: 1;
   text-transform: none;

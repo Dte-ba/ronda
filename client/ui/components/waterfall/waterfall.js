@@ -1,43 +1,142 @@
 'use strict';
 
+import $ from 'jquery';
+import _ from 'lodash';
+import async from 'async';
+
 export default angular
     .module('ronda-ui.components.waterfall', [])
     .directive('rdWaterfall', rdWaterfall)
     .name;
 
 const DEFAULT_COLUMNS_SIZE = 5;
+const DEFAULT_ITEM_WIDTH = 350;
+const DEFAULT_GUTTER = 24;
 
 class RdWaterfallController {
     /*@ngInject*/
-    constructor($scope, $element, $timeout, $compile, $attrs, $transclude, $mdMedia, $window){
+    constructor($scope, $element, $timeout, $compile, $attrs, $mdMedia, $window){
 			this.$scope = $scope;
 			this.$element = $element;
 			this.$timeout = $timeout;
 			this.$attrs = $attrs;
 			this.$compile = $compile;
-			this.$transclude = $transclude;
 			this.$window = $window;
 			this.$mdMedia = $mdMedia;
-			this.$wrapperElement = this.$element.find('.rd-waterfall-wrapper');
-			this.$columns = [];
-			this.$templ = angular.element(this.$attrs.itemTemplate);
 			this.columnsSizes = {};
 			this.lastColumn_ = null;
-			this.items = [];
+			this.loadMoreText = this.$scope.loadMoreText || 'Load more';
 
-			this.$element.addClass('rd-waterfall');
+			this.$scope.itemWidth = this.$scope.itemWidth || DEFAULT_ITEM_WIDTH;
+			this.$scope.gutter = this.$scope.gutter	|| DEFAULT_GUTTER;
+
+			// set sizes
 			this.initColumnsSizes_();
+			this.$element.addClass('rd-waterfall');
+		}
 
-			// init
-			for (var i=0; i < 15; i++){
-				this.items.push({ id: i, color: this.randomColor() });
+		$onInit(){
+			this.$wrapperElement = angular.element(this.$element.children()[0]);
+			this.$templ = angular.element(this.$attrs.itemTemplate);			
+			this.$wrapperElement.empty();
+
+			$(this.$window).resize(() => {
+				this.$timeout(() => {
+					this.render_();	
+				}, 200);
+			});
+
+			// fetch the first time
+			this.fetch();
+		}
+
+		itemWidth_(){
+			return this.$scope.itemWidth;
+		}
+
+		gutter_(){
+			return this.$scope.gutter;
+		}
+		
+		render_(force){
+			let csize = this.columnSize_();
+			console.log(csize)
+			if (this.rendering_ && !force) 
+				return;
+				
+			let gutter = this.gutter_();
+			let itemW = this.itemWidth_();
+			this.rendering_ = true;
+			this.lastColumn_ = csize;
+
+			let colsHeights = {};
+			//init counters
+			for (var c = 0; c < csize; c++){
+				colsHeights[c] = 0;
 			}
-			let counter = this.items.length;
-			//setInterval(() => {
-			//	this.items.push(counter++);
-			//	this.$scope.$apply();
-			//}, 3000);
-    }
+
+			$(this.$wrapperElement).find('[data-grid-item]').each(function(){
+				let $this = $(this);
+				let idx = parseInt($this.attr('data-grid-item'));
+				//let ci = idx % csize;
+				// get the column with min height
+				let ci = _.minBy(_.keys(colsHeights), (key) => {
+					return colsHeights[key];
+				});
+
+				let tx = (itemW*(ci))+((ci)*gutter);
+				let ty = colsHeights[ci];
+
+				// set transform
+				$this.css('transform', `translateX(${tx}px) translateY(${ty}px)`);
+
+				$this.css('opacity', 1);
+
+				// upgrade colsHeights
+				colsHeights[ci] += $this.height() + gutter;
+			});
+			
+			this.rendering_ = false;
+
+			// upgrade the wrapper height
+			let wrapperHeight = _.max(_.values(colsHeights)) + gutter;
+			let wrapperWidth = (itemW*csize)+(gutter*csize);
+			
+			$(this.$wrapperElement).height(wrapperHeight);
+			$(this.$wrapperElement).width(wrapperWidth);
+		}
+		
+		aggregate_(items) {
+
+			for (var i = 0; i < items.length; i++) {
+				let item = items[i];
+				let childScope = this.$scope.$new(false);
+				childScope.item=item;
+				let clone = this.$templ.clone();				
+				clone[0].innerHTML = this.$attrs.itemTemplate[0].innerHTML;
+				let el = this.$compile(clone)(childScope);
+				el.attr('data-grid-item', i);
+				$(el).width(this.itemWidth_());
+				this.$wrapperElement.append(el);
+			}
+
+			this.$timeout(()=>{
+				this.render_();
+			});
+		}
+
+		fetch(){
+			this.fetching_ = true;
+			this.$scope.fetch()
+					.then(data => {
+						this.fetching_ = true;
+						console.log(data);
+						this.aggregate_(data.items);
+					})
+					.finally(()=>{
+						this.fetching_ = false;
+					});
+		}
 
 		initColumnsSizes_(){
 			// init breakpoints
@@ -62,67 +161,13 @@ class RdWaterfallController {
 		}
 
     columnSize_(){
-			for (var media in this.columnsSizes){
-				if (this.$mdMedia(media))
-					return this.columnsSizes[media];
-			}
-			return this.columnsSizes['columns'];
+			let cs = Math.floor($(this.$window).width()/(this.itemWidth_()+this.gutter_()));
+			return cs === 0 ? 1: cs;
     }
-
-    render_(force){
-			let csize = this.columnSize_();
-			if (this.lastColumn_ === csize || (this.rendering_ && !force)) 
-				return;
-
-			console.log('rendering...');
-				
-			this.rendering_ = true;
-			this.lastColumn_ = csize;
-			this.$wrapperElement.empty();
-			// create the columns
-			let flex = Math.floor(100/csize);
-			for (var c=0; c < this.columnSize_();c++){
-				this.$columns[c] = this.$compile(angular.element(`<div layout="column" layout-align="start stretch" flex="${flex}"></div>`))(this.$scope);
-				this.$columns[c].$colIndex = c;
-				this.$wrapperElement.append(this.$columns[c]);
-			}
-
-			for (var i = 0; i < this.items.length; i++) {
-				let item = this.items[i];
-				item.$index = i;
-				item.$colIndex = i % this.columnSize_();
-				let childScope = this.$scope.$new(false);
-				childScope.item=item;
-				let clone = this.$templ.clone();
-				//
-				let h = Math.floor((Math.random() * 200) + 30);
-				//let lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
-				//clone.append(`${lorem}`);
-				if(this.$templ[0].srcHTML){
-				clone[0].innerHTML = this.$templ[0].srcHTML;
-				}
-				let el = this.$compile(clone)(childScope);
-				this.$columns[item.$colIndex].append(el);
-			}
-
-			this.rendering_ = false;
-    }
-
-    $onInit(){
-			this.render_();
-
-			$(this.$window).resize(() => {
-				this.render_();
-			});
-		}
 		
 		loadingIsVisible() {
-			return this.rendering_;
+			return this.fetching_ || this.rendering_;
 		}
-
-    randomColor(){
-			return ('00000'+(Math.random()*(1<<24)|0).toString(16)).slice(-6);
-    }
 }
 
 function rdWaterfall(){
@@ -132,17 +177,29 @@ function rdWaterfall(){
 			restrict: 'E',
 			controllerAs: '$rdWaterfallCtrl',
 			controller: RdWaterfallController,
+			scope: {
+				'fetch': '&',
+				'itemWidth': '=',
+				'gutter': '=',
+				'loadMoreText': '@'
+			},
 			template: (element, attr) => {
 				attr.itemTemplate    = getItemTemplate();
 				return `
-				<md-progress-linear class="'md-inline'" ng-if="$rdWaterfallCtrl.loadingIsVisible()" md-mode="indeterminate"></md-progress-linear>
-				<div class="rd-waterfall-wrapper" layout="row" layout-padding></div>`;
+				<div class="rd-waterfall__wrapper"></div>
+				<div class="rd-waterfall__actions">
+					<md-button class="md-raised md-primary" ng-click="$rdWaterfallCtrl.fetch()" ng-hide="$rdWaterfallCtrl.loadingIsVisible()">{{$rdWaterfallCtrl.loadMoreText}}</md-button>
+					<div layout="row" layout-sm="column" layout-align="space-around" ng-if="$rdWaterfallCtrl.loadingIsVisible()">
+						<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+					</div>
+				</div>
+				`;
 
 				// helpers
 			function getItemTemplate() {
 					var templateTag = element.find('rd-item-template').detach(),
 					html = templateTag.length ? templateTag.html() : element.html();
-					let $templ = angular.element(`<div class="rd-waterfall-item">${html}</rd-waterfall-item>`);
+					let $templ = angular.element(`<div class="rd-waterfall__item">${html}</div>`);
 					// copy attributes
 					if (templateTag.length){
 							let $templOne = templateTag[0];

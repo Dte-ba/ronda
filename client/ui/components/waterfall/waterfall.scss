@@ -4,17 +4,22 @@
   clear: both;
 }
 
-.rd-waterfall { 
-	display: block;
-}
+.rd-waterfall {
+  display: block;
 
-.rd-waterfall-item {
-  border-radius: 6px;
-  margin-bottom: 15px;
-  transition: all .3s;
-  @include opacity-transition();
-}
+  &__wrapper {
+    margin: 0 auto;
+    display: block;
+    position: relative;
+  }
 
-.rd-waterfall-item:hover {
-  //height: 250px !important;
+  &__item {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &__actions {
+    text-align: center;
+  }
 }

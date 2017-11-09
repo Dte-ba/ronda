@@ -16,9 +16,6 @@ class RdNavbarController {
     this.$element = $element;
     this.$timeout = $timeout;
 
-		this.logo = $scope.logo;
-		this.logoScrolled = $scope.logoScrolled;
-
     this.$element.addClass('rd-navbar md-whiteframe-4dp');
 
     this.$scope.$watch(() => { return $mdMedia('xs') || $mdMedia('sm'); }, (mobile) => {
@@ -78,7 +75,9 @@ function RdNavbar($window){
 		transclude: {
 			'items': 'rdNavbarNavigation',
 			'tools': 'rdNavbarTools',
-			'body': '?rdNavbarBody'
+			'brand': 'rdNavbarBrand',
+			'body': '?rdNavbarBody',
+			'profile': '?rdNavbarProfile'
 		},
 		template: require('./navbar.html')
 	}
