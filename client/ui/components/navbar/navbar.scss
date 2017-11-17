@@ -120,19 +120,19 @@
 		width: 23rem;
 		overflow: hidden;
 		opacity: 0;
-		transition: $transition-default-delay;
+		transition: $transition-default;
 
 		&--tools {
 			opacity: 0;
 			z-index: $navbar-z-index + 3;
 			border-top: 1px solid $color-grey-light;
 			margin-top: 1rem;
-			transition: $transition-default-delay;
+			transition: all .5s cubic-bezier(1,.39,.93,.73);
 		}
 
 		&--items {
 			opacity: 0;
-			transition: $transition-default-delay;
+			transition: all .5s cubic-bezier(1,.39,.93,.73);
 		}
 
 		&--background {

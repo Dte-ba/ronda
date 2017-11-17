@@ -1,0 +1,46 @@
+.login {
+	&__wrapper {
+		height: 100vh;
+		padding-top: 10rem;
+	}
+
+	&__card {
+		min-height: 40rem;
+		width: 35rem;
+		margin: 0 auto;
+		box-shadow: $whiteframe-shadow-4dp;
+		background-color: $color-white;
+		border-radius: $border-radius-default;
+		padding: 2rem 1rem;
+	}
+
+	&__header {
+		text-align: center;
+
+		&--logo {
+			height: 4.5rem;
+		}
+
+		&--title {
+			font-family: $font-family-secondary;
+			font-weight: $font-secondary-bold;
+			font-size: 3.2rem;
+		}
+	}
+
+	&__form {
+
+		md-input-container {
+			width: 100%;
+		}
+
+		&--content {
+			width: 21.63rem;
+			margin: 0	auto;
+		}
+	}
+
+	&__button--submit {
+		width: 100%;
+	}
+}

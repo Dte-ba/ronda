@@ -8,8 +8,8 @@ class FooterComponent {
   }
 }
 
-export default angular.module('ronda.app.app-footer', [])
-  .component('footer', {
+export default angular.module('ronda.app.socialFooter', [])
+  .component('socialFooter', {
     template: require('./footer.html'),
     controller: FooterComponent
   })

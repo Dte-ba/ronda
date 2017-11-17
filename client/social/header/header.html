@@ -1,0 +1,30 @@
+<header class="header">
+	<rd-navbar class="navbar">
+		<rd-navbar-brand>
+				<div class="navbar__logo">
+					<a href="/login">
+						<img ng-src="assets/ronda-logo.svg" alt="Logo">
+					</a>
+				</div>
+				<div class="navbar__logo--scrolled">
+					<img ng-src="assets/ronda-logo-header.svg" alt="Logo">
+				</div>
+				
+		</rd-navbar-brand>
+		<rd-navbar-navigation>
+			<rd-navbar-item 
+				ng-repeat="item in $ctrl.navbarItems" 
+				ng-model="item" 
+				navbar-item-selected="item.section === $ctrl.selected"
+				ng-click="$ctrl.itemClicked(item)"
+				tabindex="0"/>
+		</rd-navbar-navigation>
+		<rd-navbar-tools>
+			<rd-navbar-item navbar-item-icon="ri ri-lupa" navbar-item-caption="Buscar"></rd-navbar-item>
+			<rd-navbar-item navbar-item-icon="mi mi-home" navbar-item-caption="Home" navbar-item-selected="true"></rd-navbar-item>
+			<rd-navbar-item navbar-item-icon="ri ri-mochila" navbar-item-caption="Mi Mochila"></rd-navbar-item>
+		</rd-navbar-tools>
+		<rd-navbar-body>
+		</rd-navbar-body>
+	</rd-navbar>
+</header>

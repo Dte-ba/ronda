@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var cookieParser = require('cookie-parser');
 var errorHandler = require('errorhandler');
+var morgan = require('morgan');
 
 let env = 'development';
 let config = {
@@ -38,10 +39,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(methodOverride());
 app.use(cookieParser());
+app.use(morgan('dev'));
 
 /***********************************************
  * 	ROUTES
  */
+
+app.use('/api', require('./api'));
 
 // All undefined asset or api routes should return a 404
 app.route('/:url(api|auth|components|app|bower_components|assets)/*')

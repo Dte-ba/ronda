@@ -1,8 +1,11 @@
 'use strict';
 
-export function appConfig($urlRouterProvider, $locationProvider) {
+export function appConfig($stateProvider) {
 	'ngInject';
-
-	$urlRouterProvider.otherwise('/');
-  $locationProvider.html5Mode(true);
+	
+	$stateProvider
+	.state('app', {
+		abstract: true,
+		template: `<main ui-view=""></main>`
+	});
 }

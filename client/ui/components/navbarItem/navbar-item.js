@@ -25,7 +25,7 @@ class RdNavbarItemController {
     this.$element.addClass('rd-navbar__item');
 		this.$element.attr('data-rd-section', this.section);
 		
-		this.$element.attr('role', 'menuitem');
+		//this.$element.attr('role', 'menuitem');
 
     this.$scope.$watch(() => { return this.$scope.selected }, (value) => {
     	if (value) {

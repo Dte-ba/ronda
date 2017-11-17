@@ -60,7 +60,6 @@ class RdWaterfallController {
 		
 		render_(force){
 			let csize = this.columnSize_();
-			console.log(csize)
 			if (this.rendering_ && !force) 
 				return;
 				
@@ -130,7 +129,6 @@ class RdWaterfallController {
 			this.$scope.fetch()
 					.then(data => {
 						this.fetching_ = true;
-						console.log(data);
 						this.aggregate_(data.items);
 					})
 					.finally(()=>{

@@ -128,8 +128,11 @@ let theme = ($mdThemingProvider) => {
 
 };
 
-export function rondaConfig($mdThemingProvider) {
+export function rondaConfig($urlRouterProvider, $locationProvider, $mdThemingProvider) {
   'ngInject';
+  
+  $urlRouterProvider.otherwise('/');
+  $locationProvider.html5Mode(true);
 
   // create theming
   theme($mdThemingProvider);

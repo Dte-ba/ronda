@@ -22,6 +22,30 @@ body {
 }
 
 // ------------------------------
+// Colors
+//
+.rd-bg {
+	&__grey {
+		background-color: $color-grey;
+	}
+
+	&__grey-light {
+		background-color: $color-grey-light;
+	}
+}
+
+.rd-color {
+	&__grey {
+		color: $color-grey;
+	}
+
+	&__grey-light {
+		color: $color-grey-light;
+	}
+}
+
+
+// ------------------------------
 // Transitions
 //
 @-webkit-keyframes _opacityTransition {
