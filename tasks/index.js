@@ -4,6 +4,7 @@ import _ from 'lodash';
 import inject from './inject';
 import webpack from './webpack';
 import server from './server';
+import codebot from './codebot';
 
 export default (gulp, plugins, config) => {
 	let tasks = [inject, webpack, server];
