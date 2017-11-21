@@ -1,5 +1,14 @@
 {
 	"layer": {
-		"app": "./client/social"
-	}
+		"app": "./social"
+	},
+	"module": {
+		"name": "social"
+	},
+	"route": [
+		{
+			"name": "home",
+			"url": "/"
+		}
+	]
 }

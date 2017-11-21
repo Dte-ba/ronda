@@ -1,5 +1,10 @@
 {
 	"layer": {
-		"app": "./client/curador"
-	}
+		"app": "./curador"
+	},
+	"module": {
+		"name": "curador"
+	},
+	"route": [
+	]
 }
