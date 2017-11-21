@@ -1,5 +1,14 @@
 {
 	"layer": {
-		"app": "./client/app"
-	}
+		"app": "./app"
+	},
+	"module": {
+		"name": "app"
+	},
+	"route": [
+		{
+			"name": "login",
+			"url": "/login"
+		}
+	]
 }

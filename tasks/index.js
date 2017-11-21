@@ -7,7 +7,7 @@ import server from './server';
 import codebot from './codebot';
 
 export default (gulp, plugins, config) => {
-	let tasks = [inject, webpack, server];
+	let tasks = [inject, webpack, server, codebot];
 
 	_.each(tasks, t => {
 		t(gulp, plugins, config);
