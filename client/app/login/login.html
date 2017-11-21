@@ -5,16 +5,20 @@
 			<h1 class="login__header--title" >Inicia sesión</h1>
 		</div>
 		<form class="login__form">
-			<div class="login__form--content">
-				<md-input-container>
-					<label>Correo</label>
-					<input ng-model="email" required autofocus>
-				</md-input-container>
-				<md-input-container>
-					<label>Contraseña</label>
-					<input ng-model="password"  required>
-				</md-input-container>
+				<div class="login__form--content">
+
+				<div class="login-form__group">
+					<input type="text" class="login-form__input" placeholder="Correo" id="username" required autofocus>
+					<label for="username" class="login-form__label">Correo</label>
+				</div>
+
+				<div class="login-form__group">
+					<input type="password" class="login-form__input" placeholder="Contraseña" id="password" required>
+					<label for="username" class="login-form__label">Contraseña</label>
+				</div>
+
 				<md-button class="login__button--submit md-raised md-primary">Iniciar sesión</md-button>
+
 			</div>
 		</form>
 	</div>

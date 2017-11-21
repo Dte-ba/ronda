@@ -14,6 +14,20 @@ export default (gulp, plugins, config) => {
 
 	gulp.task('codebot:client', ['codebot:app', 'codebot:curador', 'codebot:social']);
 
+	gulp.task('watch:codebot', () => {
+		plugins.watch(['templates/app.model.json'], plugins.batch((events, done) => {
+			gulp.start('codebot:app', done);
+		}));
+
+		plugins.watch(['templates/curador.model.json'], plugins.batch((events, done) => {
+			gulp.start('codebot:curador', done);
+		}));
+
+		plugins.watch(['templates/social.model.json'], plugins.batch((events, done) => {
+			gulp.start('codebot:social', done);
+		}));
+	});
+
 	function task_(name, model, modules, relOutput) {
 		gulp.task(name, () => {
 			return gulp.src(path.join(config.root, model))

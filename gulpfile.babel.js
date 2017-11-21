@@ -19,10 +19,13 @@ let config = {
 
 tasksFactory(gulp, plugins, config);
 
-gulp.task('watch', ['watch:inject']);
+gulp.task('watch', ['watch:inject', 'watch:codebot']);
+
+gulp.task('codebot', ['codebot:client'])
 
 gulp.task('serve', cb => {
 	runSequence(
+			'codebot',
 			[
 					'clean:tmp', 
 					'inject'
@@ -36,6 +39,7 @@ gulp.task('serve', cb => {
 
 gulp.task('serve:debug', cb => {
 	runSequence(
+			'codebot',
 			[
 					'clean:tmp', 
 					'inject'

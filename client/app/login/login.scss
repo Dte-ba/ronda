@@ -29,6 +29,7 @@
 	}
 
 	&__form {
+		margin-top: 4rem;
 
 		md-input-container {
 			width: 100%;
@@ -42,5 +43,37 @@
 
 	&__button--submit {
 		width: 100%;
+		margin-left: 0;
+		margin-right: 0;
+		margin-bottom: 2.5rem;
 	}
+}
+
+.login-form {
+	&__group:not(:last-child) {
+			margin-bottom: 1rem;
+	}
+
+	&__input {
+			background-color: $color-grey-light;
+			border: solid 1px $color-grey;
+			border-radius: $border-radius-default;
+			color: $color-black;
+			width: 100%;
+			padding: .5rem;
+
+			&:focus {
+					outline: none;
+					border: solid 2px $color-black-light;
+			}
+
+			&:focus:invalid {
+					border: 3px solid $color-primary;
+			}
+	}
+
+	&__label {
+			display: none;
+	}
+
 }
