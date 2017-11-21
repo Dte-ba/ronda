@@ -23,7 +23,7 @@ class HeaderComponent {
   }
 }
 
-export default angular.module('ronda.app.socialHeader', [])
+export default angular.module('ronda.social.socialHeader', [])
   .component('socialHeader', {
     template: require('./header.html'),
     controller: HeaderComponent

@@ -54,6 +54,43 @@
 	}
 }
 
+// propuestas
+// orientaciones
+
+// actividades
+// herramientas
+// mediateca
+
+.rd-card[data-rd-section="actividades"],
+.rd-card[rd-section="actividades"] {
+	.rd-card {
+		&__cover {
+			// the size for images of 400x200
+			height: 0px;
+		}
+	}
+}
+
+.rd-card[data-rd-section="herramientas"],
+.rd-card[rd-section="herramientas"] {
+	.rd-card {
+		&__cover {
+			// the size for images of 400x200
+			height: 0px;
+		}
+	}
+}
+
+.rd-card[data-rd-section="mediateca"],
+.rd-card[rd-section="mediateca"] {
+	.rd-card {
+		&__cover {
+			// the size for images of 400x200
+			height: 0px;
+		}
+	}
+}
+
 @each $key, $section in $sections {
 	.rd-card[data-rd-section="#{$key}"],
 	.rd-card[rd-section="#{$key}"] {

@@ -519,6 +519,13 @@ var tags = [
 ];
 
 var categories = ['propuestas', 'actividades', 'herramientas', 'orientaciones', 'mediateca'];
+var categoriesCaption = {
+  'propuestas': 'Propuesta pedagógica',
+  'actividades': 'Actividad accesible',
+  'herramientas': 'Herramienta',
+  'orientaciones': 'Orientación',
+  'mediateca': 'Mediateca',
+};
 var levels = ['Inicial', 'Primaria Primer Ciclo', 'Primaria Segundo Ciclo', 'Primaria Tercer Ciclo', 'Centro de Formacion Integral', 'Todo'];
 var area = ['Prácticas del lenguaje',
 						'Matemática',
@@ -568,21 +575,6 @@ function substr_(min, max){
 	return lorem.substr(0, n);
 }
 
-function category_(){
-	var cat = random_(categories);
-
-	return {
-		category: [
-			cat,
-			random_(levels),
-			random_(area),
-		],
-		custom: {
-			types: randomSample_(types[cat])
-		}
-	}
-}
-
 function files_(){
 	let n = _.random(1, 5);
 	let res = _.map(randomSample_(files, n), function(entry) {
@@ -612,18 +604,28 @@ function randomDate_() {
 
 function create_(){
 
-  let category = category_();
+  let type_ = random_(categories);
+  let uid = uuidv4();
+
+  let cover = undefined;
+  if (type_ === 'propuestas' || type_ === 'orientaciones') {
+    cover = 'http://lorempixel.com/400/200/?id=' + uid;
+  }
+
 	return {
-		uid: uuidv4(),
+		uid: uid,
 		version: 1,
-		type: 'ronda',
-		title: random_(titles),
-		description: substr_(300, 430),
+    type: type_,
+    typeCaption: categoriesCaption[type_],
+    levels: randomSample_(levels),
+    areas: randomSample_(area),
+    categories: randomSample_(types[type_]),
+    title: random_(titles),
+    cover: cover,
+    thumbnail: 'http://lorempixel.com/100/100/?id=' + uid,
 		summary: substr_(100, 200),
 		remark: substr_(20, 100),
-		category: category.category,
 		tags: tags_(),
-		custom: category.custom,
 		sources: randomSample_(sources, 2),
 		collaborators: randomSample_(collaborators, 3),
 		// archivos
