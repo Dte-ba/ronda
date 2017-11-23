@@ -11,9 +11,9 @@ var cookieParser = require('cookie-parser');
 var errorHandler = require('errorhandler');
 var morgan = require('morgan');
 
-let env = 'development';
+var env = process.env.NODE_ENV || 'development';
 let config = {
-	port: 8000,
+	port: process.env.PORT || 8000,
 	ip: 'localhost',
 	browserSyncPort: process.env.BROWSER_SYNC_PORT || 3000
 };

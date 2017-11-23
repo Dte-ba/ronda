@@ -25,6 +25,6 @@ export default (gulp, plugins, config) => {
 					.on('error', (err) => {
 						this.emit('end'); // Recover from errors
 					})
-					.pipe(gulp.dest(`${paths.dist}/client`));
+					.pipe(gulp.dest(`${config.dist}/client`));
 	});
 }

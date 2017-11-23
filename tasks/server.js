@@ -5,6 +5,7 @@ import makeWebpackConfig from './webpack.make';
 import webpack from 'webpack-stream';
 import nodemon from 'nodemon';
 import http from 'http';
+import fs from 'fs-extra';
 
 export default (gulp, plugins, config) => {
 	gulp.task('start:server', (cb) => {
@@ -30,6 +31,41 @@ export default (gulp, plugins, config) => {
 			nodemon(`-w ${config.serverPath} --debug=5858 --debug-brk ${config.serverPath}`)
 					.on('log', onServerLog);
 	});
+
+	
+	gulp.task('server:copy', () => {
+		gulp.src(path.join(config.root, '/client/assets/*.*'))
+				.pipe(gulp.dest('./dist/client/assets/'));
+		
+		gulp.src(path.join(config.root, '/client/favicon.ico'))
+				.pipe(gulp.dest('./dist/client/'));
+	});
+	
+	gulp.task('server:generate:index', (cb) => {
+		let content = [
+			`'use strict';`,
+			`process.env.NODE_ENV = 'production';`,
+			`process.env.PORT = 9000;`,
+			`require('./server/index.js');`
+		].join('\n');
+
+		fs.mkdirpSync(path.join(config.root, '/dist/'));
+
+		fs.writeFile(path.join(config.root, '/dist/index.js'), content, cb);
+	});
+
+	gulp.task('server:babel', () => {
+		return gulp.src(config.root + '/server/**/*.js')
+								.pipe(plugins.babel({
+									presets: ['env'],
+									plugins: [
+										'transform-class-properties'
+									]
+								}))
+								.pipe(gulp.dest(config.root + '/dist/server/'));
+	});
+
+	gulp.task('server:dist', ['server:babel', 'server:generate:index', 'server:copy']);
 
 	function checkAppReady(cb) {
 		var options = {

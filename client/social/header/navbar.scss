@@ -130,6 +130,10 @@
 
 	//
 	// tools
+	&__tools {
+		margin-left: auto;
+	}
+
 	&__tools &__item {
 		height: 3.2rem;
 		width: 3.2rem;
@@ -156,6 +160,8 @@
 		@include ronda-shape;	
 	}
 
+	&__profile {
+	}
 	
 }
 

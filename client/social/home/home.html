@@ -1,30 +1,10 @@
-<rd-waterfall item-width="350" gutter="24" load-more-text="Cargar mas elementos" fetch="$ctrl.fetchData()">
-	<rd-item-template ng-click="$ctrl.itemClicked(item)">
-		<rd-card data-rd-section="{{item.type}}">
-				<!--<rd-card-toolbar>
-					toolbar
-				</rd-card-toolbar>-->
-				<rd-card-cover ng-if="item.cover">
-						<img ng-src="{{item.cover}}" alt="Imagen de prueba">
-				</rd-card-cover>
-				<rd-card-header>
-						<div class="rd-card__header--wrapper" layout="row" layout-align="start center">
-								<span class="rd-card__icon--circle">
-									<i class="ri ri-3x" ng-class="'ri-'+item.type"></i>
-								</span>
-								<span class="rd-card__header--type rd__text--caption">{{item.typeCaption}}</span>
-								<span class="rd-card__header--level rd__text--caption">{{item.levelCaption}}</span>
-						</div>
-				</rd-card-header>
-				<rd-card-body>
-						<h1 class="rd-card__title--v1">{{item.title}}</h1>
-						<p class="rd-card__paragraph">{{item.summary}}</p>
-						<p><strong class="rd__text--caption rd__color--grey-light">Febrero 2017</strong></p>
-					  <p><strong class="rd__text--caption">Johan Mastropiero</strong></p>
-				</rd-card-body>
-				<rd-card-footer>
-					<span class="rd__text--caption">Contiene 20 Recursos</span>
-				</rd-card-footer>
-		</rd-card>
-	</rd-item-template>
-</rd-waterfall>
+<div class="banner__home">
+
+</div>
+<section class="resources_waterfall">
+	<rd-waterfall item-width="350" gutter="24" load-more-text="Ver más recursos" fetch="$ctrl.fetchData()">
+		<rd-item-template ng-click="$ctrl.itemClicked(item)">
+			<resource-card resource="item"></resource-card>
+		</rd-item-template>
+	</rd-waterfall>
+</section>

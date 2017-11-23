@@ -1,15 +1,9 @@
-.card {
-	padding: .5rem;
-	opacity: 0;
-	transition: transform .3s ease-in-out, opacity .2s ease-in-out  .4s;
-
-	&:hover .item-wrapper,
-	&:focus .item-wrapper {
-		box-shadow: $whiteframe-shadow-4dp;
-	}
+.banner__home {
+	background-color: $color-primary;
+	height: 40rem;
 }
 
-.item-wrapper {
-	border-radius: 6px;
-	height: 100%;
+.resources_waterfall {
+	margin-top: -10rem;
+	margin-bottom: 20rem;
 }

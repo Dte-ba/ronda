@@ -1,0 +1,9 @@
+@each $key, $section in $sections {
+	.color-#{$key} {
+		color: map-get($section, color);
+	}
+
+	.bg-#{$key} {
+		background-color: map-get($section, color);
+	}
+}

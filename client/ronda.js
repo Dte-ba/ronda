@@ -20,14 +20,12 @@ import social from './social';
 import ui from './ui';
 
 // styles
-import '../node_modules/angular-material/angular-material.scss';
+//import '../node_modules/angular-material/angular-material.scss';
 import './styles/ronda.scss';
 
 let requirements = [
 	uiRouter,
-	//ngAnimate,
 	ngCookies,
-	//ngResource,
 	ngSanitize,
 	ngLoader,
 	ngMaterial,
@@ -46,7 +44,7 @@ module.exports = ronda;
 
 angular.element(document)
 .ready(() => {
-	angular.bootstrap(document, ['ronda'], {
+	angular.bootstrap(document, [ronda], {
 		strictDi: true
 	});
 });

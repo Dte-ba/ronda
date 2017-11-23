@@ -51,4 +51,18 @@ gulp.task('serve:debug', cb => {
 	);
 });
 
+gulp.task('build', cb => {
+	runSequence(
+			'codebot',
+			[
+					'clean:dist', 
+					'inject'
+			],
+			'webpack:dist',
+			'server:dist',
+			cb
+	);
+});
+
 gulp.task('clean:tmp', () => del(['.tmp/**/*'], {dot: true}));
+gulp.task('clean:dist', () => del(['dist/**/*'], {dot: true}));

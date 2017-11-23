@@ -13,7 +13,7 @@ export default class HomeComponent extends SocialController {
     this.message = 'Hello';
 
     this.page = 0;
-    this.limit = 10;
+    this.limit = 20;
 
 
     // for test

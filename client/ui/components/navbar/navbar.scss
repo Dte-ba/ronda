@@ -182,3 +182,10 @@
 	}
 
 }
+
+// responsive
+@include respond(tab-port){
+	.rd-navbar__nav--navigation {
+		display: none;
+	}
+}

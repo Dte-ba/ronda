@@ -7,6 +7,9 @@ var HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 var WebpackCdnPlugin = require('webpack-cdn-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
+var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const OptimizeCSSClassnamesPlugin = require('optimize-css-classnames-plugin');
+
 var fs = require('fs');
 var path = require('path');
 
@@ -19,6 +22,84 @@ module.exports = function makeWebpackConfig(options) {
     var DEV = !!options.DEV;
     var TEST = !!options.TEST;
 
+    let externals = {};
+    let cssRule = [
+        {
+            loader: 'style-loader',
+        },
+        {
+            loader: 'css-loader',
+            options: {
+                importLoaders: 1,
+            }
+        },
+        {
+            loader: 'postcss-loader',
+            options: {
+                plugins: [
+                    require('precss'),
+                    require('autoprefixer')
+                ]
+            }
+        },
+        {
+            loader: "sass-loader", // compiles Sass to CSS
+        }
+    ];
+
+    let htmlLoader = [{
+        loader: 'raw-loader'
+    }];
+
+    const extractSCSS = new ExtractTextPlugin('[name].[hash].css');
+
+    if (BUILD){
+        externals = {
+            'angular': "angular",
+            'angular-animate': "'ngAnimate'",
+            'angular-aria': "'ngAria'",
+            'angular-cookies': "'ngCookies'",
+            //'angular-resource': "'ngResource'",
+            'angular-messages': "'ngMessages'",
+            'angular-sanitize': "'ngSanitize'",
+            'angular-material': "'ngMaterial'",
+            'angular-ui-router': "'ui.router'",
+            'angular-loading-bar': "'angular-loading-bar'",
+            'jquery': 'jQuery',
+            'lodash': '_'
+        };
+
+        htmlLoader = [{
+            loader: 'html-loader'
+        }];
+
+        cssRule = ExtractTextPlugin.extract({
+            fallback: "style-loader",
+            use: [
+                {
+                    loader: 'css-loader',
+                    options: {
+                        importLoaders: 1,
+                        minimize: true,
+                        sourceMap: false
+                    }
+                },
+                {
+                    loader: 'postcss-loader',
+                    options: {
+                        plugins: [
+                            require('precss'),
+                            require('autoprefixer')
+                        ]
+                    }
+                },
+                {
+                    loader: "sass-loader", // compiles Sass to CSS
+                }
+            ]
+        });
+    }
+
     /**
      * Config
      * Reference: http://webpack.github.io/docs/configuration.html
@@ -28,20 +109,22 @@ module.exports = function makeWebpackConfig(options) {
         entry: {
             app: './client/ronda.js',
             polyfills: './client/polyfills.js',
-            //vendor: [
-            //    'angular',
-            //    'angular-animate',
-            //    'angular-aria',
-            //    'angular-cookies',
-            //    'angular-resource',
-            //    'angular-messages',
-            //    'angular-sanitize',
-            //    'angular-material',
-            //    'angular-ui-router',
-            //    'jquery',
-            //    'lodash'
-            //]
+            vendor: [
+                'angular',
+                'angular-animate',
+                'angular-aria',
+                'angular-cookies',
+                //'angular-resource',
+                'angular-messages',
+                'angular-sanitize',
+                'angular-material',
+                'angular-ui-router',
+                'angular-loading-bar',
+                'jquery',
+                'lodash'
+            ]
         },
+        externals: externals,
         devtool: 'source-map',
         output: {
             // Absolute output directory
@@ -78,33 +161,11 @@ module.exports = function makeWebpackConfig(options) {
                 },
                 {
                     test: /\.html$/,
-                    use: 'raw-loader'
+                    use: htmlLoader
                 },
                 {
                     test: /\.scss$/,
-                    use: [
-                        {
-                            loader: 'style-loader',
-                        },
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                importLoaders: 1,
-                            }
-                        },
-                        {
-                            loader: 'postcss-loader',
-                            options: {
-                                plugins: [
-                                    require('precss'),
-                                    require('autoprefixer')
-                                ]
-                            }
-                        },
-                        {
-                            loader: "sass-loader", // compiles Sass to CSS
-                        }
-                    ]
+                    use: cssRule
                 }, {
                     // ASSET LOADER
                     // Reference: https://github.com/webpack/file-loader
@@ -154,13 +215,6 @@ module.exports = function makeWebpackConfig(options) {
          */
         // new ForkCheckerPlugin(),
 
-        // Reference: https://github.com/webpack/extract-text-webpack-plugin
-        // Extract css files
-        // Disabled when in test mode or not in build mode
-        new ExtractTextPlugin('[name].[hash].css', {
-            disable: !BUILD || TEST
-        }),
-
         new CommonsChunkPlugin({
             name: 'vendor',
 
@@ -178,9 +232,15 @@ module.exports = function makeWebpackConfig(options) {
     // Render index.html
     if(!TEST) {
         let htmlConfig = {
-            template: 'client/_index.html',
-            filename: '../../client/index.html',
-            alwaysWriteToDisk: true
+            template: BUILD ? 'client/_index.prod.html' : 'client/_index.html',
+            filename: BUILD ? '../../dist/client/index.html' : '../../client/index.html',
+            alwaysWriteToDisk: !BUILD,
+            minify: {
+                removeComments: true,
+                html5: true,
+                preserveLineBreaks: true,
+                collapseWhitespace: true
+            }
         }
         config.plugins.push(
           new HtmlWebpackPlugin(htmlConfig),
@@ -206,11 +266,7 @@ module.exports = function makeWebpackConfig(options) {
         config.plugins.push(
             // Reference: http://webpack.github.io/docs/list-of-plugins.html#noerrorsplugin
             // Only emit files when there are no errors
-            new webpack.NoErrorsPlugin(),
-
-            // Reference: http://webpack.github.io/docs/list-of-plugins.html#dedupeplugin
-            // Dedupe modules in the output
-            new webpack.optimize.DedupePlugin(),
+            new webpack.NoEmitOnErrorsPlugin(),
 
             // Reference: http://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
             // Minify all javascript, switch loaders to minimizing mode
@@ -223,6 +279,28 @@ module.exports = function makeWebpackConfig(options) {
                     warnings: false
                 }
             }),
+
+            // Reference: https://github.com/webpack/extract-text-webpack-plugin
+            // Extract css files
+            // Disabled when in test mode or not in build mode
+            new ExtractTextPlugin('[name].[hash].min.css', {
+                disable: !BUILD || TEST
+            }),
+
+            new OptimizeCssAssetsPlugin({
+              assetNameRegExp: /\.css$/g,
+              cssProcessor: require('cssnano'),
+              cssProcessorOptions: { discardComments: {removeAll: true } },
+              canPrint: true
+            }),
+            
+            //new OptimizeCSSClassnamesPlugin({
+            //    prefix: '_',
+            //    ignore: [
+            //        'blink-class',
+            //        /^e2e-/
+            //    ]
+            //}),
 
             // Reference: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
             // Define free global variables

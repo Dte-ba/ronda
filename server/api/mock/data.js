@@ -526,7 +526,9 @@ var categoriesCaption = {
   'orientaciones': 'Orientación',
   'mediateca': 'Mediateca',
 };
-var levels = ['Inicial', 'Primaria Primer Ciclo', 'Primaria Segundo Ciclo', 'Primaria Tercer Ciclo', 'Centro de Formacion Integral', 'Todo'];
+var levels = ['Inicial', 'Primaria Primer Ciclo', 'Primaria Segundo Ciclo', 'Primaria Tercer Ciclo', 'Centro de Formacion Integral', 'Todos'];
+var fileTypes = ['Presentación', 'Video', 'Plantilla', 'Texto', 'Imágen', 'Audios'];
+
 var area = ['Prácticas del lenguaje',
 						'Matemática',
 						'Inglés',
@@ -608,8 +610,14 @@ function create_(){
   let uid = uuidv4();
 
   let cover = undefined;
-  if (type_ === 'propuestas' || type_ === 'orientaciones') {
+  if (type_ === 'propuestas') {
     cover = 'http://lorempixel.com/400/200/?id=' + uid;
+  }
+
+  let levels_ = randomSample_(levels);
+
+  if (type_ === 'mediateca'){
+    levels_ = randomSample_(fileTypes);
   }
 
 	return {
@@ -617,7 +625,7 @@ function create_(){
 		version: 1,
     type: type_,
     typeCaption: categoriesCaption[type_],
-    levels: randomSample_(levels),
+    levels: levels_,
     areas: randomSample_(area),
     categories: randomSample_(types[type_]),
     title: random_(titles),

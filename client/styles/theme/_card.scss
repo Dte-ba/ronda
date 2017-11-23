@@ -3,11 +3,11 @@
 .rd-card {
 	
 	&__cover {
-		// the size for images of 400x200
-		height: 170px;
+		height: 0px;
 	}
 
 	&__footer {
+		position: relative;
 		text-align: center;
 		text-transform: uppercase;
 		padding-top: .803rem;
@@ -33,20 +33,28 @@
 		display: inline-block;
 	}
 
+	&__header {
+		position: relative;
+	}
+	
 	&__header--wrapper {
 		transform: translateY(-13px);
 	}
 
 	&__header--type {
+		font-weight: $font-primary-medium;
 		padding-right: 1rem;
 		border-right: solid 1px $color-grey-light;
 	}
 
 	&__header--level {
+		font-weight: $font-primary-medium;
 		padding-left: 1rem;
+		color: $color-grey;
 	}
 
 	&__body {
+		position: relative;
 		display: block;
 		padding-left: 6.8rem;
 		padding-right: 1rem;
@@ -55,18 +63,64 @@
 }
 
 // propuestas
-// orientaciones
 
+// orientaciones
 // actividades
 // herramientas
 // mediateca
 
-.rd-card[data-rd-section="actividades"],
-.rd-card[rd-section="actividades"] {
+.rd-card[data-rd-section="propuestas"],
+.rd-card[rd-section="propuestas"] {
 	.rd-card {
 		&__cover {
 			// the size for images of 400x200
-			height: 0px;
+			height: 170px;
+		}
+
+		&__body:before {
+			content: '';
+			position: absolute;
+			left: 0px;
+			top: 50%;
+			transform: translateY(-50%);
+			width: .5rem;
+			height: 70%;
+			background-color: $color-propuestas;
+			border-radius: 100px;
+		}
+	}
+}
+
+.rd-card[data-rd-section="orientaciones"],
+.rd-card[rd-section="orientaciones"] {
+	.rd-card {
+		&__body:before {
+			content: '';
+			position: absolute;
+			right: 0px;
+			top: 50%;
+			transform: translateY(-50%);
+			width: .5rem;
+			height: 70%;
+			background-color: $color-orientaciones;
+			border-radius: 100px;
+		}
+	}
+}
+
+.rd-card[data-rd-section="actividades"],
+.rd-card[rd-section="actividades"] {
+	.rd-card {
+		&__footer:before {
+			content: '';
+			position: absolute;
+			bottom: 0px;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 70%;
+			height: .5rem;
+			background-color: $color-actividades;
+			border-radius: 100px;
 		}
 	}
 }
@@ -74,9 +128,20 @@
 .rd-card[data-rd-section="herramientas"],
 .rd-card[rd-section="herramientas"] {
 	.rd-card {
-		&__cover {
-			// the size for images of 400x200
-			height: 0px;
+		&__body:before {
+			content: '';
+			position: absolute;
+			right: 0px;
+			top: 50%;
+			transform: translateY(-50%);
+			width: .5rem;
+			height: 80%;
+			background-color: $color-herramientas;
+			border-radius: 100px;
+		}
+
+		&__footer {
+			display: none;
 		}
 	}
 }
@@ -84,9 +149,20 @@
 .rd-card[data-rd-section="mediateca"],
 .rd-card[rd-section="mediateca"] {
 	.rd-card {
-		&__cover {
-			// the size for images of 400x200
-			height: 0px;
+
+		&__header:before {
+			content: '';
+			position: absolute;
+			top: 0px;
+			right: 15%;
+			width: 50%;
+			height: .5rem;
+			background-color: $color-mediateca;
+			border-radius: 100px;
+		}
+		
+		&__footer {
+			display: none;
 		}
 	}
 }
