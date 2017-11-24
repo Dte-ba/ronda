@@ -37,3 +37,6 @@ dist
 
 # Generated files
 client/index.html
+
+# secret stuff
+server/config/secret.js
