@@ -1,0 +1,40 @@
+.post {
+	
+	&__content {
+		padding: .3rem;
+		background-color: $color-white;
+	}
+
+	&__actions {
+		padding: 1rem;
+		border: $border-dashed-default;
+		border-radius: $border-radius-default;
+		background-color: $color-white;
+	}
+
+	&__actions--wrapper {
+		padding: .3rem;
+	}
+
+	&__actions--caption {
+		font-size: 2rem;
+		font-weight: $font-primary-light;
+
+		span {
+			font-weight: inherit;
+		}
+	}
+
+	&__button {
+		color: $color-white !important;
+		background-color: $color-black-light !important;
+	}
+
+	// modules
+	&__divisor {
+		margin-top: $gutter/2;
+		margin-bottom: $gutter/2;
+		border-top: solid 1px $color-grey-light;
+	}
+
+}

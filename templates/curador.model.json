@@ -6,5 +6,9 @@
 		"name": "curador"
 	},
 	"route": [
+		{
+			"name": "dashboard",
+			"url": "/tablero"
+		}
 	]
 }

@@ -7,3 +7,13 @@
 		background-color: map-get($section, color);
 	}
 }
+
+.has-error {
+	& > .help-block {
+		text-align: center;
+		padding: .2rem .3rem;
+		background: rgba($color-error, .1);
+		border: solid 1px $color-error;
+		color: $color-error;
+	}
+}

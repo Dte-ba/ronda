@@ -15,14 +15,20 @@ export default function seedDatabaseIfNeeded() {
         User.create({
           provider: 'local',
           name: 'Test User',
-          email: 'test@example.com',
+          email: 'test@ronda',
           password: 'test'
         }, {
           provider: 'local',
           role: 'admin',
           name: 'Admin',
-          email: 'admin@example.com',
+          email: 'admin@ronda',
           password: 'admin'
+        }, {
+          provider: 'local',
+          role: 'curador',
+          name: 'Curador',
+          email: 'curador@ronda',
+          password: 'curador'
         })
         .then(() => console.log('finished populating users'))
         .catch(err => console.log('error populating users', err));

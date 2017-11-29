@@ -4,20 +4,31 @@
 			<img class="login__header--logo" src="/assets/ronda-logo.svg" alt="Logo">
 			<h1 class="login__header--title" >Inicia sesión</h1>
 		</div>
-		<form class="login__form">
+		<form class="login__form"  name="loginForm" ng-submit="$ctrl.login(loginForm)" novalidate>
 				<div class="login__form--content">
 
 				<div class="login-form__group">
-					<input type="text" class="login-form__input" placeholder="Correo" id="username" required autofocus>
-					<label for="username" class="login-form__label">Correo</label>
+					<input type="email" class="login-form__input" placeholder="Correo" name="email" ng-model="$ctrl.user.email" required autofocus>
+					<label for="email" class="login-form__label">Correo</label>
 				</div>
 
 				<div class="login-form__group">
-					<input type="password" class="login-form__input" placeholder="Contraseña" id="password" required>
+					<input type="password" class="login-form__input" placeholder="Contraseña" name="password" ng-model="$ctrl.user.password" required>
 					<label for="username" class="login-form__label">Contraseña</label>
 				</div>
 
-				<md-button class="login__button--submit md-raised md-primary">Iniciar sesión</md-button>
+				<div class="login-form__group has-error">
+					<p class="help-block" ng-show="loginForm.email.$error.required && loginForm.password.$error.required && $ctrl.submitted">
+							Por favor, ingresá tu email y contraseña.
+					</p>
+					<p class="help-block" ng-show="loginForm.email.$error.email && $ctrl.submitted">
+							Por favor, ingresá un email válido.
+					</p>
+
+					<p class="help-block" ng-show="$ctrl.errors.login">{{ $ctrl.errors.login }}</p>
+				</div>
+
+				<md-button type="submit" class="login__button--submit md-raised md-primary">Iniciar sesión</md-button>
 
 			</div>
 		</form>

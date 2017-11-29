@@ -126,6 +126,42 @@ let theme = ($mdThemingProvider) => {
     'contrastLightColors': contrastLightColors
   });
 
+  $mdThemingProvider.definePalette('dark', {
+    '50': 'e4e4e4',
+    '100': 'bcbcbc',
+    '200': '909090',
+    '300': '636363',
+    '400': '414141',
+    '500': '202020',
+    '600': '1c1c1c',
+    '700': '181818',
+    '800': '131313',
+    '900': '0b0b0b',
+    'A100': 'e76c6c',
+    'A200': 'e04040',
+    'A400': 'ec0000',
+    'A700': 'd30000',
+    'contrastDefaultColor': 'light',
+    'contrastDarkColors': [
+      '50',
+      '100',
+      '200',
+      'A100'
+    ],
+    'contrastLightColors': [
+      '300',
+      '400',
+      '500',
+      '600',
+      '700',
+      '800',
+      '900',
+      'A200',
+      'A400',
+      'A700'
+    ]
+  });
+
 };
 
 export function rondaConfig($urlRouterProvider, $locationProvider, $mdThemingProvider) {
@@ -146,7 +182,9 @@ export function rondaConfig($urlRouterProvider, $locationProvider, $mdThemingPro
 	$mdThemingProvider.theme('rdOrientaciones')
 		.primaryPalette('orientaciones');
 	$mdThemingProvider.theme('rdMediateca')
-		.primaryPalette('mediateca');
+    .primaryPalette('mediateca');
+    $mdThemingProvider.theme('rdDark')
+		.primaryPalette('dark');
 
   $mdThemingProvider.theme('default')
     .primaryPalette('ronda');

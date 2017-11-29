@@ -59,12 +59,13 @@ module.exports = function makeWebpackConfig(options) {
             'angular-animate': "'ngAnimate'",
             'angular-aria': "'ngAria'",
             'angular-cookies': "'ngCookies'",
-            //'angular-resource': "'ngResource'",
+            'angular-resource': "'ngResource'",
             'angular-messages': "'ngMessages'",
             'angular-sanitize': "'ngSanitize'",
             'angular-material': "'ngMaterial'",
             'angular-ui-router': "'ui.router'",
             'angular-loading-bar': "'angular-loading-bar'",
+            'ng-wig': "'ngWig'",
             'jquery': 'jQuery',
             'lodash': '_'
         };
@@ -114,12 +115,13 @@ module.exports = function makeWebpackConfig(options) {
                 'angular-animate',
                 'angular-aria',
                 'angular-cookies',
-                //'angular-resource',
+                'angular-resource',
                 'angular-messages',
                 'angular-sanitize',
                 'angular-material',
                 'angular-ui-router',
                 'angular-loading-bar',
+                'ng-wig',
                 'jquery',
                 'lodash'
             ]

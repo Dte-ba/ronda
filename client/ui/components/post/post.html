@@ -1,0 +1,26 @@
+<!-- content here -->
+<div class="post__content">
+	<div class="post__module" ng-repeat="module in $rdPostController.modules">
+		<div class="post__divisor" ng-if="module.type === 'divisor'" draggable="true"></div>
+	</div>
+</div>
+
+<div class="post__actions--wrapper">
+	<div class="post__actions" layout="row" layout-align="center center">
+		<div class="post__actions--caption">
+			<i class="ri ri-mas"></i><span> Insertar módulo de:</span>
+		</div>
+		<md-button class="md-raised post__button" layout="row"  ng-click="$rdPostController.addText($event)">
+			<i class="ri ri-mas-texto"></i> Texto
+		</md-button>
+		<md-button class="md-raised post__button" layout="row">
+			<i class="ri ri-mas-imagen"></i> Imagen
+		</md-button>
+		<md-button class="md-raised post__button" layout="row">
+			<i class="ri ri-mas-medios"></i> Medios
+		</md-button>
+		<md-button class="md-raised post__button" layout="row" ng-click="$rdPostController.addDivisor($event)">
+			<i class="ri ri-divisor"></i> Divisor
+		</md-button>
+	</div>
+</div>

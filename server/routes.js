@@ -9,7 +9,7 @@ import path from 'path';
 
 export default function(app) {
   
-  app.use('/api/v1', require('./api'));
+  app.use('/api', require('./api'));
 
   app.use('/auth', require('./auth').default);
 

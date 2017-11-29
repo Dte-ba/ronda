@@ -1,9 +1,9 @@
 'use strict';
 import angular from 'angular';
-import SocialController from '../social.component';
+import SocialComponent from '../social.component';
 import _ from 'lodash';
 
-export default class HomeComponent extends SocialController {
+export default class HomeComponent extends SocialComponent {
   /*@ngInject*/
   constructor($element, $q, $http) {
     super({$element});
