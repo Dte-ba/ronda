@@ -1,6 +1,5 @@
 * {
 	font-family: $font-family-primary;
-	font-weight: $font-weight-primary;
 	margin: 0;
 	padding: 0;
 }
@@ -13,12 +12,27 @@
 
 html {
 	box-sizing: border-box;
+	font-weight: $font-weight-primary;
 	font-size: 62.5%; // 1rem = 10px, 10px/16px = 62.5%
 }
 
 body {
 	font-size: $body-font-size;
 	color: $color-black;
+}
+
+// ------------------------------
+// Reset font sizes to default
+//
+div, span, p, blockquote, pre,
+a, abbr, address, cite, code, strong
+i, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend {
+	font-size: 1.6rem;
+}
+
+small {
+	font-size: 0.7em;
 }
 
 // ------------------------------

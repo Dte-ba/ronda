@@ -5,7 +5,7 @@ import angular from 'angular';
 /**
  * The Util service is for thin, globally reusable, utility functions
  */
-export function UtilService($window) {
+export function UtilService($window, $cookies) {
   'ngInject';
 
   var Util = {
@@ -61,6 +61,13 @@ export function UtilService($window) {
         return hostnameCheck && protocolCheck && portCheck;
       });
       return origins.length >= 1;
+    },
+
+    getHeaders(){
+      return {
+        'Authorization': `Bearer ${$cookies.get('token')}`,
+        'X-XSRF-TOKEN': $cookies.get("XSRF-TOKEN")
+      };
     }
   };
 

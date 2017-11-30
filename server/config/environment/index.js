@@ -12,6 +12,7 @@ import _ from 'lodash';
 }*/
 
 let secret = require('../secret');
+let rootPath = path.normalize(`${__dirname}/../../..`);
 
 // All configurations will extend these options
 // ============================================
@@ -19,7 +20,7 @@ var all = {
   env: process.env.NODE_ENV,
 
   // Root path of server
-  root: path.normalize(`${__dirname}/../../..`),
+  root: rootPath,
 
   // Browser-sync port
   browserSyncPort: process.env.BROWSER_SYNC_PORT || 3000,
@@ -29,6 +30,9 @@ var all = {
 
   // Server IP
   ip: process.env.IP || '0.0.0.0',
+
+  // uploads folder
+  uploads: path.join(rootPath, 'uploads'),
 
   // Should we populate the DB with sample data?
   seedDB: false,

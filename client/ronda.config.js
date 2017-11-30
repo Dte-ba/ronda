@@ -1,5 +1,7 @@
 'use strict';
 
+import $ from 'jquery';
+
 let theme = ($mdThemingProvider) => {
 	
 	let contrastDefaultColor = 'light';
@@ -188,4 +190,16 @@ export function rondaConfig($urlRouterProvider, $locationProvider, $mdThemingPro
 
   $mdThemingProvider.theme('default')
     .primaryPalette('ronda');
+}
+
+export function rondaRun($cookies){
+  'ngInject';
+
+  // add the token to jQuery
+  $.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+      xhr.setRequestHeader("Authorization", `Bearer ${$cookies.get('token')}`);
+      xhr.setRequestHeader("X-CSRFToken", $cookies.get("XSRF-TOKEN"));
+    }
+  });
 }

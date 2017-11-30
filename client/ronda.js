@@ -11,10 +11,16 @@ import ngSanitize from 'angular-sanitize';
 import ngLoader from 'angular-loading-bar';
 
 // WYSIWYG editor
-import ngWig from 'ng-wig';
+import ngQuill from 'ng-quill';
+
+// file uploader
+import Dropzone from 'dropzone';
+Dropzone.autoDiscover = false;
+
+import ngdropzone from 'ngdropzone';
 
 // configs
-import { rondaConfig } from './ronda.config';
+import { rondaConfig, rondaRun } from './ronda.config';
 
 // componentes
 import app from './app';
@@ -27,6 +33,7 @@ import authModule from './auth/auth.module';
 
 // styles
 //import '../node_modules/angular-material/angular-material.scss';
+import '../node_modules/dropzone/dist/dropzone.css';
 import './styles/ronda.scss';
 
 let requirements = [
@@ -41,12 +48,14 @@ let requirements = [
 	curador, 
 	social, 
 	ui,
-	'ngWig'
+	ngQuill,
+	'thatisuday.dropzone'
 ];
 
 var ronda = angular
 							.module('ronda', requirements)
 							.config(rondaConfig)
+							.run(rondaRun)
 							.name;
 
 module.exports = ronda;

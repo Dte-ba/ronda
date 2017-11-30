@@ -65,7 +65,9 @@ module.exports = function makeWebpackConfig(options) {
             'angular-material': "'ngMaterial'",
             'angular-ui-router': "'ui.router'",
             'angular-loading-bar': "'angular-loading-bar'",
-            'ng-wig': "'ngWig'",
+            'ng-quill': "'ng-quill'",
+            'dropzone': 'Dropzone',
+            'ngdropzone': "'thatisuday.dropzone'",
             'jquery': 'jQuery',
             'lodash': '_'
         };
@@ -121,7 +123,9 @@ module.exports = function makeWebpackConfig(options) {
                 'angular-material',
                 'angular-ui-router',
                 'angular-loading-bar',
-                'ng-wig',
+                'ng-quill',
+                'dropzone',
+                'ngdropzone',
                 'jquery',
                 'lodash'
             ]
@@ -166,7 +170,7 @@ module.exports = function makeWebpackConfig(options) {
                     use: htmlLoader
                 },
                 {
-                    test: /\.scss$/,
+                    test: /\.(scss|css)$/,
                     use: cssRule
                 }, {
                     // ASSET LOADER

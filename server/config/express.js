@@ -17,6 +17,7 @@ import lusca from 'lusca';
 import config from './environment';
 import passport from 'passport';
 import session from 'express-session';
+import fileUpload from 'express-fileupload';
 import connectMongo from 'connect-mongo';
 import mongoose from 'mongoose';
 var MongoStore = connectMongo(session);
@@ -45,7 +46,7 @@ export default function(app) {
   app.use(methodOverride());
   app.use(cookieParser());
   app.use(passport.initialize());
-
+  app.use(fileUpload());
 
   // Persist sessions with MongoStore / sequelizeStore
   // We need to enable sessions for passport-twitter because it's an

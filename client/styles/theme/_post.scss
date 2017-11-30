@@ -38,3 +38,20 @@
 	}
 
 }
+
+
+
+.post-text {
+	&__dialog {
+		width: 80vw;
+	}
+
+	&__toolbar {
+		color: $color-white !important;
+		background-color: $color-black-light !important;
+	}
+
+	&__content {
+		padding: 1rem;
+	}
+}

@@ -11,7 +11,7 @@ export default (gulp, plugins, config) => {
 	gulp.task('start:server', (cb) => {
     process.env.NODE_ENV = process.env.NODE_ENV || 'development';
     //config = require(`./${config.serverPath}/config/environment`);
-    nodemon({ script: config.serverPath, ext: 'js json' })
+    nodemon({ script: config.serverPath, ext: 'js json', ignore: [ config.clientPath+'/*' ] })
 				.on('log', onServerLog);
 				
 		whenServerReady(cb);
