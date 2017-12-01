@@ -7,6 +7,7 @@ export function curadorConfig($stateProvider) {
 	.state('curador', {
 		abstract: true,
 		template: `
+			<curador-header></curador-header>
 			<main ui-view=""></main>
 		`
 	});

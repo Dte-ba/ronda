@@ -3,6 +3,16 @@
 	<div class="post__module" ng-repeat="module in $rdPostController.modules">
 		<div class="post__divisor" ng-if="module.type === 'divisor'" draggable="true"></div>
 		<div class="post__text" ng-if="module.type === 'text'" draggable="true" ng-bind-html="module.content"></div>
+		<div class="post__image--gallery" ng-if="module.type === 'image-gallery'" draggable="true" layout="column" layout-padding>
+			<div ng-repeat="image in module.content">
+				<img ng-src="{{image.src}}" alt="{{image.description}}">
+			</div>
+		</div>
+		<div class="post__image--grid" ng-if="module.type === 'image-grid'" draggable="true" layout="row" layout-padding>
+				<div ng-repeat="image in module.content" flex="33">
+					<img ng-src="{{image.src}}" alt="{{image.description}}">
+				</div>
+			</div>
 	</div>
 </div>
 

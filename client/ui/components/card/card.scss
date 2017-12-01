@@ -34,4 +34,24 @@
 	&__footer {
 		border-top: solid 1px $color-grey-light;
 	}
+
+	&__footer:empty {
+		display: none;
+	}
+}
+
+rd-card-toolbar {
+	display: block;
+}
+rd-card-cover {
+	display: block;
+}
+rd-card-header {
+	display: block;
+}
+rd-card-body {
+	display: block;
+}
+rd-card-footer {
+	display: block;
 }

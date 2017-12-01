@@ -30,6 +30,11 @@
 		background-color: $color-black-light !important;
 	}
 
+	&__button:disabled {
+		background-color: $color-grey !important;
+		color: $color-grey-light !important;
+	}
+
 	// modules
 	&__divisor {
 		margin-top: $gutter/2;
@@ -37,9 +42,19 @@
 		border-top: solid 1px $color-grey-light;
 	}
 
+	&__image--gallery {
+		& img {
+			width: 100%;
+		}
+	}
+
+	&__image--grid {
+		& img {
+			width: 100%;
+		}
+	}
+
 }
-
-
 
 .post-text {
 	&__dialog {
@@ -54,4 +69,30 @@
 	&__content {
 		padding: 1rem;
 	}
+}
+
+.post-media {
+
+	&__image--edition {
+		img {
+			width: 100%;
+			height: auto;
+		}
+
+		h5 {
+			margin-bottom: 1.2rem;
+		}
+
+		textarea {
+			max-width: 100%;
+			width: 100%;
+		}
+	}
+
+	&__opstions {
+		md-radio-button {
+			display: inline-block !important;
+		}
+	}
+
 }

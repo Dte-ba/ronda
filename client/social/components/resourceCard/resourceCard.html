@@ -1,4 +1,20 @@
-<rd-card data-rd-section="{{$ctrl.resource.type}}">
+<rd-card class="rd-card__addnew" ng-if="$ctrl.resource.type === 'addnew'">
+		<rd-card-body class="rd-card__addnew--body">
+			<ul class="new-resource__list">
+				<li ng-repeat="item in $ctrl.resource.options">
+					<a href="" layout="row" layout-align="start center">
+						<i class="{{item.icon}} color-{{item.section}} ri-3x"></i>
+						<span class="new-resource__item">{{item.caption}}</span>
+					</a>
+				</li>
+			</ul>
+			<div role="button" class="new-resource__button" ng-hide="$ctrl.resource.clicked" ng-click="$ctrl.resource.clicked = true">
+				<div class="new-resource__button--center">
+				</div>
+			</div>
+		</rd-card-body>
+</rd-card>
+<rd-card data-rd-section="{{$ctrl.resource.type}}" ng-if="$ctrl.resource.type !== 'addnew'">
 		<!--<rd-card-toolbar>
 			toolbar
 		</rd-card-toolbar>-->

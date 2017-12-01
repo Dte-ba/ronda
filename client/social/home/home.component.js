@@ -10,14 +10,8 @@ export default class HomeComponent extends SocialComponent {
     this.$http = $http;
     this.$q = $q;
 
-    this.message = 'Hello';
-
     this.page = 0;
     this.limit = 20;
-
-
-    // for test
-    this.items = [];
   }
 
   fetchData(){
@@ -39,9 +33,5 @@ export default class HomeComponent extends SocialComponent {
       });
 
     return def.promise;
-  }
-
-  randomColor(){
-    return '#'+('00000'+(Math.random()*(1<<24)|0).toString(16)).slice(-6);
   }
 }

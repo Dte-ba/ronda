@@ -11,7 +11,6 @@ export default function(req, res, next){
 	File
 		.findById(id)
 		.then(file => {
-			console.log(file);
 			res.sendFile(path.join(config.uploads, file.relative));
 		})
 		.catch(next);

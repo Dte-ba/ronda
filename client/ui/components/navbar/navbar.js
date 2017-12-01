@@ -22,7 +22,11 @@ class RdNavbarController {
     	this.isMobile = mobile === true;
     });
 
-    let clsScrolled = 'rd-navbar--scrolled';
+		let clsScrolled = 'rd-navbar--scrolled';
+		this.isCompact = this.$scope.rdCompact;
+		if (this.isCompact) {
+			this.$element.addClass(clsScrolled);
+		}
 
     $(document).ready(() => {
 		  var scrollTop = 0;
@@ -31,7 +35,9 @@ class RdNavbarController {
 		    if (scrollTop >= HIEGHT_BREACKPOINT) {
 		      this.$element.addClass(clsScrolled);
 		    } else if (scrollTop < HIEGHT_BREACKPOINT) {
-		      this.$element.removeClass(clsScrolled);
+					if (!this.isCompact){
+						this.$element.removeClass(clsScrolled);
+					}
 		    } 
 
 		    this.removeDropdown();
@@ -69,8 +75,7 @@ function RdNavbar($window){
 		controller: RdNavbarController,
 		controllerAs: '$rdNavbarController',
 		scope: {
-			logo: '@logo',
-			logoScrolled: '@logoScrolled'
+			rdCompact: '@'
 		},
 		transclude: {
 			'items': 'rdNavbarNavigation',

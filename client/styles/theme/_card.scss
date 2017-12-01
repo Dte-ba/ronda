@@ -56,11 +56,95 @@
 	&__body {
 		position: relative;
 		display: block;
-		padding-left: 6.8rem;
-		padding-right: 1rem;
-		padding-bottom: 1rem;
+		//padding-left: 6.8rem;
+		//padding-right: 1rem;
+		//padding-bottom: 1rem;
 	}
 }
+
+.rd-card__addnew {
+
+	.rd-card__wrapper {
+		cursor: auto !important;
+		border: dashed 1px $color-primary;
+	}
+
+	&--body {
+		position: relative;
+		padding: .5rem 1.8rem;
+	}
+}
+
+.new-resource {
+	
+	&__list {
+		list-style: none;
+		padding: 0px;
+	
+		li {
+			cursor: pointer;
+			padding: .5rem 1rem;
+
+			a {
+				text-decoration: none;
+			}
+		}
+	
+		li:not(:last-child) {
+			border-bottom: solid 1px $color-grey-light;
+		}
+	}
+
+
+
+	&__list > li:hover &__item,
+	&__list > li:focus &__item {
+		color: $color-black
+	}
+
+	&__item {
+		padding-left: 1rem;
+		font-size: 1.8rem;
+		color: $color-black-light;
+	}
+
+	&__button {
+		position: absolute;
+		cursor: pointer !important;
+		left: 0;
+		top: 0;
+		height: 100%;
+		width: 100%;
+		background-color: $color-white;
+
+		&--center {
+			height: 15rem;
+			width: 15rem;
+			background-color: $color-primary;
+			border-radius: 50%;
+			@include centered;
+
+			&::before {
+				content: '';
+				height: 8rem;
+				width: 2rem;
+				border-radius: .7rem;
+				background-color: $color-white;
+				@include centered;
+			}
+
+			&::after {
+				content: '';
+				height: 2rem;
+				width: 8rem;
+				border-radius: .7rem;
+				background-color: $color-white;
+				@include centered;
+			}
+		}
+	}
+}
+
 
 // propuestas
 

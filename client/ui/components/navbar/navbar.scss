@@ -103,6 +103,10 @@
 		height: $navbar-height-scrolled;
 	}
 
+	&__compact &__content {
+		height: $navbar-height-scrolled;
+	}
+
 	&__nav--navigation {
 		flex: 1 0 auto;
 		opacity: 1;

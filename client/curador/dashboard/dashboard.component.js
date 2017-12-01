@@ -4,32 +4,40 @@ import CuradorComponent from '../curador.component';
 
 export default class DashboardComponent extends CuradorComponent {
   /*@ngInject*/
-  constructor($element,  Util) {
+  constructor($element,  $q) {
     super({$element});
-    
-    this.dzOptions = {
-      url : '/upload?relative=somerelative',
-      paramName : 'photo',
-      maxFilesize : '10',
-      acceptedFiles : 'image/jpeg, images/jpg, image/png',
-      addRemoveLinks : true,
-      headers: Util.getHeaders()
+
+    this.$q = $q;
+
+    this.page = 0;
+    this.limit = 20;
+  }
+
+  fetchData(){
+    let def = this.$q.defer();
+
+    this.page++;
+    let items = [{
+      type: 'addnew',
+      options: [
+        { section: 'propuestas', icon: 'ri ri-propuestas', caption: 'Propuestas pedagógica' },
+        { section: 'actividades', icon: 'ri ri-actividades', caption: 'Actividades' },
+        { section: 'herramientas', icon: 'ri ri-herramienta', caption: 'Herramientas' },
+        { section: 'orientaciones', icon: 'ri ri-orientaciones', caption: 'Orientaciones' },
+        { section: 'mediateca', icon: 'ri ri-mediateca', caption: 'Mediateca' },
+      ]
+    }];
+
+    let data = {
+      count: items.length,
+      items: items,
+      page: this.page,
+      limit: this.limit
     };
 
-    this.dzCallbacks = {
-      'addedfile' : (file) => {
-        console.log(file);
-        this.newFile = file;
-      },
-      'success' : (file, xhr) => {
-        console.log(file, xhr);
-      },
-    };
+    def.resolve(data);
 
-    this.dzMethods = {};
-    this.removeNewFile = () => {
-      this.dzMethods.removeFile($scope.newFile); //We got $scope.newFile from 'addedfile' event callback
-    }
+    return def.promise;
   }
 	
 }

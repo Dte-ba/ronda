@@ -68,6 +68,7 @@ module.exports = function makeWebpackConfig(options) {
             'ng-quill': "'ng-quill'",
             'dropzone': 'Dropzone',
             'ngdropzone': "'thatisuday.dropzone'",
+            //'md-steppers': "'md-steppers'",
             'jquery': 'jQuery',
             'lodash': '_'
         };
@@ -126,6 +127,7 @@ module.exports = function makeWebpackConfig(options) {
                 'ng-quill',
                 'dropzone',
                 'ngdropzone',
+                'md-steppers',
                 'jquery',
                 'lodash'
             ]
