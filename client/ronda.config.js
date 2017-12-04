@@ -7,7 +7,8 @@ let theme = ($mdThemingProvider) => {
 	let contrastDefaultColor = 'light';
 	let contrastDarkColors = [ '50', '100', '200', '300', '400', 'A100', 'A200', 'A400', 'A700'];
 	let contrastLightColors = [ '500','600','700','800','900' ];
-	
+  
+  /*
 	$mdThemingProvider.definePalette('propuestas', {
     '50': 'fee8e7',
     '100': 'fcc7c3',
@@ -106,7 +107,8 @@ let theme = ($mdThemingProvider) => {
     'contrastDefaultColor': contrastDefaultColor,
     'contrastDarkColors': contrastDarkColors,
     'contrastLightColors': []
-	});
+  });
+  */
 	
   $mdThemingProvider.definePalette('ronda', {
     '50': 'fce7e7',
@@ -128,6 +130,7 @@ let theme = ($mdThemingProvider) => {
     'contrastLightColors': contrastLightColors
   });
 
+  /*
   $mdThemingProvider.definePalette('dark', {
     '50': 'e4e4e4',
     '100': 'bcbcbc',
@@ -163,7 +166,7 @@ let theme = ($mdThemingProvider) => {
       'A700'
     ]
   });
-
+  */
 };
 
 export function rondaConfig($urlRouterProvider, $locationProvider, $mdThemingProvider) {
@@ -175,6 +178,7 @@ export function rondaConfig($urlRouterProvider, $locationProvider, $mdThemingPro
   // create theming
   theme($mdThemingProvider);
 
+  /*
   $mdThemingProvider.theme('rdPropuestas')
   	.primaryPalette('propuestas');
   $mdThemingProvider.theme('rdActividades')
@@ -185,8 +189,9 @@ export function rondaConfig($urlRouterProvider, $locationProvider, $mdThemingPro
 		.primaryPalette('orientaciones');
 	$mdThemingProvider.theme('rdMediateca')
     .primaryPalette('mediateca');
-    $mdThemingProvider.theme('rdDark')
+  $mdThemingProvider.theme('rdDark')
 		.primaryPalette('dark');
+  */
 
   $mdThemingProvider.theme('default')
     .primaryPalette('ronda');

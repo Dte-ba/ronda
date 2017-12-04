@@ -91,3 +91,23 @@
 .mi-person:before {
 	content: "\E7FD";
 }
+
+.mi-navigate-next::before {
+  content: "\E409";
+}
+
+.mi-navigate-back::before {
+  content: "\E408";
+}
+
+.mi-cloud-done::before {
+  content: "\E2BF";
+}
+
+.mi-cloud-upload::before {
+  content: "\E2BF";
+}
+
+.mi-save::before {
+  content: "\E161";
+}

@@ -1,7 +1,7 @@
 // fix the height with the navbar
 .dashboard {
 	&__header {
-		height: $navbar-height
+		height: $navbar-height-scrolled;
 	}
 	
 	&__navbar--caption {

@@ -1,0 +1,33 @@
+curador-new {
+	display: block;
+	height: calc(100vh - #{$navbar-height-scrolled});
+}
+
+.dashboard {
+	&__toolbar {
+		height: $navbar-height-scrolled;
+		background-color: $color-black-light;
+		box-shadow: $whiteframe-shadow-2dp;
+		z-index: $navbar-z-index - 1;
+		position: sticky;
+	}
+
+	&__wrapper {
+		height: calc(100vh - #{$navbar-height-scrolled * 2});
+	}
+
+	&__sidenav {
+		width: 35rem;
+		background-color: $color-grey-light;
+	}
+
+	&__stepper {
+		height: 100%;
+		margin: 0 auto;
+		width: calc(100% - #{$gutter});
+
+		& > div {
+			height: 100%;
+		}
+	}
+}

@@ -2,7 +2,7 @@
 		<rd-card-body class="rd-card__addnew--body">
 			<ul class="new-resource__list">
 				<li ng-repeat="item in $ctrl.resource.options">
-					<a href="" layout="row" layout-align="start center">
+					<a ui-sref="curador.new({ type: item.section })" layout="row" layout-align="start center">
 						<i class="{{item.icon}} color-{{item.section}} ri-3x"></i>
 						<span class="new-resource__item">{{item.caption}}</span>
 					</a>

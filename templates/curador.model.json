@@ -9,6 +9,10 @@
 		{
 			"name": "dashboard",
 			"url": "/tablero"
+		},
+		{
+			"name": "new",
+			"url": "/tablero/new"
 		}
 	]
 }
