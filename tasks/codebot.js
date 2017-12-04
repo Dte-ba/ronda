@@ -7,10 +7,15 @@ export default (gulp, plugins, config) => {
 	let clientModules = [
 		path.join(config.root, 'templates/client/route')
 	];
+
+	let serverModules = [
+		path.join(config.root, 'templates/server/api')
+	];
 	
 	task_('codebot:app', 'templates/app.model.json', clientModules, 'client/');
 	task_('codebot:curador', 'templates/curador.model.json', clientModules, 'client/');
 	task_('codebot:social', 'templates/social.model.json', clientModules, 'client/');
+	task_('codebot:server', 'templates/server.model.json', serverModules, 'server/');
 
 	gulp.task('codebot:client', ['codebot:app', 'codebot:curador', 'codebot:social']);
 
@@ -25,6 +30,10 @@ export default (gulp, plugins, config) => {
 
 		plugins.watch(['templates/social.model.json'], plugins.batch((events, done) => {
 			gulp.start('codebot:social', done);
+		}));
+		
+		plugins.watch(['templates/server.model.json'], plugins.batch((events, done) => {
+			gulp.start('codebot:server', done);
 		}));
 	});
 

@@ -1,0 +1,30 @@
+{
+	"layer": {
+		"api": "./api"
+	},
+	"entity": [
+		{
+			"name": "category",
+			"plural": "categories",
+			"routes": {
+				"index": { "method": "get", "route": "/", "auth": "authenticate" },
+				"update": { "method": "put", "route": "/:id", "auth": "admin" },
+				"show": { "method": "get", "route": "/:id", "auth": "authenticate" }
+			},
+			"props": [
+				{ 
+					"name": "type",
+					"type": "String"
+				},
+				{ 
+					"name": "values",
+					"type": "[String]"
+				},
+				{ 
+					"name": "caption",
+					"type": "String"
+				}
+			]
+		}
+	]
+}
