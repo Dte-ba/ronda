@@ -14,6 +14,7 @@ import _ from 'lodash';
 let secret = require('../secret');
 let rootPath = path.normalize(`${__dirname}/../../..`);
 
+
 // All configurations will extend these options
 // ============================================
 var all = {
@@ -54,7 +55,7 @@ var all = {
   google: {
     clientID: process.env.GOOGLE_ID || secret.GOOGLE_ID,
     clientSecret: process.env.GOOGLE_SECRET || secret.GOOGLE_SECRET,
-    callbackURL: `${process.env.DOMAIN || ''}/auth/google/callback`
+    callbackURL: `http://localhost:3000/auth/google/callback`
   }
 };
 

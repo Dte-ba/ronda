@@ -24,10 +24,26 @@ class RdStepperController {
 			{ name: 'relacion', caption: 'Relación' },
 			{ name: 'publicar', caption: 'Publicar' },
 		];
+
+		this.$scope.$watch(() => { return this.currentStepIndex_ }, (value) => {
+			this.releaseEnterStep(value);
+		});
+	}
+
+	getStepByIndex_(idx) {
+		if (idx >= this.steps.length){
+			return undefined;
+		}
+
+		return this.steps[idx];
 	}
 
 	currentStep(){
-		return this.steps[this.currentStepIndex_];
+		return this.getStepByIndex_(this.currentStepIndex_);
+	}
+
+	currentStepName(){
+		return this.currentStep().name;
 	}
 
 	stepStatus(step){
@@ -73,6 +89,19 @@ class RdStepperController {
 	canBack(){
 		return this.currentStepIndex_ > 0;
 	}
+
+	releaseEnterStep(idx){
+		let onEnterStepFn = this.$scope.onEnterStep;
+		if (typeof onEnterStepFn === 'function'){
+			onEnterStepFn(this.getStepByIndex_(idx));
+		}
+	}
+
+	goToStep(idx){
+		if (idx < this.currentStepIndex_){
+			this.currentStepIndex_ = idx;
+		}
+	}
 }
 
 function rdStepper($log){
@@ -85,7 +114,11 @@ function rdStepper($log){
 		scope: {
 			rdSteps: '=',
 			canNext: '=',
-			'onFinish': '='
+			onFinish: '=',
+			onEnterStep: '=',
+			saveFunction: '=',
+			autoSave: '=',
+			ngModel: '='
 		},
 		template: require('./stepper.html')
 	}

@@ -1,5 +1,6 @@
 import passport from 'passport';
 import {Strategy as GoogleStrategy} from 'passport-google-oauth20';
+var GooglePlusStrategy = require('passport-google-plus');
 
 export function setup(User, config) {
   passport.use(new GoogleStrategy({

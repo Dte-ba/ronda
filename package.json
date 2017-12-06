@@ -43,6 +43,8 @@
     "morgan": "^1.9.0",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
+    "passport-google-plus": "^0.5.1",
+    "passport-google-plus-token": "^2.1.0",
     "passport-local": "^1.0.0",
     "serve-favicon": "^2.4.5",
     "shrink-ray": "^0.1.3",

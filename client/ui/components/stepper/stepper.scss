@@ -12,14 +12,22 @@
 
 	&__button--back {
 		min-width: 36px !important;
-		background-color: #07b9c1 !important;
+		background-color: $color-secondary !important;
 
 		md-icon {
 			color: $color-white !important;
 		}
 	}
 
+	&__button--back:disabled {
+		md-icon {
+			color: $color-grey !important;
+		}
+	}
+
 	&__step {
+		outline: none;
+
 		&--number {
 			display: inline-block;
 			height: 3.6rem;
@@ -48,6 +56,11 @@
 	}
 
 	// status completed
+	&__step[step-status="completed"],
+	&__step[data-step-status="completed"] {
+		cursor: pointer;
+	}
+
 	&__step[step-status="completed"] > &__step--number,
 	&__step[data-step-status="completed"] > &__step--number {
 			color: $color-black-light;

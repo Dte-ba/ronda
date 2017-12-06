@@ -4,10 +4,10 @@ import CuradorComponent from '../curador.component';
 
 export default class DashboardComponent extends CuradorComponent {
   /*@ngInject*/
-  constructor($element,  $q) {
+  constructor($element,  $q, $http) {
     super({$element});
-
     this.$q = $q;
+    this.$http = $http;
 
     this.page = 0;
     this.limit = 20;
@@ -39,5 +39,16 @@ export default class DashboardComponent extends CuradorComponent {
 
     return def.promise;
   }
-	
+  
+  $onInit(){
+    this
+      .$http.get('/api/categories/type/os')
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+  
 }

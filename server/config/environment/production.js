@@ -20,5 +20,11 @@ module.exports = {
       || process.env.MONGOHQ_URL
       || process.env.OPENSHIFT_MONGODB_DB_URL + process.env.OPENSHIFT_APP_NAME
       || 'mongodb://localhost/ronda'
+  },
+  
+  google: {
+    clientID: process.env.GOOGLE_ID || secret.GOOGLE_ID,
+    clientSecret: process.env.GOOGLE_SECRET || secret.GOOGLE_SECRET,
+    callbackURL: `http://ronda.dtelab.com.ar/auth/google/callback`
   }
 };

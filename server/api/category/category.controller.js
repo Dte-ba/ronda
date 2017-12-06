@@ -67,3 +67,22 @@ export function show(req, res, next) {
 					.catch(err => next(err));
 }
 
+
+/**
+ * Get a single category by type
+ * restriction: 'authenticate'
+ */
+export function showByType(req, res, next) {
+  var categoryType = req.params.type;
+
+	return Category
+					.findOne({ type: categoryType })
+					.exec()
+					.then(category => {
+						if(!category) {
+							return res.status(404).end();
+						}
+						res.json(category);
+					})
+					.catch(err => next(err));
+}
