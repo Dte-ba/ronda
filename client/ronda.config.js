@@ -172,8 +172,12 @@ let theme = ($mdThemingProvider) => {
 export function rondaConfig($urlRouterProvider, $locationProvider, $mdThemingProvider) {
   'ngInject';
   
-  $urlRouterProvider.otherwise('/');
   $locationProvider.html5Mode(true);
+
+  $urlRouterProvider.when('/admin/users/', ['$match', '$stateParams', '$state', function ($match, $stateParams, $state) {
+    $state.go('admin.users');
+  }]);
+  $urlRouterProvider.otherwise('/');
 
   // create theming
   theme($mdThemingProvider);

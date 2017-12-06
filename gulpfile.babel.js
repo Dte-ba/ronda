@@ -21,7 +21,7 @@ tasksFactory(gulp, plugins, config);
 
 gulp.task('watch', ['watch:inject', 'watch:codebot']);
 
-gulp.task('codebot', ['codebot:client'])
+gulp.task('codebot', ['codebot:client', 'codebot:server'])
 
 gulp.task('serve', cb => {
 	runSequence(

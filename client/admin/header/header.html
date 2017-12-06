@@ -1,8 +1,8 @@
-<header class="header">
-	<rd-navbar class="navbar">
+<header class="dashboard__header">
+	<rd-navbar class="navbar" rd-compact="true">
 		<rd-navbar-brand>
 				<div class="navbar__logo">
-					<a ui-sref="admin.users">
+					<a ui-sref="curador.dashboard">
 						<img ng-src="assets/ronda-logo.svg" alt="Logo">
 					</a>
 				</div>
@@ -11,18 +11,13 @@
 				</div>
 				
 		</rd-navbar-brand>
-		<rd-navbar-navigation>
-			<rd-navbar-item 
-				ng-repeat="item in $ctrl.navbarItems" 
-				ng-model="item" 
-				navbar-item-selected="item.section === $ctrl.selected"
-				ng-click="$ctrl.itemClicked(item)"
-				tabindex="0"/>
+		<rd-navbar-navigation layout="row" layout-padding>
+			<span flex></span>
+			<div class="dashboard__navbar--caption">Admin</div>
 		</rd-navbar-navigation>
 		<rd-navbar-tools>
-			<rd-navbar-item navbar-item-icon="ri ri-lupa" navbar-item-caption="Buscar"></rd-navbar-item>
 			<rd-navbar-item navbar-item-icon="mi mi-home" navbar-item-caption="Home" navbar-item-selected="true"></rd-navbar-item>
-			<rd-navbar-item navbar-item-icon="ri ri-mochila" navbar-item-caption="Mi Mochila"></rd-navbar-item>
+			<rd-navbar-item navbar-item-icon="mi mi-person" navbar-item-caption="Profile"></rd-navbar-item>
 		</rd-navbar-tools>
 		<rd-navbar-body>
 		</rd-navbar-body>

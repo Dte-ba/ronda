@@ -1,7 +1,7 @@
 'use strict';
 import angular from 'angular';
 
-class HeaderComponent {
+class CuradorHeaderComponent {
   /*@ngInject*/
   constructor($element) {
     this.selected = '';
@@ -26,6 +26,6 @@ class HeaderComponent {
 export default angular.module('ronda.curador.curadorHeader', [])
   .component('curadorHeader', {
     template: require('./header.html'),
-    controller: HeaderComponent
+    controller: CuradorHeaderComponent
   })
   .name;

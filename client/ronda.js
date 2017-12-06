@@ -24,6 +24,7 @@ import mdSteppers from 'md-steppers';
 import { rondaConfig, rondaRun } from './ronda.config';
 
 // componentes
+import admin from './admin';
 import app from './app';
 import curador from './curador';
 import social from './social';
@@ -48,6 +49,7 @@ let requirements = [
 	authModule,
 	app, 
 	curador, 
+	admin,
 	social, 
 	ui,
 	ngQuill,

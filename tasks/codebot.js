@@ -12,14 +12,20 @@ export default (gulp, plugins, config) => {
 		path.join(config.root, 'templates/server/api')
 	];
 	
-	task_('codebot:app', 'templates/app.model.json', clientModules, 'client/');
-	task_('codebot:curador', 'templates/curador.model.json', clientModules, 'client/');
-	task_('codebot:social', 'templates/social.model.json', clientModules, 'client/');
-	task_('codebot:server', 'templates/server.model.json', serverModules, 'server/');
+	task_('codebot:client:admin', 'templates/admin.model.json', clientModules, 'client/');
+	task_('codebot:client:app', 'templates/app.model.json', clientModules, 'client/');
+	task_('codebot:client:curador', 'templates/curador.model.json', clientModules, 'client/');
+	task_('codebot:client:social', 'templates/social.model.json', clientModules, 'client/');
+	task_('codebot:server:server', 'templates/server.model.json', serverModules, 'server/');
 
-	gulp.task('codebot:client', ['codebot:app', 'codebot:curador', 'codebot:social']);
+	gulp.task('codebot:client', ['codebot:client:admin', 'codebot:client:app', 'codebot:client:curador', 'codebot:client:social']);
+	gulp.task('codebot:server', ['codebot:server:server']);
 
 	gulp.task('watch:codebot', () => {
+		plugins.watch(['templates/admin.model.json'], plugins.batch((events, done) => {
+			gulp.start('codebot:admin', done);
+		}));
+
 		plugins.watch(['templates/app.model.json'], plugins.batch((events, done) => {
 			gulp.start('codebot:app', done);
 		}));
