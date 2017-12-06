@@ -1,6 +1,8 @@
 'use strict';
 /*eslint no-process-env:0*/
 
+let secret = require('../secret');
+
 // Production specific configuration
 // =================================
 module.exports = {

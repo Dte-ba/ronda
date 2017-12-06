@@ -65,7 +65,7 @@ module.exports = function makeWebpackConfig(options) {
             'angular-material': "'ngMaterial'",
             'angular-ui-router': "'ui.router'",
             'angular-loading-bar': "'angular-loading-bar'",
-            'ng-quill': "'ng-quill'",
+            'ng-quill': "'ngQuill'",
             'dropzone': 'Dropzone',
             'ngdropzone': "'thatisuday.dropzone'",
             //'md-steppers': "'md-steppers'",
@@ -127,7 +127,7 @@ module.exports = function makeWebpackConfig(options) {
                 'ng-quill',
                 'dropzone',
                 'ngdropzone',
-                'md-steppers',
+                //'md-steppers',
                 'jquery',
                 'lodash'
             ]
@@ -279,7 +279,7 @@ module.exports = function makeWebpackConfig(options) {
             // Reference: http://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
             // Minify all javascript, switch loaders to minimizing mode
             new webpack.optimize.UglifyJsPlugin({
-                mangle: false,
+                mangle: true,
                 output: {
                     comments: false
                 },
