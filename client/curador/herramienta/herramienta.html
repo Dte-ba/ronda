@@ -1,0 +1,36 @@
+
+<div class="dashboard__loading" layout="row" layout-align="center center" ng-show="$ctrl.loading">
+	<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
+
+<div class="dashboard__toolbar" ng-hide="$ctrl.loading">
+	<rd-stepper class="dashboard__stepper" 
+							rd-section="herramientas" 
+							steps="$ctrl.steps"
+							can-next="$ctrl.canNext" 
+							on-finish="$ctrl.finish"
+							on-enter-step="$ctrl.onEnterStep"
+							on-save="$ctrl.save"
+							></rd-stepper>
+</div>
+<div class="dashboard__wrapper">
+	<div class="dashboard__container"  layout="row" layout-align="start stretch" ng-hide="$ctrl.loading">
+		<md-content class="dashboard__sidenav sidenav__herramientas" ng-hide="$ctrl.currentStep === 'publicar'">
+			<h2 class="dashboard__sidenav--head color-herramientas">Herramientas</h2>
+		</md-content>
+		
+		<md-content  class="dashboard__content" flex>
+			<div class="dashboard__content--head">
+					<md-input-container class="dashboard__input dashboard__input--title">
+						<label>Título</label>
+						<input ng-model="$ctrl.resource.title" required>
+					</md-input-container>
+					<md-input-container  class="dashboard__input dashboard__input--summary">
+						<label>Síntesis</label>
+						<textarea ng-model="$ctrl.resource.summary" required></textarea>
+					</md-input-container>
+			</div>
+			<rd-post modules="$ctrl.resource.postBody"></rd-post>
+		</md-content>
+	</div>
+</div>

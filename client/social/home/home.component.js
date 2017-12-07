@@ -5,10 +5,11 @@ import _ from 'lodash';
 
 export default class HomeComponent extends SocialComponent {
   /*@ngInject*/
-  constructor($element, $q, $http) {
+  constructor($element, $q, $http, Restangular) {
     super({$element});
     this.$http = $http;
     this.$q = $q;
+    this.Api = Restangular;
 
     this.page = 0;
     this.limit = 20;
@@ -18,19 +19,18 @@ export default class HomeComponent extends SocialComponent {
     let def = this.$q.defer();
 
     this.page++;
-    this.$http
-      .get(`/api/mock?page=${this.page}&limit=${this.limit}`)
-      .then(response => {
-        var data = response.data;
-
-        let res = {
-          page: data.page,
-          items: data.data,
-          total: data.data.length
-        };
-
-        def.resolve(res);
-      });
+    let resources = this.Api.all('resources');
+    resources
+        .getList({page: this.page, limit: this.limit })
+        .then(data => {
+          let res = {
+            page: data.$page,
+            items: data,
+            total: data.$total
+          };
+  
+          def.resolve(res);
+        })
 
     return def.promise;
   }

@@ -1,63 +1,8 @@
-<div class="dashboard__toolbar">
-	<rd-stepper class="dashboard__stepper" 
-							rd-section="{{$ctrl.section}}" 
-							can-next="$ctrl.canNext" 
-							on-finish="$ctrl.finish"
-							on-enter-step="$ctrl.onEnterStep"></rd-stepper>
+<div layout="row" layout-align="center center">
+	<div ng-if="$ctrl.error" class="alert alert__error">
+		{{$ctrl.error}}
+	</div>
 </div>
-<div class="dashboard__wrapper" layout="row" layout-align="start stretch">
-	<md-content class="dashboard__sidenav"></md-content>
-	
-	<md-content  class="dashboard__content" flex><ul>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-		<li>Lorem </li>
-	</ul></md-content>
+<div layout="row" layout-align="center center">
+	<md-progress-circular md-mode="indeterminate"></md-progress-circular>
 </div>

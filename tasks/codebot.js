@@ -23,23 +23,23 @@ export default (gulp, plugins, config) => {
 
 	gulp.task('watch:codebot', () => {
 		plugins.watch(['templates/admin.model.json'], plugins.batch((events, done) => {
-			gulp.start('codebot:admin', done);
+			gulp.start('codebot:client:admin', done);
 		}));
 
 		plugins.watch(['templates/app.model.json'], plugins.batch((events, done) => {
-			gulp.start('codebot:app', done);
+			gulp.start('codebot:client:app', done);
 		}));
 
 		plugins.watch(['templates/curador.model.json'], plugins.batch((events, done) => {
-			gulp.start('codebot:curador', done);
+			gulp.start('codebot:client:curador', done);
 		}));
 
 		plugins.watch(['templates/social.model.json'], plugins.batch((events, done) => {
-			gulp.start('codebot:social', done);
+			gulp.start('codebot:client:social', done);
 		}));
 		
 		plugins.watch(['templates/server.model.json'], plugins.batch((events, done) => {
-			gulp.start('codebot:server', done);
+			gulp.start('codebot:server:server', done);
 		}));
 	});
 

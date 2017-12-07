@@ -169,7 +169,7 @@ let theme = ($mdThemingProvider) => {
   */
 };
 
-export function rondaConfig($urlRouterProvider, $locationProvider, $mdThemingProvider) {
+export function rondaConfig($urlRouterProvider, $locationProvider, $mdThemingProvider, RestangularProvider) {
   'ngInject';
   
   $locationProvider.html5Mode(true);
@@ -179,6 +179,28 @@ export function rondaConfig($urlRouterProvider, $locationProvider, $mdThemingPro
   }]);
   $urlRouterProvider.otherwise('/');
 
+  //RestangularProvider.setFullResponse(true);
+  RestangularProvider.setBaseUrl('/api');
+  RestangularProvider.setResponseExtractor(function(data, operation, what, url, response) {
+    if (operation !== 'getList'){
+      return data;  
+    }
+    
+    let page = response.headers('x-result-page');
+    let limit = response.headers('x-result-limit');
+    let total = response.headers('x-result-total');
+
+    data.$page = parseInt(page);
+    data.$limit = parseInt(limit);
+    data.$total = parseInt(total);
+
+    return data;
+  });
+
+  RestangularProvider.setRestangularFields({
+    id: "_id",
+  });
+  
   // create theming
   theme($mdThemingProvider);
 

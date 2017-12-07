@@ -61,7 +61,7 @@ class RdNavbarController {
     if (this.dropdownOpened) {
     	this.dropdownOpened = false;
     	this.$timeout(() => {
-    		this.$apply();
+    		//this.$apply();
     	});
     }
 	}

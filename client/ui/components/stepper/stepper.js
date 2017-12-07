@@ -17,13 +17,8 @@ class RdStepperController {
     this.$timeout = $timeout;
 
 		this.$element.addClass('rd-stepper');
-		this.currentStepIndex_ = 1;
-		this.steps = [
-			{ name: 'ficha', 		caption: 'Ficha' },
-			{ name: 'recurso', 	caption: 'Recurso' },
-			{ name: 'relacion', caption: 'Relación' },
-			{ name: 'publicar', caption: 'Publicar' },
-		];
+		this.currentStepIndex_ = 0;
+		this.steps = this.$scope.steps;
 
 		this.$scope.$watch(() => { return this.currentStepIndex_ }, (value) => {
 			this.releaseEnterStep(value);
@@ -102,6 +97,13 @@ class RdStepperController {
 			this.currentStepIndex_ = idx;
 		}
 	}
+
+	releaseSave(){
+		let onSaveFn = this.$scope.onSave;
+		if (typeof onSaveFn === 'function'){
+			onSaveFn(this.currentStep());
+		}
+	}
 }
 
 function rdStepper($log){
@@ -112,13 +114,13 @@ function rdStepper($log){
 		controller: RdStepperController,
 		controllerAs: '$rdStepperController',
 		scope: {
-			rdSteps: '=',
 			canNext: '=',
 			onFinish: '=',
 			onEnterStep: '=',
-			saveFunction: '=',
+			onSave: '=',
 			autoSave: '=',
-			ngModel: '='
+			ngModel: '=',
+			steps: '='
 		},
 		template: require('./stepper.html')
 	}

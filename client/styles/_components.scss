@@ -1,9 +1,14 @@
 /* inject:scss */
 @import '../app/app';
 @import '../app/login/login';
+@import '../curador/actividad/actividad';
 @import '../curador/dashboard/dashboard';
 @import '../curador/header/header';
+@import '../curador/herramienta/herramienta';
+@import '../curador/mediateca/mediateca';
 @import '../curador/new/new';
+@import '../curador/orientacion/orientacion';
+@import '../curador/propuesta/propuesta';
 @import '../social/components/resourceCard/resourceCard';
 @import '../social/footer/footer';
 @import '../social/header/header';

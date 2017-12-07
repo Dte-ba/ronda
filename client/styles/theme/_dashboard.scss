@@ -1,0 +1,89 @@
+
+.dashboard {
+
+	&__loading {
+		padding-top: 3rem;
+	}
+
+	&__toolbar {
+		height: $navbar-height-scrolled;
+		background-color: $color-black-light;
+		box-shadow: $whiteframe-shadow-2dp;
+		z-index: $navbar-z-index - 1;
+		position: sticky;
+	}
+
+	&__wrapper {
+		height: calc(100vh - #{$navbar-height-scrolled * 2});
+	}
+
+	&__container {
+		height: 100%;
+		margin: 0 auto;
+		width: calc(100% - #{$gutter});
+	}
+
+	&__sidenav {
+		width: 35rem;
+		background-color: rgba($color-white, .3);
+		padding: 2rem 2rem;
+
+		&--head {
+			font-family: $font-family-secondary;
+			text-transform: uppercase;
+			font-weight: $font-secondary-light;
+			font-size: 2.4rem;
+		}
+	}
+
+	&__content {
+		padding: $gutter/2;
+		
+		&--head {
+			padding: $gutter/2;
+			padding-top: 0;
+		}
+	}
+
+	&__stepper {
+		height: 100%;
+		margin: 0 auto;
+		width: calc(100% - #{$gutter});
+
+		& > div {
+			height: 100%;
+		}
+	}
+
+	&__input {
+		width: 100%;
+
+		&--title {
+			label {
+				font-family: $font-family-secondary;
+				font-weight: $font-secondary-medium;
+				font-size: 3.5rem;
+			}
+
+			input {
+				font-family: $font-family-secondary;
+				font-weight: $font-secondary-medium;
+				font-size: 3.5rem;
+			}
+		}
+
+		&--summary {
+			label {
+				font-family: $font-family-secondary;
+				font-weight: $font-secondary-light;
+				font-size: 3rem;
+			}
+
+			input {
+				font-family: $font-family-secondary;
+				font-weight: $font-secondary-light;
+				font-size: 3rem;
+			}
+		}
+	}
+}

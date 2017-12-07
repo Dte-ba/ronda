@@ -7,7 +7,8 @@ let routes = function($stateProvider) {
   $stateProvider
     .state('curador.new', {
       url: '/tablero/new?type',
-      template: '<curador-new></curador-new>'
+      template: '<curador-new></curador-new>',
+      authenticate: 'curador'
     });
 }
 

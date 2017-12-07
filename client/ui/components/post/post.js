@@ -81,14 +81,14 @@ class MediaDialogController {
 	}
 
 	aceptar(){
-		this.$mdDialog.hide({type: this.galleryType, images: this.images});
+		this.$mdDialog.hide({galleryType: this.galleryType, images: this.images});
 	}
 
 	clear(){
 	}
 }
 
-class RdCardController {
+class RdPostController {
 	/*@ngInject*/
 	constructor($scope, $element, $timeout, $mdDialog){
 		this.$scope = $scope;
@@ -103,9 +103,13 @@ class RdCardController {
 		this.mediaEditing = false;
 	}
 
+	getModel(){
+		return this.$scope.modules;
+	}
+
 	addDivisor($event) {
-		this.modules.push({
-			type: 'divisor',
+		this.getModel().push({
+			moduleType: 'divisor',
 			content: '<hr />'
 		});
 	}
@@ -124,8 +128,8 @@ class RdCardController {
     })
     .then((add) => {
       if (add && !this.textEditing){
-				this.modules.push({
-					type: 'text',
+				this.getModel().push({
+					moduleType: 'text',
 					content: this.$scope.currentText
 				});
 			}
@@ -153,8 +157,8 @@ class RdCardController {
 					};
 				});
 
-				this.modules.push({
-					type: data.type,
+				this.getModel().push({
+					moduleType: data.galleryType,
 					content: imgs
 				});
 			}
@@ -167,10 +171,10 @@ function rdPost($log){
 
 	return {
 		restrict: 'E',
-		controller: RdCardController,
+		controller: RdPostController,
 		controllerAs: '$rdPostController',
 		scope: {
-			'ngModel': '='
+			'modules': '='
 		},
 		template: require('./post.html')
 	}

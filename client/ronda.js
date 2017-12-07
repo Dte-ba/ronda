@@ -10,13 +10,15 @@ import ngResource from 'angular-resource';
 import ngSanitize from 'angular-sanitize';
 import ngLoader from 'angular-loading-bar';
 
+// RESTFull API
+import restangular from 'restangular';
+
 // WYSIWYG editor
 import ngQuill from 'ng-quill';
 
 // file uploader
 import Dropzone from 'dropzone';
 Dropzone.autoDiscover = false;
-
 import ngdropzone from 'ngdropzone';
 
 // configs
@@ -44,14 +46,15 @@ let requirements = [
 	ngSanitize,
 	ngLoader,
 	ngMaterial,
+	restangular,
+	ngQuill,
+	'thatisuday.dropzone',
 	authModule,
 	app, 
 	curador, 
 	admin,
 	social, 
-	ui,
-	ngQuill,
-	'thatisuday.dropzone'
+	ui
 ];
 
 var ronda = angular

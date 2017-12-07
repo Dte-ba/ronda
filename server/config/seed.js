@@ -79,11 +79,11 @@ export default function seedDatabaseIfNeeded() {
         caption: 'Tipo de accesibilidad'
       },{
         type: 'software',
-        values: ['Rampas Digitales', 'Software para crear actividades', 'Software educativos'],
+        values: ['Rampas Digitales', 'Software para crear actividades', 'Software educativos', 'Otro'],
         caption: 'Tipo de software'
       },{
         type: 'orientacion',
-        values: ['Tutoriales', 'Documentación', 'Recomendaciones de uso de soft', 'Enlaces de interes', 'Documentación de apoyo'],
+        values: ['Tutoriales', 'Documentación', 'Recomendaciones de uso de soft', 'Enlaces de interes', 'Documentación de apoyo', 'Otro'],
         caption: 'Tipo de Orientación'
       })
       .then(() => console.log('finished populating categories'))
