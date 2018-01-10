@@ -7,12 +7,18 @@ export default angular
 
 class ResourceCardController {
 	/*@ngInject*/
-	constructor($scope, $element){
+	constructor($scope, $element, $state){
 		this.$scope = $scope;
-    this.$element = $element;
+		this.$element = $element;
+		this.$state = $state;
     this.$element.addClass('resource-card');
     
-    this.resource = this.$scope.resource;
+		this.resource = this.$scope.resource;
+		this.editable = this.$scope.editable === true;
+	}
+
+	editResource(){
+		this.$state.go(`curador.${this.resource.type}`, { uid: this.resource._id });
 	}
 }
 
@@ -24,7 +30,8 @@ function resourceCard($log){
 		controller: ResourceCardController,
     controllerAs: '$ctrl',
     scope: {
-      resource: '='
+			resource: '=',
+			editable: '='
     },
 		template: require('./resourceCard.html')
 	}

@@ -8,10 +8,38 @@ import Category from './category.model';
  * restriction: 'authenticate'
  */
 export function index(req, res, next) {
-	req.result = Category.find({}).exec();
-	next();
+	var query = req.querymen;
+	
+	Category
+		.find({})
+		.count()
+		.exec((err, count) => {
+			if (err){
+				return next(err);
+			}
+			req.totalItems = count;
+			req.result = Category
+										.find(query.query)
+										.skip(query.cursor.skip)
+										.limit(query.cursor.limit)
+										.sort(query.sort)
+										.select(query.select)
+										.exec();
+			next();
+		});
 }
 
+
+/**
+ * Creates a new category
+ * restriction: 'admin'
+ */
+export function create(req, res, next) {
+  var newCategory = new Category(req.body);
+  
+	req.result = newCategory.save();
+	next();
+}
 
 
 /**
@@ -37,13 +65,9 @@ export function show(req, res, next) {
 	next();
 }
 
-/**
- * Get a single category
- * restriction: 'authenticate'
- */
-export function showByType(req, res, next) {
+export function getByType(req, res, next) {
   var categoryType = req.params.type;
 
-	req.result = Category.findOne({ type: categoryType}).exec();
+	req.result = Category.findOne({type: categoryType}).exec();
 	next();
 }

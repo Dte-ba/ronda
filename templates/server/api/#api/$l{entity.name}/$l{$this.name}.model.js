@@ -15,7 +15,7 @@ var <%-capName-%>Schema = new Schema({
 	<% _.each($this.props, function(prop){ -%>
 	<%- prop.name -%>: <%- prop.type -%>,
 	<%})-%>
-});
+}, ops);
 
 registerEvents(<%-capName-%>Schema);
 export default mongoose.model('<%-capName-%>', <%-capName-%>Schema);

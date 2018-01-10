@@ -16,9 +16,11 @@ var ResourceSchema = new Schema({
 		category: Schema.Types.Mixed,
 		postBody: [{ moduleType: String, content: Schema.Types.Mixed }],
 		tags: [String],
+		owner: { type: Schema.Types.ObjectId, ref: 'User' },
 		collaborators: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 		files: [{ url: String, name: String, description: String, size: Number }],
-	});
+		published: { type: Schema.Types.ObjectId, ref: 'Published' },
+	}, ops);
 
 registerEvents(ResourceSchema);
 export default mongoose.model('Resource', ResourceSchema);

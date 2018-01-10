@@ -51,20 +51,15 @@ var write = function(req, res, next){
 };
 
 function responseAsArray(req, res, statusCode){
-  let sq = req.squery;
+  var query = req.querymen;
   res.setHeader('x-result-type', 'array');
-  res.setHeader('x-result-total', req.result.length);
-
-  let items = req.result;
-
-  if (sq && (sq.page !== undefined && sq.limit !== undefined)) {
-    items = _.take(_.drop(req.result, (sq.page-1)*sq.limit), sq.limit);
-    res.setHeader('x-result-limit', sq.limit);
-    res.setHeader('x-result-page', sq.page);
+  res.setHeader('x-result-skip', query.cursor.skip);
+  res.setHeader('x-result-limit', query.cursor.limit);
+  if (req.totalItems !== undefined){
+    res.setHeader('x-result-total', req.totalItems);
   }
 
-  res.setHeader('x-result-count', items.length);
-  return res.status(statusCode).json(items);
+  return res.status(statusCode).json(req.result);
 }
 
 module.exports = function() {

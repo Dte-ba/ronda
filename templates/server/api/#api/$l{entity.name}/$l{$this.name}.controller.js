@@ -11,8 +11,25 @@ import <%- modelName -%> from './<%- _.lowerCase($this.name) -%>.model';
  * restriction: '<%-$this.routes['index'].auth%>'
  */
 export function index(req, res, next) {
-	req.result = <%-modelName%>.find({}).exec();
-	next();
+	var query = req.querymen;
+	
+	<%-modelName%>
+		.find({})
+		.count()
+		.exec((err, count) => {
+			if (err){
+				return next(err);
+			}
+			req.totalItems = count;
+			req.result = <%-modelName%>
+										.find(query.query)
+										.skip(query.cursor.skip)
+										.limit(query.cursor.limit)
+										.sort(query.sort)
+										.select(query.select)
+										.exec();
+			next();
+		});
 }
 <%}-%>
 

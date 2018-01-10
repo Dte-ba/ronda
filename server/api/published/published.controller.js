@@ -1,16 +1,16 @@
 'use strict';
 
-import Resource from './resource.model';
+import Published from './published.model';
 
 
 /**
- * Get list of resources
- * restriction: 'authenticate'
+ * Get list of publisheds
+ * restriction: ''
  */
 export function index(req, res, next) {
 	var query = req.querymen;
 	
-	Resource
+	Published
 		.find({})
 		.count()
 		.exec((err, count) => {
@@ -18,7 +18,7 @@ export function index(req, res, next) {
 				return next(err);
 			}
 			req.totalItems = count;
-			req.result = Resource
+			req.result = Published
 										.find(query.query)
 										.skip(query.cursor.skip)
 										.limit(query.cursor.limit)
@@ -31,47 +31,47 @@ export function index(req, res, next) {
 
 
 /**
- * Creates a new resource
- * restriction: 'curador'
+ * Creates a new published
+ * restriction: 'admin'
  */
 export function create(req, res, next) {
-  var newResource = new Resource(req.body);
+  var newPublished = new Published(req.body);
   
-	req.result = newResource.save();
+	req.result = newPublished.save();
 	next();
 }
 
 
 /**
- * Updates a resource
- * restriction: 'curador'
+ * Updates a published
+ * restriction: 'admin'
  */
 export function update(req, res, next) {
 	delete req.body._id;
 
-	req.result = Resource.update({ _id: req.params.id}, req.body);
+	req.result = Published.update({ _id: req.params.id}, req.body);
 	next();
 }
 
 
 /**
- * Get a single resource
- * restriction: 'authenticate'
+ * Get a single published
+ * restriction: ''
  */
 export function show(req, res, next) {
-  var resourceId = req.params.id;
+  var publishedId = req.params.id;
 
-	req.result = Resource.findById(resourceId).exec();
+	req.result = Published.findById(publishedId).exec();
 	next();
 }
 
 
 /**
- * Deletes a resource
- * restriction: 'authenticate'
+ * Deletes a published
+ * restriction: ''
  */
 export function destroy(req, res, next) {
-	req.result =  Resource.findByIdAndRemove(req.params.id).exec();
+	req.result =  Published.findByIdAndRemove(req.params.id).exec();
 	req.statusCode = 204;
 	next();
 }

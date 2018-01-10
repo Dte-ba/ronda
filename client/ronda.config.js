@@ -186,11 +186,11 @@ export function rondaConfig($urlRouterProvider, $locationProvider, $mdThemingPro
       return data;  
     }
     
-    let page = response.headers('x-result-page');
+    let skip = response.headers('x-result-skip');
     let limit = response.headers('x-result-limit');
     let total = response.headers('x-result-total');
 
-    data.$page = parseInt(page);
+    data.$skip = parseInt(skip);
     data.$limit = parseInt(limit);
     data.$total = parseInt(total);
 
@@ -223,8 +223,11 @@ export function rondaConfig($urlRouterProvider, $locationProvider, $mdThemingPro
     .primaryPalette('ronda');
 }
 
-export function rondaRun($cookies){
+export function rondaRun($cookies, $rootScope, $state){
   'ngInject';
+  
+  // expose $state
+  $rootScope.$state = $state;
 
   // add the token to jQuery
   $.ajaxSetup({

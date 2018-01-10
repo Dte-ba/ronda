@@ -2,11 +2,12 @@
 /*eslint no-invalid-this:0*/
 mongoose.Promise = require('bluebird');
 import mongoose, {Schema} from 'mongoose';
-import {registerEvents} from './herramienta.events';
+import {registerEvents} from './published.events';
 
 var ops = {};
 ops.timestamps = true;
-var HerramientaSchema = new Schema({
+var PublishedSchema = new Schema({
+		type: String,
 		title: String,
 		summary: String,
 		thumbnail: String,
@@ -17,9 +18,8 @@ var HerramientaSchema = new Schema({
 		tags: [String],
 		owner: { type: Schema.Types.ObjectId, ref: 'User' },
 		collaborators: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-		published: { type: Schema.Types.ObjectId, ref: 'Resource' },
 		files: [{ url: String, name: String, description: String, size: Number }],
-	});
+	}, ops);
 
-registerEvents(HerramientaSchema);
-export default mongoose.model('Herramienta', HerramientaSchema);
+registerEvents(PublishedSchema);
+export default mongoose.model('Published', PublishedSchema);

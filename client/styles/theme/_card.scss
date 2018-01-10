@@ -60,6 +60,15 @@
 		//padding-right: 1rem;
 		//padding-bottom: 1rem;
 	}
+
+	&__button--edit {
+		color: $color-black-light !important;
+		border-color: $color-grey !important;
+
+		md-icon {
+			color: $color-black-light !important;
+		}
+	}
 }
 
 .rd-card__addnew {

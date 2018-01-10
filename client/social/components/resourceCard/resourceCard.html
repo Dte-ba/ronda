@@ -15,9 +15,16 @@
 		</rd-card-body>
 </rd-card>
 <rd-card data-rd-section="{{$ctrl.resource.type}}" ng-if="$ctrl.resource.type !== 'addnew'">
-		<!--<rd-card-toolbar>
-			toolbar
-		</rd-card-toolbar>-->
+		<rd-card-toolbar ng-if="$ctrl.editable">
+			<div layout="row">
+				<div flex>{{$state}}</div>
+				<md-button ng-click="$ctrl.editResource()" class="bordered mini-button md-button md-ink-ripple rd-card__button--edit">
+					<div layout="row">
+							<md-icon class="mi-mode-edit"></md-icon> <span>Editar</span>
+					</div>
+				</md-button>
+			</div>
+		</rd-card-toolbar>
 		<rd-card-cover ng-if="$ctrl.resource.cover">
 				<img ng-src="{{$ctrl.resource.cover}}" alt="Imagen de prueba">
 		</rd-card-cover>

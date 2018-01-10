@@ -29,12 +29,22 @@ export default class NewComponent extends CuradorComponent {
       return;
     }
     // create the object
-    this[this.section]();
+    this.createResource(this.section);
   }
 
-  herramientas(){
-    let herramienta = this.Restangular.all('herramientas');
+  createResource(section) {
 
+    let dbtypes = {
+      'propuestas': 'propuesta',
+      'actividades': 'actividad',
+      'herramientas': 'herramienta',
+      'orientaciones': 'orientacion',
+      'mediateca': 'mediateca',
+    };
+    
+    let type = dbtypes[section];
+    let resource = this.Restangular.all('resources');
+    
     async.waterfall([
       // get the user
       (cb) => {
@@ -47,6 +57,7 @@ export default class NewComponent extends CuradorComponent {
       },
       (user, cb) => {
         let data = {
+          type: type,
           title: '',
           summary: '',
           thumbnail: '',
@@ -60,7 +71,7 @@ export default class NewComponent extends CuradorComponent {
           publishResource: '',
           files: [],
         };
-        herramienta
+        resource
           .post(data)
           .then(data => {
             cb(null, data);
@@ -72,8 +83,7 @@ export default class NewComponent extends CuradorComponent {
         throw err;
       }
 
-      this.$state.go('curador.herramienta', { uid: data._id });
+      this.$state.go(`curador.${section}`, { uid: data._id });
     });
-
   }
 }

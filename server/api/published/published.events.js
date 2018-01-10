@@ -1,14 +1,14 @@
 /**
- * Herramienta model events
+ * Published model events
  */
 
 'use strict';
 
 import {EventEmitter} from 'events';
-var HerramientaEvents = new EventEmitter();
+var PublishedEvents = new EventEmitter();
 
 // Set max event listeners (0 == unlimited)
-HerramientaEvents.setMaxListeners(0);
+PublishedEvents.setMaxListeners(0);
 
 // Model events
 var events = {
@@ -17,19 +17,19 @@ var events = {
 };
 
 // Register the event emitter to the model events
-function registerEvents(Herramienta) {
+function registerEvents(Published) {
   for(var e in events) {
     let event = events[e];
-    Herramienta.post(e, emitEvent(event));
+    Published.post(e, emitEvent(event));
   }
 }
 
 function emitEvent(event) {
   return function(doc) {
-    HerramientaEvents.emit(`${event}:${doc._id}`, doc);
-    HerramientaEvents.emit(event, doc);
+    PublishedEvents.emit(`${event}:${doc._id}`, doc);
+    PublishedEvents.emit(event, doc);
   };
 }
 
 export {registerEvents};
-export default HerramientaEvents;
+export default PublishedEvents;

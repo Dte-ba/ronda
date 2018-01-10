@@ -14,7 +14,7 @@ export default class HerramientaComponent extends CuradorComponent {
 		this.$stateParams = $stateParams;
 		this.uid = this.$stateParams.uid;
 
-		this.Resource = this.Restangular.one('herramientas', this.uid)
+		this.Resource = this.Restangular.one('resources', this.uid)
 
 		this.resource = { };
     this.steps = [
@@ -23,6 +23,16 @@ export default class HerramientaComponent extends CuradorComponent {
 			//{ name: 'relacion', caption: 'Relación' },
 			{ name: 'publicar', caption: 'Publicar' },
 		];
+
+		this.$scope.$watch(() => { return this.resource; }, (valule) => {
+			if (this.saverHandler) {
+				clearInterval(this.saverHandler);
+			}
+			this.saverHandler = setInterval(() => {
+				this.saveResource();
+				clearInterval(this.saverHandler);
+			}, 500);
+		}, true);
 		
 		this.onEnterStep = (step) => {
 			this.currentStep = step.name;
@@ -43,6 +53,12 @@ export default class HerramientaComponent extends CuradorComponent {
 			.catch(err => {
 				throw err;
 			});
+	}
+
+	$onDestroy() {
+		if (this.saverHandler) {
+			clearInterval(this.saverHandler);
+		}
 	}
 	
 	saveResource(){

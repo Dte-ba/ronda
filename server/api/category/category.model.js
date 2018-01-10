@@ -4,11 +4,12 @@ mongoose.Promise = require('bluebird');
 import mongoose, {Schema} from 'mongoose';
 import {registerEvents} from './category.events';
 
+var ops = {};
 var CategorySchema = new Schema({
 		type: String,
 		values: [String],
 		caption: String,
-	});
+	}, ops);
 
 registerEvents(CategorySchema);
 export default mongoose.model('Category', CategorySchema);
