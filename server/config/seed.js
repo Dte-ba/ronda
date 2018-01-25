@@ -49,7 +49,8 @@ export default function seedDatabaseIfNeeded() {
         caption: 'Nivel'
       },{
         type: 'area',
-        values: ['Prácticas del lenguaje',
+        values: [
+          'Prácticas del lenguaje',
           'Matemática',
           'Inglés',
           'Ciencias Naturales',
@@ -61,13 +62,12 @@ export default function seedDatabaseIfNeeded() {
           'Formación científico-tecnología',
           'Formación Técnico Específica',
           'Formación profesional u ocupacional',
-          'Autonomía personal y social',
-          'Otra'
+          'Autonomía personal y social'
         ],
         caption: 'Area'
       },{
         type: 'os',
-        values: ['Android', 'Linux', 'Windows', 'Todos'],
+        values: ['Android', 'Linux', 'Windows', 'Todos', 'Otros'],
         caption: 'Sistema Operativo'
       },{
         type: 'resource',
@@ -79,11 +79,11 @@ export default function seedDatabaseIfNeeded() {
         caption: 'Tipo de accesibilidad'
       },{
         type: 'software',
-        values: ['Rampas Digitales', 'Software para crear actividades', 'Software educativos', 'Otro'],
+        values: ['Rampa Digital', 'Para crear y editar', 'Listo para usar', 'Soporte'],
         caption: 'Tipo de software'
       },{
         type: 'orientacion',
-        values: ['Tutoriales', 'Documentación', 'Recomendaciones de uso de soft', 'Enlaces de interes', 'Documentación de apoyo', 'Otro'],
+        values: ['Tutoriales', 'Documentación', 'Recomendaciones de uso de soft', 'Enlaces de interes', 'Documentación de apoyo'],
         caption: 'Tipo de Orientación'
       })
       .then(() => console.log('finished populating categories'))

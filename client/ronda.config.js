@@ -223,9 +223,11 @@ export function rondaConfig($urlRouterProvider, $locationProvider, $mdThemingPro
     .primaryPalette('ronda');
 }
 
-export function rondaRun($cookies, $rootScope, $state){
+export function rondaRun($cookies, $rootScope, $state, amMoment){
   'ngInject';
   
+  amMoment.changeLocale('es');
+
   // expose $state
   $rootScope.$state = $state;
 

@@ -42,7 +42,7 @@ class MediaDialogController {
 		this.images = [];
 
     this.dzOptions = {
-      url : '/upload',
+      url : '/upload?relative=' + this.$scope.relative,
       paramName : 'Imágen',
       //maxFilesize : '10',
       acceptedFiles : 'image/jpeg, images/jpg, image/png',
@@ -98,6 +98,7 @@ class RdPostController {
 		this.$mdDialog = $mdDialog;
 
 		this.modules = [];
+		this.relative = $scope.relative || '';
 		this.$scope.currentText = '<h1>The lorem ipsum</h1><p><br></p><p><span style="color: rgb(0, 0, 0);">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span></p>';
 		this.textEditing = false;
 		this.mediaEditing = false;
@@ -174,7 +175,8 @@ function rdPost($log){
 		controller: RdPostController,
 		controllerAs: '$rdPostController',
 		scope: {
-			'modules': '='
+			'modules': '=',
+			'relative': '='
 		},
 		template: require('./post.html')
 	}

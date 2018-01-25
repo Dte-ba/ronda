@@ -15,6 +15,15 @@ class ResourceCardController {
     
 		this.resource = this.$scope.resource;
 		this.editable = this.$scope.editable === true;
+		let captions = {
+			'propuesta': 'Propuesta pedagógica',
+			'actividad': 'Actividad accesible',
+			'herramienta': 'Herramienta',
+			'orientacion': 'Orientación',
+			'mediateca': 'Mediateca',
+		};
+
+		this.resource.typeCaption = captions[this.resource.type];
 	}
 
 	editResource(){

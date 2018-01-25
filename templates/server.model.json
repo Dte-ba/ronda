@@ -42,7 +42,8 @@
 				{ "name": "owner", "type": "{ type: Schema.Types.ObjectId, ref: 'User' }" },
 				{ "name": "collaborators", "type": "[{ type: Schema.Types.ObjectId, ref: 'User' }]" },
 				{ "name": "files", "type": "[{ url: String, name: String, description: String, size: Number }]" },
-				{ "name": "published", "type": "{ type: Schema.Types.ObjectId, ref: 'Published' }"}
+				{ "name": "published", "type": "{ type: Schema.Types.ObjectId, ref: 'Published' }"},
+				{ "name": "links", "type": "[{ type: Schema.Types.ObjectId, ref: 'Published' }]" }
 			]
 		},
 		{
@@ -68,7 +69,8 @@
 				{ "name": "tags", "type": "[String]" },
 				{ "name": "owner", "type": "{ type: Schema.Types.ObjectId, ref: 'User' }" },
 				{ "name": "collaborators", "type": "[{ type: Schema.Types.ObjectId, ref: 'User' }]" },
-				{ "name": "files", "type": "[{ url: String, name: String, description: String, size: Number }]" }
+				{ "name": "files", "type": "[{ url: String, name: String, description: String, size: Number }]" },
+				{ "name": "links", "type": "[{ type: Schema.Types.ObjectId, ref: 'Published' }]" }
 			]
 		}
 	]

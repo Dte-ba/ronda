@@ -4,8 +4,8 @@ import CuradorComponent from '../curador.component';
 
 export default class MediatecaComponent extends CuradorComponent {
   /*@ngInject*/
-  constructor($element) {
-    super({$element});
+  constructor($element, $log) {
+    super({$element, $log});
 	}
 	
 }

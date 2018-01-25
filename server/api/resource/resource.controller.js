@@ -20,6 +20,7 @@ export function index(req, res, next) {
 			req.totalItems = count;
 			req.result = Resource
 										.find(query.query)
+										.populate('owner')
 										.skip(query.cursor.skip)
 										.limit(query.cursor.limit)
 										.sort(query.sort)

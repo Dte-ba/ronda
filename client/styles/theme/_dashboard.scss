@@ -34,6 +34,10 @@
 			font-weight: $font-secondary-light;
 			font-size: 2.4rem;
 		}
+
+		md-content:not(:last-child) {
+			margin-bottom: 1.5rem;
+		}
 	}
 
 	&__content {
@@ -85,5 +89,11 @@
 				font-size: 3rem;
 			}
 		}
+	}
+}
+
+.option-panel {
+	.md-title {
+		text-transform: uppercase;
 	}
 }

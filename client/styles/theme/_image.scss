@@ -1,0 +1,32 @@
+.thumbnail {
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+
+	img {
+		display: block;
+		margin: 0 auto;
+		width: 100%;
+		height: auto;
+	}
+
+	&--rounded {
+		border-radius: $border-radius-default;
+	}
+
+	&__container {
+		border-radius: $border-radius-default;
+	}
+	
+	&__button--edit {
+		visibility: hidden;
+		position: absolute;
+		bottom: 1rem;
+		right: 1rem;
+	}
+
+	&:hover &__button--edit,
+	&:focus &__button--edit {
+		visibility: visible;
+	}
+}

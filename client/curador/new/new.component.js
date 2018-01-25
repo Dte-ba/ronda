@@ -6,8 +6,8 @@ import async from 'async';
 
 export default class NewComponent extends CuradorComponent {
   /*@ngInject*/
-  constructor($element, $state, $stateParams, $timeout, Auth, Restangular) {
-    super({$element});
+  constructor($element, $state, $stateParams, $timeout, Auth, Restangular, $log) {
+    super({$element, $log});
     this.$timeout = $timeout;
     this.$state = $state;
     this.Restangular = Restangular;
@@ -43,47 +43,39 @@ export default class NewComponent extends CuradorComponent {
     };
     
     let type = dbtypes[section];
-    let resource = this.Restangular.all('resources');
     
-    async.waterfall([
-      // get the user
-      (cb) => {
-        this.Auth
-          .getCurrentUser()
-          .then(user => {
-            cb(null, user);
-          })
-          .catch(cb);
-      },
-      (user, cb) => {
-        let data = {
-          type: type,
-          title: '',
-          summary: '',
-          thumbnail: '',
-          nivel: '',
-          area: '',
-          category: '',
-          post: [],
-          tags: [],
-          owner: user._id,
-          collaborators: [],
-          publishResource: '',
-          files: [],
-        };
-        resource
-          .post(data)
-          .then(data => {
-            cb(null, data);
-          })
-          .catch(cb);
-      }
-    ], (err, data) => {
-      if (err){
-        throw err;
-      }
-
-      this.$state.go(`curador.${section}`, { uid: data._id });
+    this.Auth
+    .getCurrentUser()
+    .then(user => {
+      let data = {
+        type: type,
+        title: '',
+        summary: '',
+        thumbnail: '',
+        nivel: [],
+        area: [],
+        category: '',
+        postBody: '',
+        tags: [],
+        owner: user._id,
+        collaborators: [],
+        links: [],
+        files: []
+      };
+      let resource = this.Restangular.all('resources');
+      resource
+        .post(data)
+        .then(data => {
+          this.$state.go(`curador.${type}`, { uid: data._id });
+        })
+        .catch((err) => {
+          this.$log.error(err)
+          return this.$state.go(`curador.dashboard`);
+        });
+    })
+    .catch((err) => {
+      this.$log.error(err)
+      return this.$state.go(`curador.dashboard`);
     });
   }
 }

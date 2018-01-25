@@ -20,9 +20,13 @@ $color-mediateca:     $color-yellow-400;
 
 $sections: (
 	propuestas: ( color: $color-propuestas ),
+	propuesta: ( color: $color-propuestas ),
 	actividades: ( color: $color-actividades ),
+	actividad: ( color: $color-actividades ),
 	herramientas: ( color: $color-herramientas ),
+	herramienta: ( color: $color-herramientas ),
 	orientaciones: ( color: $color-orientaciones ),
+	orientacion: ( color: $color-orientaciones ),
 	mediateca: ( color: $color-mediateca )
 ) !default;
 

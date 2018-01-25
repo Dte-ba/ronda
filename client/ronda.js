@@ -21,6 +21,12 @@ import Dropzone from 'dropzone';
 Dropzone.autoDiscover = false;
 import ngdropzone from 'ngdropzone';
 
+// expansion panel
+import ngExpansionPanel from 'angular-material-expansion-panel';
+
+// MomentJS
+import ngMoment from 'angular-moment';
+
 // configs
 import { rondaConfig, rondaRun } from './ronda.config';
 
@@ -37,6 +43,7 @@ import authModule from './auth/auth.module';
 // styles
 //import '../node_modules/angular-material/angular-material.scss';
 //import '../node_modules/dropzone/dist/dropzone.css';
+import '../node_modules/angular-material-expansion-panel/dist/md-expansion-panel.css';
 import './styles/ronda.scss';
 
 let requirements = [
@@ -48,7 +55,9 @@ let requirements = [
 	ngMaterial,
 	restangular,
 	ngQuill,
+	ngMoment,
 	'thatisuday.dropzone',
+	'material.components.expansionPanels',
 	authModule,
 	app, 
 	curador, 

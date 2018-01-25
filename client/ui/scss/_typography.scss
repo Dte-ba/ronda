@@ -21,6 +21,11 @@ h1, h2, h3, h4, h5, h6 {
 .rd__text--caption {
 	font-weight: $font-primary-regular;
 	font-size: $caption-font-size;
+
+	span {
+		font-weight: $font-primary-regular;
+		font-size: $caption-font-size;
+	}
 }
 
 // the headpost thing

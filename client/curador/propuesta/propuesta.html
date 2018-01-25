@@ -1,1 +1,108 @@
-<h1>curadorPropuesta Component</h1>
+
+<div class="dashboard__loading" layout="row" layout-align="center center" ng-show="$ctrl.loading">
+	<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
+
+<div class="dashboard__toolbar" ng-hide="$ctrl.loading">
+	<rd-stepper class="dashboard__stepper" 
+							rd-section="propuestas" 
+							steps="$ctrl.steps"
+							can-next="$ctrl.canNext" 
+							on-finish="$ctrl.finish"
+							on-enter-step="$ctrl.onEnterStep"
+							on-save="$ctrl.save"
+							></rd-stepper>
+</div>
+<div class="dashboard__wrapper">
+	<div class="dashboard__container"  layout="row" layout-align="start stretch" ng-hide="$ctrl.loading">
+		<md-content class="dashboard__sidenav sidenav__propuestas" ng-hide="$ctrl.currentStep === 'publicar'">
+			<h2 class="dashboard__sidenav--head color-propuestas">Propuesta Pedagógica</h2>
+			<md-content class="thumbnail__container">
+				<div class="dropzone select-thumbnail" options="$ctrl.dzOptions" callbacks="$ctrl.dzCallbacks" methods="$ctrl.dzMethods" ng-dropzone
+						 ng-hide="$ctrl.resource.thumbnail !== ''"></div>
+				<div class="thumbnail thumbnail--rounded" ng-hide="$ctrl.resource.thumbnail == ''">
+					<img ng-src="{{$ctrl.resource.thumbnail}}" alt="Miniatura de la Herramienta">
+					<md-button ng-click="$ctrl.editTumbnail()" class="mini-button md-button md-raised thumbnail__button--edit">
+						<div layout="row">
+								<md-icon class="mi-mode-edit"></md-icon> <span>Cambiar</span>
+						</div>
+					</md-button>
+				</div>
+			</md-content>
+			<md-content>
+				<md-expansion-panel class="option-panel">
+					
+					 <md-expansion-panel-collapsed>
+						 <div class="md-title">Nivel *</div>
+						 <div class="md-summary">{{$ctrl.resource.nivel.length}} {{$ctrl.textSelection($ctrl.resource.nivel.length)}}</div>
+						 <md-expansion-panel-icon></md-expansion-panel-icon>
+					 </md-expansion-panel-collapsed>
+					
+					
+					 <md-expansion-panel-expanded>
+					
+						 <md-expansion-panel-header ng-click="$panel.collapse()">
+							<div class="md-title">Nivel *</div>
+							<div class="md-summary"></div>
+							 <md-expansion-panel-icon></md-expansion-panel-icon>
+						 </md-expansion-panel-header>
+					
+						 <md-expansion-panel-content>
+								<div flex="100" ng-repeat="item in $ctrl.niveles">
+									<md-checkbox ng-checked="$ctrl.exists(item, $ctrl.resource.nivel)" ng-click="$ctrl.toggle(item, $ctrl.resource.nivel)">
+										{{ item }}
+									</md-checkbox>
+								</div>
+						 </md-expansion-panel-content>
+					
+					 </md-expansion-panel-expanded>
+					
+				 </md-expansion-panel>
+			</md-content>
+			<md-content>
+				<md-expansion-panel class="option-panel">
+					
+					 <md-expansion-panel-collapsed>
+						 <div class="md-title">Area *</div>
+						 <div class="md-summary">{{$ctrl.resource.area.length}} {{$ctrl.textSelection($ctrl.resource.area.length)}}</div>
+						 <md-expansion-panel-icon></md-expansion-panel-icon>
+					 </md-expansion-panel-collapsed>
+					
+					
+					 <md-expansion-panel-expanded>
+					
+						 <md-expansion-panel-header ng-click="$panel.collapse()">
+							 <div class="md-title">Area *</div>
+							 <div class="md-summary"></div>
+							 <md-expansion-panel-icon></md-expansion-panel-icon>
+						 </md-expansion-panel-header>
+					
+						 <md-expansion-panel-content>
+								<div flex="100" ng-repeat="item in $ctrl.areas">
+										<md-checkbox ng-checked="$ctrl.exists(item, $ctrl.resource.area)" ng-click="$ctrl.toggle(item, $ctrl.resource.area)">
+										{{ item }}
+									</md-checkbox>
+								</div>
+						 </md-expansion-panel-content>
+					
+					 </md-expansion-panel-expanded>
+					
+				 </md-expansion-panel>
+			</md-content>
+		</md-content>
+		
+		<md-content  class="dashboard__content" flex>
+			<div class="dashboard__content--head">
+					<md-input-container class="dashboard__input dashboard__input--title">
+						<label>Título</label>
+						<input ng-model="$ctrl.resource.title" required>
+					</md-input-container>
+					<md-input-container  class="dashboard__input dashboard__input--summary">
+						<label>Síntesis</label>
+						<textarea ng-model="$ctrl.resource.summary" required></textarea>
+					</md-input-container>
+			</div>
+			<rd-post modules="$ctrl.resource.postBody" relative="$ctrl.uid"></rd-post>
+		</md-content>
+	</div>
+</div>

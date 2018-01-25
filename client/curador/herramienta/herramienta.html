@@ -17,6 +17,83 @@
 	<div class="dashboard__container"  layout="row" layout-align="start stretch" ng-hide="$ctrl.loading">
 		<md-content class="dashboard__sidenav sidenav__herramientas" ng-hide="$ctrl.currentStep === 'publicar'">
 			<h2 class="dashboard__sidenav--head color-herramientas">Herramientas</h2>
+			<md-input-container class="full-width">
+				<md-select ng-model="$ctrl.resource.category" placeholder="Seleccioná un tipo" required>
+					<md-option ng-value="soft" ng-repeat="soft in $ctrl.softwares">{{ soft }}</md-option>
+				</md-select>
+			</md-input-container>
+			<md-content class="thumbnail__container">
+				<div class="dropzone select-thumbnail" options="$ctrl.dzOptions" callbacks="$ctrl.dzCallbacks" methods="$ctrl.dzMethods" ng-dropzone
+						 ng-hide="$ctrl.resource.thumbnail !== ''"></div>
+				<div class="thumbnail thumbnail--rounded" ng-hide="$ctrl.resource.thumbnail == ''">
+					<img ng-src="{{$ctrl.resource.thumbnail}}" alt="Miniatura de la Herramienta">
+					<md-button ng-click="$ctrl.editTumbnail()" class="mini-button md-button md-raised thumbnail__button--edit">
+						<div layout="row">
+								<md-icon class="mi-mode-edit"></md-icon> <span>Cambiar</span>
+						</div>
+					</md-button>
+				</div>
+			</md-content>
+			<md-content>
+				<md-expansion-panel class="option-panel">
+					
+					 <md-expansion-panel-collapsed>
+						 <div class="md-title">Nivel *</div>
+						 <div class="md-summary">{{$ctrl.resource.nivel.length}} {{$ctrl.textSelection($ctrl.resource.nivel.length)}}</div>
+						 <md-expansion-panel-icon></md-expansion-panel-icon>
+					 </md-expansion-panel-collapsed>
+					
+					
+					 <md-expansion-panel-expanded>
+					
+						 <md-expansion-panel-header ng-click="$panel.collapse()">
+							<div class="md-title">Nivel *</div>
+							<div class="md-summary"></div>
+							 <md-expansion-panel-icon></md-expansion-panel-icon>
+						 </md-expansion-panel-header>
+					
+						 <md-expansion-panel-content>
+								<div flex="100" ng-repeat="item in $ctrl.niveles">
+									<md-checkbox ng-checked="$ctrl.exists(item, $ctrl.resource.nivel)" ng-click="$ctrl.toggle(item, $ctrl.resource.nivel)">
+										{{ item }}
+									</md-checkbox>
+								</div>
+						 </md-expansion-panel-content>
+					
+					 </md-expansion-panel-expanded>
+					
+				 </md-expansion-panel>
+			</md-content>
+			<md-content>
+				<md-expansion-panel class="option-panel">
+					
+					 <md-expansion-panel-collapsed>
+						 <div class="md-title">Area *</div>
+						 <div class="md-summary">{{$ctrl.resource.area.length}} {{$ctrl.textSelection($ctrl.resource.area.length)}}</div>
+						 <md-expansion-panel-icon></md-expansion-panel-icon>
+					 </md-expansion-panel-collapsed>
+					
+					
+					 <md-expansion-panel-expanded>
+					
+						 <md-expansion-panel-header ng-click="$panel.collapse()">
+							 <div class="md-title">Area *</div>
+							 <div class="md-summary"></div>
+							 <md-expansion-panel-icon></md-expansion-panel-icon>
+						 </md-expansion-panel-header>
+					
+						 <md-expansion-panel-content>
+								<div flex="100" ng-repeat="item in $ctrl.areas">
+										<md-checkbox ng-checked="$ctrl.exists(item, $ctrl.resource.area)" ng-click="$ctrl.toggle(item, $ctrl.resource.area)">
+										{{ item }}
+									</md-checkbox>
+								</div>
+						 </md-expansion-panel-content>
+					
+					 </md-expansion-panel-expanded>
+					
+				 </md-expansion-panel>
+			</md-content>
 		</md-content>
 		
 		<md-content  class="dashboard__content" flex>
@@ -30,7 +107,7 @@
 						<textarea ng-model="$ctrl.resource.summary" required></textarea>
 					</md-input-container>
 			</div>
-			<rd-post modules="$ctrl.resource.postBody"></rd-post>
+			<rd-post modules="$ctrl.resource.postBody" relative="$ctrl.uid"></rd-post>
 		</md-content>
 	</div>
 </div>

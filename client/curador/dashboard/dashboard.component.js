@@ -4,8 +4,8 @@ import CuradorComponent from '../curador.component';
 
 export default class DashboardComponent extends CuradorComponent {
   /*@ngInject*/
-  constructor($element,  $q, $http, Restangular) {
-    super({$element});
+  constructor($element,  $q, $http, $log, Restangular) {
+    super({$element, $log});
     this.$q = $q;
     this.$http = $http;
     this.Restangular = Restangular;
@@ -38,7 +38,8 @@ export default class DashboardComponent extends CuradorComponent {
           if (this.page === 1) {
             items.push(addNewItem);
           }
-
+          
+          console.log(res);
           items = items.concat(res);
 
           let data = {
