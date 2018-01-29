@@ -18,9 +18,10 @@ var ResourceSchema = new Schema({
 		tags: [String],
 		owner: { type: Schema.Types.ObjectId, ref: 'User' },
 		collaborators: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-		files: [{ url: String, name: String, description: String, size: Number }],
+		files: [{ type: Schema.Types.ObjectId, ref: 'File' }],
 		published: { type: Schema.Types.ObjectId, ref: 'Published' },
 		links: [{ type: Schema.Types.ObjectId, ref: 'Published' }],
+		step: String,
 	}, ops);
 
 registerEvents(ResourceSchema);

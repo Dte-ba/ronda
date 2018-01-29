@@ -18,7 +18,7 @@ var PublishedSchema = new Schema({
 		tags: [String],
 		owner: { type: Schema.Types.ObjectId, ref: 'User' },
 		collaborators: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-		files: [{ url: String, name: String, description: String, size: Number }],
+		files: [{ type: Schema.Types.ObjectId, ref: 'File' }],
 		links: [{ type: Schema.Types.ObjectId, ref: 'Published' }],
 	}, ops);
 

@@ -24,12 +24,10 @@ export default function(req, res, next){
 	async.map(
 		_.values(req.files),
 		(file, cb) => {
-
 			async.waterfall([
-
 				// create the dbfile to get the _id
 				(icb) => {
-					var dbFile = new File({ name: file.name });
+					var dbFile = new File({ name: file.name, size: file.data.length });
 
 					dbFile.save()
 						.then((dbf) => {

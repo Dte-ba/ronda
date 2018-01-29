@@ -31,6 +31,7 @@ module.exports = function makeWebpackConfig(options) {
             loader: 'css-loader',
             options: {
                 importLoaders: 1,
+                url: false
             }
         },
         {
@@ -86,7 +87,8 @@ module.exports = function makeWebpackConfig(options) {
                     options: {
                         importLoaders: 1,
                         minimize: true,
-                        sourceMap: false
+                        sourceMap: false,
+                        url: false
                     }
                 },
                 {
@@ -194,21 +196,15 @@ module.exports = function makeWebpackConfig(options) {
                         }
                     ]
                     
-                }, {
-                    // ASSET LOADER
-                    // Reference: https://github.com/webpack/file-loader
-                    // Copy png, jpg, jpeg, gif, svg, woff, woff2, ttf, eot files to output
-                    // Rename the file using the asset hash
-                    // Pass along the updated reference to your code
-                    // You can add here any file extension you want to get copied to your output
-                    test: /\.(png|jpg|jpeg|gif|svg)([\?]?.*)$/,
+                },
+                {
+                    test: /\.(png|jpg|jpeg|gif)$/,
                     use: [
                         {
-                            loader: 'file-loader',
-                            options: {
-                                name: '[name].[ext]',
-                                //publicPath: 'assets/'
-                            } 
+                        loader: 'url-loader',
+                        options: {
+                            limit: 8192
+                        }
                         }
                     ]
                 }

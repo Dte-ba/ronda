@@ -21,6 +21,7 @@ export function index(req, res, next) {
 			req.result = Resource
 										.find(query.query)
 										.populate('owner')
+										.populate('files')
 										.skip(query.cursor.skip)
 										.limit(query.cursor.limit)
 										.sort(query.sort)
@@ -62,7 +63,11 @@ export function update(req, res, next) {
 export function show(req, res, next) {
   var resourceId = req.params.id;
 
-	req.result = Resource.findById(resourceId).exec();
+	req.result = Resource
+								.findById(resourceId)
+								.populate('owner')
+								.populate('files')
+								.exec();
 	next();
 }
 

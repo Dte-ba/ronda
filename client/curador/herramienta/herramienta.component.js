@@ -5,7 +5,7 @@ import async from 'async';
 
 export default class HerramientaComponent extends CuradorComponent {
   /*@ngInject*/
-  constructor($scope, $element, $stateParams, Auth, Restangular, $log, Util) {
+  constructor($scope, $element, $stateParams, Auth, Restangular, $log, Util, $timeout) {
     super({$element, Restangular, $log});
 
 		this.$scope = $scope;
@@ -15,21 +15,31 @@ export default class HerramientaComponent extends CuradorComponent {
 		this.$stateParams = $stateParams;
 		this.uid = this.$stateParams.uid;
 		this.Util = Util;
+		this.$timeout = $timeout;
+		this.init = true;
 
 		var ctrl = this;
     this.dzOptions = {
+			dictDefaultMessage: '<div class="dz-clickable"></div>',
       url : '/upload?relative=' + this.uid,
 			paramName : 'Imágen',
-			maxFiles: 1,
-			clickable: '.thumbnail__button--edit',
-      //maxFilesize : '10',
-      acceptedFiles : 'image/jpeg, images/jpg, image/png',
+			maxFiles: Infinity,
+			clickable: '.dz-clickable',
+      maxFilesize : 100,
+      acceptedFiles : 'application/*',
       addRemoveLinks : false,
 			headers: Util.getHeaders(),
 			init: function(){
 				// add dropzone to ctrl
 				ctrl.dropzoneThumbnail = this;
 			}
+		};
+
+
+		this.dzOptionsSoftware = this.dzOptions;
+		this.dzOptionsSoftware.init = function(){
+			// add dropzone to ctrl
+			ctrl.dropzoneSoftware = this;
 		};
 
     this.dzCallbacks = {
@@ -48,6 +58,27 @@ export default class HerramientaComponent extends CuradorComponent {
 			'queuecomplete': () => {
 				ctrl.dropzoneThumbnail.removeAllFiles();
 			}
+		};
+		
+		this.dzCallbacksSoftware = {
+      'addedfile' : (file) => {
+				
+			},
+			'removedfile' : (file) => {
+				
+      },
+      'success' : (file, xhr) => {
+				this.resource.files.push(xhr);
+			},
+      'error' : (err) => {
+				this.$log.error(err);
+			},
+			'processing': () => {
+				
+			},
+			'queuecomplete': () => {
+				ctrl.dropzoneSoftware.removeAllFiles();
+			}
     };
 		
 		this.Resource = this.Restangular.one('resources', this.uid)
@@ -56,7 +87,7 @@ export default class HerramientaComponent extends CuradorComponent {
     this.steps = [
 			{ name: 'ficha', 		caption: 'Ficha' },
 			{ name: 'recurso', 	caption: 'Recurso' },
-			//{ name: 'relacion', caption: 'Relación' },
+			{ name: 'vinculo', caption: 'Vínculo' },
 			{ name: 'publicar', caption: 'Publicar' },
 		];
 		this.saveTimes = 0;
@@ -76,7 +107,16 @@ export default class HerramientaComponent extends CuradorComponent {
 		}, true);
 		
 		this.onEnterStep = (step) => {
-			this.currentStep = step.name;
+			this.$timeout(() => {
+				this.currentStep = step.name;
+				
+				if (!this.init && !this.loading){
+					this.resource.step = this.currentStep;
+				}
+				
+				this.init = false;
+				this.$scope.$apply();
+			});
 		};
 
 		this.save = () => {
@@ -97,7 +137,14 @@ export default class HerramientaComponent extends CuradorComponent {
 					if (typeof this.resource.nivel == 'string'){
 						this.resource.nivel = [];
 					}
+					if (this.resource.step){
+						let idx = _.findIndex(this.steps, { name: this.resource.step });
+						this.initStepIndex = idx === -1 ? undefined : idx;
+						
+					}
 					this.loading = false;
+
+					console.log(this.resource.files)
 					cb();
 				})
 				.catch(cb);
@@ -174,5 +221,13 @@ export default class HerramientaComponent extends CuradorComponent {
 			return 'seleccionados';
 		}
 		return 'seleccionado';
+	}
+
+	removeAllFiles(){
+		this.resource.files.splice(0, this.resource.files.length)
+	}
+
+	sumfiles(files){
+		return _.sumBy(files, 'size');
 	}
 }

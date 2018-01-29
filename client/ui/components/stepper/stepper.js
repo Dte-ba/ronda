@@ -23,6 +23,13 @@ class RdStepperController {
 		this.$scope.$watch(() => { return this.currentStepIndex_ }, (value) => {
 			this.releaseEnterStep(value);
 		});
+
+		this.$scope.$watch(() => { return this.$scope.initStepIndex }, (value) => {
+			if (value){
+				this.currentStepIndex_ = value;
+				//this.releaseEnterStep(value);
+			}
+		});
 	}
 
 	getStepByIndex_(idx) {
@@ -120,6 +127,7 @@ function rdStepper($log){
 			onSave: '=',
 			autoSave: '=',
 			ngModel: '=',
+			initStepIndex: '=',
 			steps: '='
 		},
 		template: require('./stepper.html')

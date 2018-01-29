@@ -27,6 +27,12 @@ import ngExpansionPanel from 'angular-material-expansion-panel';
 // MomentJS
 import ngMoment from 'angular-moment';
 
+// NumeralJS
+import ngNumeraljs from 'angular-numeraljs';
+
+// Datatable
+import mdDataTable from 'angular-material-data-table';
+
 // configs
 import { rondaConfig, rondaRun } from './ronda.config';
 
@@ -44,6 +50,7 @@ import authModule from './auth/auth.module';
 //import '../node_modules/angular-material/angular-material.scss';
 //import '../node_modules/dropzone/dist/dropzone.css';
 import '../node_modules/angular-material-expansion-panel/dist/md-expansion-panel.css';
+import '../node_modules/angular-material-data-table/dist/md-data-table.css';
 import './styles/ronda.scss';
 
 let requirements = [
@@ -58,6 +65,8 @@ let requirements = [
 	ngMoment,
 	'thatisuday.dropzone',
 	'material.components.expansionPanels',
+	'ngNumeraljs',
+	mdDataTable,
 	authModule,
 	app, 
 	curador, 
