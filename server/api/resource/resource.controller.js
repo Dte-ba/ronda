@@ -69,6 +69,7 @@ export function show(req, res, next) {
 								.populate('owner')
 								.populate('files')
 								.populate('published')
+								.populate('links')
 								.exec();
 	next();
 }
@@ -111,6 +112,7 @@ export function publish(req, res, next) {
 							.populate('owner')
 							.populate('files')
 							.populate('published')
+							.populate('links')
 							.exec();
 		
 						next();
@@ -127,6 +129,7 @@ export function publish(req, res, next) {
 					.populate('owner')
 					.populate('files')
 					.populate('published')
+					.populate('links')
 					.exec();
 
 				next();

@@ -1,0 +1,8 @@
+<md-dialog class="mview" aria-label="Recurso {{$ctrl.resource.title}}">
+	<md-dialog-content class="mview__content">
+		<div class="dashboard__loading" layout="row" layout-align="center center" ng-show="$ctrl.loading">
+			<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+		</div>
+		<resource-view resource="$ctrl.resource" class="dashboard__preview" is-published="true"></resource-view>
+	</md-dialog-content>
+</md-dialog>

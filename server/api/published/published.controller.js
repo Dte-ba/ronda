@@ -61,7 +61,12 @@ export function update(req, res, next) {
 export function show(req, res, next) {
   var publishedId = req.params.id;
 
-	req.result = Published.findById(publishedId).exec();
+	req.result = Published
+								.findById(publishedId)
+								.populate('owner')
+								.populate('files')
+								.populate('links')
+								.exec();
 	next();
 }
 

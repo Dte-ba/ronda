@@ -7,6 +7,7 @@ import header from './header/header.component';
 import footer from './footer/footer.component';
 import resourceCard from './components/resourceCard/resourceCard.component';
 import resourceView from './components/resourceView/resourceView.component';
+import modalView from './components/modalView/modalView.component';
 import home from './home';
 
 // config to providers
@@ -17,6 +18,7 @@ let requirements = [
 	footer,
 	resourceCard,
 	resourceView,
+	modalView,
 	home
 ];
 

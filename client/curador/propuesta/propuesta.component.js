@@ -5,7 +5,7 @@ import async from 'async';
 
 export default class PropuestaComponent extends CuradorComponent {
   /*@ngInject*/
-  constructor($scope, $element, $stateParams, Auth, Restangular, $log, Util) {
+  constructor($scope, $element, $stateParams, Auth, Restangular, $log, Util, $timeout) {
     super({$element, Restangular, $log});
 
 		this.$scope = $scope;
@@ -15,21 +15,31 @@ export default class PropuestaComponent extends CuradorComponent {
 		this.$stateParams = $stateParams;
 		this.uid = this.$stateParams.uid;
 		this.Util = Util;
+		this.$timeout = $timeout;
+		this.init = true;
 
 		var ctrl = this;
     this.dzOptions = {
+			dictDefaultMessage: '<div class="dz-clickable"></div>',
       url : '/upload?relative=' + this.uid,
 			paramName : 'Imágen',
-			maxFiles: 1,
-			clickable: '.thumbnail__button--edit',
-      //maxFilesize : '10',
-      acceptedFiles : 'image/jpeg, images/jpg, image/png',
+			maxFiles: Infinity,
+			clickable: '.dz-clickable',
+      maxFilesize : 100,
+      acceptedFiles : 'application/*',
       addRemoveLinks : false,
 			headers: Util.getHeaders(),
 			init: function(){
 				// add dropzone to ctrl
 				ctrl.dropzoneThumbnail = this;
 			}
+		};
+
+
+		this.dzOptionsSoftware = this.dzOptions;
+		this.dzOptionsSoftware.init = function(){
+			// add dropzone to ctrl
+			ctrl.dropzoneSoftware = this;
 		};
 
     this.dzCallbacks = {
@@ -48,15 +58,37 @@ export default class PropuestaComponent extends CuradorComponent {
 			'queuecomplete': () => {
 				ctrl.dropzoneThumbnail.removeAllFiles();
 			}
+		};
+		
+		this.dzCallbacksSoftware = {
+      'addedfile' : (file) => {
+				
+			},
+			'removedfile' : (file) => {
+				
+      },
+      'success' : (file, xhr) => {
+				this.resource.files.push(xhr);
+			},
+      'error' : (err) => {
+				this.$log.error(err);
+			},
+			'processing': () => {
+				
+			},
+			'queuecomplete': () => {
+				ctrl.dropzoneSoftware.removeAllFiles();
+			}
     };
 		
-		this.Resource = this.Restangular.one('resources', this.uid)
+		this.Resource = this.Restangular.one('resources', this.uid);
+		this.Publisheds = this.Restangular.all('publisheds');
 
 		this.resource = { };
     this.steps = [
 			{ name: 'ficha', 		caption: 'Ficha' },
 			{ name: 'recurso', 	caption: 'Recurso' },
-			//{ name: 'relacion', caption: 'Relación' },
+			{ name: 'vinculo', caption: 'Vínculo' },
 			{ name: 'publicar', caption: 'Publicar' },
 		];
 		this.saveTimes = 0;
@@ -76,12 +108,34 @@ export default class PropuestaComponent extends CuradorComponent {
 		}, true);
 		
 		this.onEnterStep = (step) => {
-			this.currentStep = step.name;
+			this.$timeout(() => {
+				this.currentStep = step.name;
+				
+				if (!this.init && !this.loading){
+					this.resource.step = this.currentStep;
+				}
+				
+				this.init = false;
+				this.$scope.$apply();
+			});
 		};
 
 		this.save = () => {
 			this.saveResource();
 		};
+
+		this.finish = () => {
+			this.loading = true;
+			this.resource
+				.post('publish')
+				.then(data => {
+					this.$log.log('published', data);
+					this.loading = false;
+				})
+				.catch(err => {
+					throw err;
+				});
+		}
 	}
 
 	$onInit(){
@@ -96,6 +150,11 @@ export default class PropuestaComponent extends CuradorComponent {
 					}
 					if (typeof this.resource.nivel == 'string'){
 						this.resource.nivel = [];
+					}
+					if (this.resource.step){
+						let idx = _.findIndex(this.steps, { name: this.resource.step });
+						this.initStepIndex = idx === -1 ? undefined : idx;
+						
 					}
 					this.loading = false;
 					cb();
@@ -118,6 +177,28 @@ export default class PropuestaComponent extends CuradorComponent {
 				this.areas = at.values;
 				this.niveles = lt.values;
 				cb()
+			},
+			(cb) => {
+				this.Publisheds
+					.getList()
+					.then(publisheds => {
+						let filtered = _.filter(publisheds, p => {
+							return p._id !== this.uid;
+						});
+
+						let captions = {
+							'propuesta': 'Propuesta pedagógica',
+							'actividad': 'Actividad accesible',
+							'herramienta': 'Herramienta',
+							'orientacion': 'Orientación',
+							'mediateca': 'Mediateca',
+						};
+
+						this.publisheds = _.map(filtered, p =>{
+							p.typeCaption = captions[p.type];
+							return p;
+						});
+					});
 			}
 		], err => {
 			if (err){
@@ -146,10 +227,6 @@ export default class PropuestaComponent extends CuradorComponent {
   canNext(step){
     return true;
   }
-
-  finish(){
-    console.log('finish');
-  }
 	
 	editTumbnail(){
 		console.log(this.dropzoneThumbnail)
@@ -169,10 +246,43 @@ export default class PropuestaComponent extends CuradorComponent {
     }
 	}
 
+	existsObject(item, list){
+		return _.some(list, l => {
+			if (typeof l === 'string'){
+				return l == item._id;
+			}
+			return l._id == item._id;
+		});
+	}
+
+	toggleObject(item, list){
+    var idx = _.findIndex(list, l => {
+			if (typeof l === 'string'){
+				return l == item._id;
+			}
+			return l._id == item._id;
+		});
+		
+    if (idx > -1) {
+      list.splice(idx, 1);
+    }
+    else {
+      list.push(item);
+    }
+	}
+
 	textSelection(length){
 		if (length > 1){
 			return 'seleccionados';
 		}
 		return 'seleccionado';
+	}
+
+	removeAllFiles(){
+		this.resource.files.splice(0, this.resource.files.length)
+	}
+
+	sumfiles(files){
+		return _.sumBy(files, 'size');
 	}
 }

@@ -84,6 +84,32 @@
   font-feature-settings: 'liga';
 }
 
+// alias 
+.ri-herramienta:before {
+	content: "\f000";
+}
+
+.ri-herramientas:before {
+	content: "\f000";
+}
+
+.ri-orientacion:before {
+	content: "\f001";
+}
+
+.ri-mediateca:before {
+	content: "\f002";
+}
+
+.ri-propuesta:before {
+	content: "\f003";
+}
+
+.ri-actividad:before {
+	content: "\f004";
+}
+
+// Material icons
 .mi-home:before {
 	content: "\E88A";
 }

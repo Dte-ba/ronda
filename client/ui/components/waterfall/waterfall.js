@@ -111,6 +111,9 @@ class RdWaterfallController {
 				let item = items[i];
 				let childScope = this.$scope.$new(false);
 				childScope.item=item;
+				childScope.clicked = ($event) => {
+					this.$scope.itemClick.apply(this.$scope.$parent, [$event, item]);
+				};
 				let clone = this.$templ.clone();				
 				clone[0].innerHTML = this.$attrs.itemTemplate[0].innerHTML;
 				let el = this.$compile(clone)(childScope);
@@ -184,7 +187,8 @@ function rdWaterfall(){
 				'fetch': '&',
 				'itemWidth': '=',
 				'gutter': '=',
-				'loadMoreText': '@'
+				'loadMoreText': '@',
+				'itemClick': '='
 			},
 			template: (element, attr) => {
 				attr.itemTemplate    = getItemTemplate();
@@ -202,7 +206,7 @@ function rdWaterfall(){
 			function getItemTemplate() {
 					var templateTag = element.find('rd-item-template').detach(),
 					html = templateTag.length ? templateTag.html() : element.html();
-					let $templ = angular.element(`<div class="rd-waterfall__item">${html}</div>`);
+					let $templ = angular.element(`<div class="rd-waterfall__item" ng-click="clicked($event)">${html}</div>`);
 					// copy attributes
 					if (templateTag.length){
 							let $templOne = templateTag[0];
@@ -210,7 +214,9 @@ function rdWaterfall(){
 							for (var i =0; i<$templOne.attributes.length; i++){
 									let a = $templOne.attributes[i];
 									if (/class/i.test(a.name)){
-												$templ.addClass(a.value);
+											$templ.addClass(a.value);
+									} else if (/ng-click/i.test(a.name)){
+											
 									} else {
 											$templ.attr(a.name, a.value);
 									}

@@ -14,7 +14,7 @@
 	}
 
 	&__wrapper {
-		//height: calc(100vh - #{$navbar-height-scrolled * 2});
+		min-height: calc(100vh - #{$navbar-height-scrolled * 2});
 	}
 
 	&__container {
@@ -118,6 +118,16 @@
 
 	&__preview {
 		padding: 2.5rem;
+	}
+
+	&__box {
+		border-radius: $border-radius-default;
+		border: solid 1px $color-grey-light;
+		padding: 1rem;
+	}
+
+	&__box:not(:last-child) {
+		margin-bottom: 1rem;
 	}
 }
 
