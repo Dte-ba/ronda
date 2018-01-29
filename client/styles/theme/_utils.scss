@@ -8,6 +8,18 @@
 	}
 }
 
+.color-primary {
+	color: $color-primary;
+}
+
+.bg-primary {
+	background-color: $color-primary;
+}
+
+.color-grey {
+	color: $color-grey;
+}
+
 .has-error {
 	& > .help-block {
 		text-align: center;
@@ -20,6 +32,10 @@
 
 .text-center {
 	text-align: center;
+}
+
+.text-uppercase {
+	text-transform: uppercase;
 }
 
 .full-width {

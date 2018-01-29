@@ -97,9 +97,10 @@ class RdPostController {
 		this.$element.addClass('rd-post');
 		this.$mdDialog = $mdDialog;
 
+		this.readonly = this.$scope.readonly == true;
 		this.modules = [];
 		this.relative = $scope.relative || '';
-		this.$scope.currentText = '<h1>The lorem ipsum</h1><p><br></p><p><span style="color: rgb(0, 0, 0);">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span></p>';
+		this.$scope.currentText = '';
 		this.textEditing = false;
 		this.mediaEditing = false;
 	}
@@ -176,7 +177,8 @@ function rdPost($log){
 		controllerAs: '$rdPostController',
 		scope: {
 			'modules': '=',
-			'relative': '='
+			'relative': '=',
+			'readonly': '='
 		},
 		template: require('./post.html')
 	}

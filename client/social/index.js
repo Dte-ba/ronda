@@ -6,6 +6,7 @@ import angular from 'angular';
 import header from './header/header.component';
 import footer from './footer/footer.component';
 import resourceCard from './components/resourceCard/resourceCard.component';
+import resourceView from './components/resourceView/resourceView.component';
 import home from './home';
 
 // config to providers
@@ -15,6 +16,7 @@ let requirements = [
 	header,
 	footer,
 	resourceCard,
+	resourceView,
 	home
 ];
 

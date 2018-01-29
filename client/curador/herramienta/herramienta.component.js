@@ -144,7 +144,7 @@ export default class HerramientaComponent extends CuradorComponent {
 					}
 					this.loading = false;
 
-					console.log(this.resource.files)
+					console.log(this.resource)
 					cb();
 				})
 				.catch(cb);

@@ -168,3 +168,10 @@
 	</div>
 	
 </div>
+
+<div class="dashboard__wrapper" ng-if="$ctrl.currentStep == 'publicar'" ng-hide="$ctrl.loading">
+	<div class="dashboard__preview--header bg-primary">
+		<h2><i class="fa fa-angle-down"></i> Previsualización <i class="fa fa-angle-down"></i></h2>
+	</div>
+	<resource-view resource="$ctrl.resource" class="dashboard__preview"></resource-view>
+</div>

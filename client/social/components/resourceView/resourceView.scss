@@ -1,0 +1,57 @@
+resource-view {
+	display: block;	
+}
+
+.rview { 
+
+	&__wrapper {
+		border-radius: $border-radius-default;
+		background-color: rgba($color-white, .8);
+	}
+
+	&__content {
+		position: relative;
+		padding: 2rem 2rem;
+	}
+	
+	&__content--bar {
+		content: '';
+		position: absolute;
+		left: -.5rem;
+		top: 10rem;
+		width: .5rem;
+		height: 40%;
+		border-radius: 100px;
+	}
+
+	&__sidenav {
+		width: 35rem;
+		border-left: solid 5px $color-grey-light;
+	}
+
+	&__sidenav--icon {
+		width: 17rem;
+	}
+
+	&__sidenav--icon--head {
+		text-align: center;
+		padding-top: 1.2rem;
+	}
+
+	&__thumnail {
+		margin: 0 auto;
+	}
+
+	&__subtitle {
+		font-size: 3.5rem;
+		font-weight: $font-secondary-bold;
+	}
+
+	&__button {
+		width: 20rem;
+	}
+
+	&__border-bottom {
+		border-bottom: solid 1px $color-grey;
+	}
+}

@@ -1,0 +1,48 @@
+<div class="rview" >
+	<div class="rview__wrapper" layout="row" layout-align="start stretch">
+		<div class="rview__container"  layout="row" layout-align="start stretch" flex>
+			<div class="rview__sidenav--icon">
+				<div class="rview__sidenav--icon--head">
+						<i class="ri color-{{$ctrl.resource.type}} ri-6x" ng-class="'ri-'+$ctrl.resource.type"></i>
+				</div>
+			</div>	
+			<div class="rview__content" flex>
+				<div class="rview__content--bar bg-{{$ctrl.resource.type}}"></div>
+				<div layout="column" layout-padding>
+					<h1 flex class="rd__headpost  rd__headpost--title">{{$ctrl.resource.title}}</h1>
+					<p flex class="paragraph post__test">{{$ctrl.resource.summary}}</p>
+					<rd-post flex modules="$ctrl.resource.postBody" relative="$ctrl.uid" readonly="true"></rd-post>
+				</div>
+			</div>
+		</div>
+		<div class="rview__sidenav">
+				<div layout="column" layout-padding>
+					<div flex>
+						<div class="rview__thumnail thumbnail thumbnail--rounded thumbnail--120">
+							<img ng-src="{{$ctrl.resource.thumbnail}}" alt="Miniatura">
+						</div>
+					</div>
+					<div flex><p class="rd__headpost rview__subtitle">{{$ctrl.resource.title}}</p></div>
+					<div flex class="rview__border-bottom">
+						<p><strong class="rd-card__updated rd__color--grey-light ">Actualizado <strong am-time-ago="$ctrl.resource.createdAt"></strong> </strong></p>
+						<p><strong class="rd-card__owner">{{$ctrl.resource.owner.name}}</strong></p>
+					</div>
+					<div flex class="rview__border-bottom">
+							<h5>{{$ctrl.resource.typeCaption}}</h5>
+					</div>
+					<div flex layout="column" class="text-center" layout-padding>
+						<div>
+								<md-button class="md-fab" ng-disabled="true" aria-label="Comment">
+										<md-icon md-font-icon="ri-mochila" class="ri ri-3x"></md-icon>
+								</md-button>
+						</div>
+						<div><md-button class="rview__button md-raised md-primary">Ver Recurso</md-button></div>
+						<div><md-button class="rview__button md-raised md-primary">Descargar</md-button></div>
+						<div>
+							<div class="text-center"><span class="text-uppercase color-grey">{{$ctrl.resource.files.length}} Archivos | {{$ctrl.sumfiles($ctrl.resource.files) | numeraljs:'0b'}}</span></div>
+						</div>
+					</div>
+				</div>
+		</div>
+	</div>
+</div>

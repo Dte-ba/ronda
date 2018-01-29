@@ -67,6 +67,7 @@ export function show(req, res, next) {
 								.findById(resourceId)
 								.populate('owner')
 								.populate('files')
+								.populate('published')
 								.exec();
 	next();
 }
