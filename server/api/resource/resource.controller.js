@@ -1,7 +1,8 @@
 'use strict';
 
 import Resource from './resource.model';
-
+import Published from '../published/published.model';
+import async from 'async';
 
 /**
  * Get list of resources
@@ -81,4 +82,55 @@ export function destroy(req, res, next) {
 	req.result =  Resource.findByIdAndRemove(req.params.id).exec();
 	req.statusCode = 204;
 	next();
+}
+
+
+/**
+ * Publish a resource
+ * restriction: 'curador'
+ */
+export function publish(req, res, next) {
+	let resource = req.body;
+	let pid = resource.published ? resource.published._id : undefined;
+	let published = new Published(resource);
+
+	// find the resource
+	if (pid === undefined){
+		published.createdAt = new Date();
+		published.updatedAt = new Date();
+		published
+			.save()
+			.then(p => {
+				delete resource._id;
+				resource.published = p._id;
+				Resource
+					.update({ _id: req.params.id}, req.body)
+					.then(p => {
+						req.result = Resource
+							.findById(req.params.id)
+							.populate('owner')
+							.populate('files')
+							.populate('published')
+							.exec();
+		
+						next();
+					});
+			});
+	} else {
+		delete published._id;
+		published.updatedAt = new Date();
+		Published
+			.update({ _id: pid}, published)
+			.then(p => {
+				req.result = Resource
+					.findById(req.params.id)
+					.populate('owner')
+					.populate('files')
+					.populate('published')
+					.exec();
+
+				next();
+			});
+	}
+	
 }

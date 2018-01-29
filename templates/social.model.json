@@ -9,6 +9,10 @@
 		{
 			"name": "home",
 			"url": "/"
+		},
+		{
+			"name": "ver",
+			"url": "/ver/:uid"
 		}
 	]
 }

@@ -122,6 +122,19 @@ export default class HerramientaComponent extends CuradorComponent {
 		this.save = () => {
 			this.saveResource();
 		};
+
+		this.finish = () => {
+			this.loading = true;
+			this.resource
+				.post('publish')
+				.then(data => {
+					this.$log.log('published', data);
+					this.loading = false;
+				})
+				.catch(err => {
+					throw err;
+				});
+		}
 	}
 
 	$onInit(){
@@ -143,8 +156,6 @@ export default class HerramientaComponent extends CuradorComponent {
 						
 					}
 					this.loading = false;
-
-					console.log(this.resource)
 					cb();
 				})
 				.catch(cb);
@@ -192,10 +203,6 @@ export default class HerramientaComponent extends CuradorComponent {
 
   canNext(step){
     return true;
-  }
-
-  finish(){
-    console.log('finish');
   }
 	
 	editTumbnail(){

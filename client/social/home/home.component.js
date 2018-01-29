@@ -19,7 +19,7 @@ export default class HomeComponent extends SocialComponent {
     let def = this.$q.defer();
 
     this.page++;
-    let resources = this.Api.all('resources');
+    let resources = this.Api.all('publisheds');
     resources
         .getList({page: this.page, limit: this.limit })
         .then(data => {
