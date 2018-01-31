@@ -52,6 +52,29 @@
 		}
 	}
 
+	&__toolbar {
+		position: absolute;
+		visibility: hidden;
+		top: 0;
+		left: 0;
+		width: 100%;
+		background-color: $color-grey-light;
+	}
+
+	&__module {
+		position: relative;
+		border: dashed 1px $color-white;
+		padding: 2rem 1rem;
+	}
+
+	&__module--editable:hover {
+		border-radius: $border-radius-default;
+		border: dashed 1px $color-grey;
+	}
+
+	&__module--editable:hover &__toolbar {
+		visibility: visible;
+	}
 }
 
 .post-text {

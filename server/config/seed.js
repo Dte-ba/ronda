@@ -14,6 +14,7 @@ export default function seedDatabaseIfNeeded() {
   }
 
   // populate users
+  /*
   User.find({}).remove()
     .then(() => {
       User.create({
@@ -37,6 +38,7 @@ export default function seedDatabaseIfNeeded() {
       .then(() => console.log('finished populating users'))
       .catch(err => console.log('error populating users', err));
     });
+  */
   
   // populate categories
   Category
@@ -45,24 +47,23 @@ export default function seedDatabaseIfNeeded() {
     .then(() => {
       Category.create({
         type: 'nivel',
-        values: ['Inicial', 'Primaria', 'CFI', 'Todos'],
+        values: ['Inicial', 'Primaria', 'Primaria primer ciclo', 'Primaria segundo ciclo', 'Centro de formacion integral'],
         caption: 'Nivel'
       },{
         type: 'area',
         values: [
-          'Prácticas del lenguaje',
-          'Matemática',
-          'Inglés',
+          'Autonomía personal y social',
           'Ciencias Naturales',
+          'Ciencias Sociales',
+          'Construcción de la ciudadanía',
           'Educación Artística',
           'Educación Física',
-          'Construcción de la ciudadanía',
-          'Palabras clave',
-          'Ciencias Sociales',
           'Formación científico-tecnología',
-          'Formación Técnico Específica',
           'Formación profesional u ocupacional',
-          'Autonomía personal y social'
+          'Formación Técnico Específica',
+          'Inglés',
+          'Matemática',
+          'Prácticas del lenguaje',
         ],
         caption: 'Area'
       },{

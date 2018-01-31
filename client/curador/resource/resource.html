@@ -109,7 +109,7 @@
 						<textarea ng-model="$ctrl.resource.summary" required></textarea>
 					</md-input-container>
 			</div>
-			<rd-post modules="$ctrl.resource.postBody" relative="$ctrl.uid"></rd-post>
+			<rd-post modules="$ctrl.resource.postBody" relative="$ctrl.uid" on-delete="$ctrl.onDeletePost"></rd-post>
 		</md-content>
 	</div>
 </div>
@@ -126,8 +126,8 @@
 					<h2 class="dashboard__sidenav--subhead">{{$ctrl.resource.category}}</h2>
 				</div>
 			</div>
-			<h1 class="rd__headpost--title">{{$ctrl.resource.title}}</h1>
-			<p class="rd__headpost">{{$ctrl.resource.summary}}</p>
+			<h1 class="rd__headpost--sidenav">{{$ctrl.resource.title}}</h1>
+			<p class="rd__headpost">{{$ctrl.resource.summary | truncate:140}}</p>
 		</md-content>
 		
 		<md-content  class="dashboard__content" flex>
@@ -166,14 +166,6 @@
 				</div>
 			</div>
 			<div layout="row" layout-align="start" class="dashboard__row">
-				<div flex class="dashboard__box">
-					<h6 class="font-medium color-black-light margin">Recomendado para</h6>
-					<div flex="100" ng-repeat="item in $ctrl.accessibilities">
-						<md-checkbox ng-checked="$ctrl.exists(item, $ctrl.resource.accessibility)" ng-click="$ctrl.toggle(item, $ctrl.resource.accessibility)">
-							{{ item }}
-						</md-checkbox>
-					</div>
-				</div>
 				<div flex class="dashboard__box" ng-if="$ctrl.resource.type !== 'herramienta'">
 					<h6 class="font-medium color-black-light margin">Uso del Recurso</h6>
 					<div flex="100" ng-repeat="item in $ctrl.usabilities">
@@ -186,6 +178,14 @@
 					<h6 class="font-medium color-black-light margin">Plataformas</h6>
 					<div flex="100" ng-repeat="item in $ctrl.platforms">
 						<md-checkbox ng-checked="$ctrl.exists(item, $ctrl.resource.platform)" ng-click="$ctrl.toggle(item, $ctrl.resource.platform)">
+							{{ item }}
+						</md-checkbox>
+					</div>
+				</div>
+				<div flex class="dashboard__box">
+					<h6 class="font-medium color-black-light margin">Recomendado para</h6>
+					<div flex="100" ng-repeat="item in $ctrl.accessibilities">
+						<md-checkbox ng-checked="$ctrl.exists(item, $ctrl.resource.accessibility)" ng-click="$ctrl.toggle(item, $ctrl.resource.accessibility)">
 							{{ item }}
 						</md-checkbox>
 					</div>
@@ -208,15 +208,63 @@
 					<h2 class="dashboard__sidenav--subhead color-propuestas">{{$ctrl.resource.category}}</h2>
 				</div>
 			</div>
-			<h1 class="rd__headpost--title">{{$ctrl.resource.title}}</h1>
-			<p class="rd__headpost">{{$ctrl.resource.summary}}</p>
+			<h1 class="rd__headpost--sidenav">{{$ctrl.resource.title}}</h1>
+			<p class="rd__headpost">{{$ctrl.resource.summary | truncate:140}}</p>
+			<div class="vinculo__files">
+				<div><span class="text-uppercase color-black-light">{{$ctrl.resource.files.length}} Archivos | {{$ctrl.sumfiles($ctrl.resource.files) | numeraljs:'0b'}}</span></div>
+				<div class="text-uppercase color-black-light">Curado por: {{$ctrl.resource.owner.name}}</div>
+		</div>
 		</md-content>
 		
 		<md-content  class="dashboard__content" flex>
 			<div class="dashboard__box" ng-if="$ctrl.showViculo">
 				<h4 class="font-medium color-grey">Recursos contenidos en esta propuesta</h4>
+				<div class="dashboard__search">
+					<input type="text" ng-model="$ctrl.filterText" autofocus>
+				</div>
+			<md-conten>
+					<md-expansion-panel class="option-panel">
+						
+						 <md-expansion-panel-collapsed class="vinculados__recursos">
+								<div flex><h6 class="font-light color-primary text-center text-uppercase">{{$ctrl.resource.links.length}} Recursos vinculados</h6></div>
+								<md-expansion-panel-icon></md-expansion-panel-icon>
+						 </md-expansion-panel-collapsed>
+						
+						
+						 <md-expansion-panel-expanded>
+						
+							 <md-expansion-panel-header ng-click="$panel.collapse()" class="vinculados__recursos">
+									<div flex><h6 class="font-light color-primary text-center">{{$ctrl.resource.links.length}} Recursos vinculados</h6></div>
+									<md-expansion-panel-icon></md-expansion-panel-icon>
+							 </md-expansion-panel-header>
+						
+							 <md-expansion-panel-content>
+									<md-list-item ng-repeat="item in $ctrl.resource.links">
+											<div  layout="row" layout-padding>
+												<div>
+														<div class="thumbnail thumbnail--rounded thumbnail--50" ng-hide="item.thumbnail == ''">
+															<img ng-src="{{item.thumbnail}}" alt="Miniatura de la Propuesta Pedagógica">
+														</div>
+												</div>
+												<div flex>
+														<div class="color-{{item.type}}" layout="flex" layout-align="start center">
+															<i class="ri" ng-class="'ri-'+item.type"></i> <span>{{item.typeCaption}}</span>
+														</div>
+														<div><strong>{{item.title}}</strong></div>
+														<div><p>{{item.summary}}</p></div>
+												</div>
+												<md-checkbox class="md-secondary" ng-checked="$ctrl.existsObject(item, $ctrl.resource.links)" ng-click="$ctrl.toggleObject(item, $ctrl.resource.links)"
+																		 aria-label="Agregar/quitar {{item.title}}"></md-checkbox>
+											</div>
+										</md-list-item>
+							 </md-expansion-panel-content>
+						
+						 </md-expansion-panel-expanded>
+						
+					 </md-expansion-panel>
+				</md-content>
 				<md-list ng-cloak>
-						<md-list-item ng-repeat="item in $ctrl.publisheds">
+						<md-list-item ng-repeat="item in $ctrl.publisheds | filterByText:$ctrl.filterText">
 							<div  layout="row" layout-padding>
 								<div>
 										<div class="thumbnail thumbnail--rounded thumbnail--50" ng-hide="item.thumbnail == ''">

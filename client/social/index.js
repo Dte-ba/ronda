@@ -9,6 +9,7 @@ import resourceCard from './components/resourceCard/resourceCard.component';
 import resourceView from './components/resourceView/resourceView.component';
 import modalView from './components/modalView/modalView.component';
 import home from './home';
+import filters from './social.filter';
 
 // config to providers
 import { socialConfig } from './social.config';
@@ -19,7 +20,8 @@ let requirements = [
 	resourceCard,
 	resourceView,
 	modalView,
-	home
+	home,
+	filters
 ];
 
 module.exports = angular

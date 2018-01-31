@@ -35,8 +35,8 @@
 		&--head {
 			font-family: $font-family-secondary;
 			text-transform: uppercase;
-			font-weight: $font-secondary-light;
-			font-size: 2.4rem;
+			font-weight: $font-secondary-regular;
+			font-size: 1.8rem;
 		}
 
 		&--subhead {
@@ -140,6 +140,16 @@
 
 	&__row .flex:not(:first-child) {
 		margin-left: .5rem;
+	}
+
+	&__search {
+		padding: 2rem 0px;
+
+		input {
+			width: 100%;
+			border-radius: $border-radius-default;
+			padding: .35rem 0px;
+		}
 	}
 }
 

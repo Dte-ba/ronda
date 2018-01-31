@@ -11,7 +11,7 @@
 				<div layout="column" layout-padding>
 					<h1 flex class="rd__headpost  rd__headpost--title">{{$ctrl.resource.title}}</h1>
 					<p flex class="paragraph post__test">{{$ctrl.resource.summary}}</p>
-					<rd-post flex modules="$ctrl.resource.postBody" relative="$ctrl.uid" readonly="true"></rd-post>
+					<rd-post flex modules="$ctrl.resource.postBody" relative="$ctrl.uid" readonly="true"></rd-post>	
 				</div>
 			</div>
 		</div>
@@ -50,5 +50,33 @@
 					</div>
 				</div>
 		</div>
+	</div>
+
+	<div class="rview__resources" layout="row" layout-align="start stretch">
+		<div class="rview__resources--left"></div>
+		<div flex>
+			<div class="rview__links">
+					<h1 flex class="rd__headpost  rd__headpost--title text-uppercase">Contiene {{$ctrl.resource.links.length}} recursos</h1>	
+					<md-list ng-cloak>
+							<md-list-item ng-repeat="item in $ctrl.resource.links">
+								<div  layout="row" layout-padding>
+									<div>
+											<div class="thumbnail thumbnail--rounded thumbnail--50" ng-hide="item.thumbnail == ''">
+												<img ng-src="{{item.thumbnail}}" alt="Miniatura de la Propuesta Pedagógica">
+											</div>
+									</div>
+									<div flex>
+											<div class="color-{{item.type}}" layout="flex" layout-align="start center">
+												<i class="ri" ng-class="'ri-'+item.type"></i> <span>{{item.typeCaption}}</span>
+											</div>
+											<div><strong>{{item.title}}</strong></div>
+											<div><p>{{item.summary | truncate:140}}</p></div>
+									</div>
+								</div>
+							</md-list-item>
+					</md-list>
+			</div>
+		</div>
+		<div class="rview__resources--right"></div>
 	</div>
 </div>

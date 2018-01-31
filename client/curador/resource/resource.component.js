@@ -20,7 +20,7 @@ export default class ResourceComponent extends CuradorComponent {
 		this.init = true;
 	
 		this.Resource = this.Restangular.one('resources', this.uid)
-		this.Publisheds = this.Restangular.all('publisheds');
+		this.Publisheds = this.Restangular.all('resources');
 
 		this.resource = { };
     	this.steps = [
@@ -34,6 +34,10 @@ export default class ResourceComponent extends CuradorComponent {
 		this.configureFunctions();
 		this.getResource();
 		this.getCategories_();
+
+		this.onDeletePost = ($index) => {
+			this.onDeletePost_($index);
+		};
 	}
 
 	$onInit(){
@@ -170,7 +174,7 @@ export default class ResourceComponent extends CuradorComponent {
       url : '/upload?relative=' + this.uid,
 			paramName : 'Imágen',
 			maxFiles: 1,
-			clickable: '.dz-clickable',
+			clickable: '.dz-tumbnail-clickable',
       maxFilesize : 100,
       acceptedFiles : 'image/*',
       addRemoveLinks : false,
@@ -206,7 +210,8 @@ export default class ResourceComponent extends CuradorComponent {
 			ctrl.dropzoneSoftware = this;
 		};
 		this.dzOptionsSoftware.acceptedFiles = 'application/*';
-		this.maxFiles = Infinity;
+		this.dzOptionsSoftware.maxFiles = Infinity;
+		this.dzOptionsSoftware.clickable = '.dz-clickable';
 
 		this.dzCallbacksSoftware = {
       'addedfile' : (file) => {
@@ -246,6 +251,19 @@ export default class ResourceComponent extends CuradorComponent {
 				this.initStepIndex = idx === -1 ? undefined : idx;
 				
 			}
+
+			let captions = {
+				'propuesta': 'Propuesta pedagógica',
+				'actividad': 'Actividad accesible',
+				'herramienta': 'Herramienta',
+				'orientacion': 'Orientación',
+				'mediateca': 'Mediateca',
+			};
+
+			_.each(this.resource.links, l =>{
+				l.typeCaption = captions[l.type];
+			});
+
 			this.loading = false;
 			this.watchResource()
 		})
@@ -280,17 +298,54 @@ export default class ResourceComponent extends CuradorComponent {
 	}
 
 	exists(item, list){
+		if (list == undefined){
+			return false;
+		}
 		return list.indexOf(item) > -1;
 	}
 
 	toggle(item, list){
-    var idx = list.indexOf(item);
+		if (list == undefined){
+			return;
+		}
+		var idx = list.indexOf(item);
     if (idx > -1) {
       list.splice(idx, 1);
     }
     else {
       list.push(item);
     }
+	}
+
+	existsObject(item, list){
+		return _.some(list, l => {
+			if (typeof l === 'string'){
+				return l == item._id;
+			}
+			return l._id == item._id;
+		});
+	}
+
+	toggleObject(item, list){
+    var idx = _.findIndex(list, l => {
+			if (typeof l === 'string'){
+				return l == item._id;
+			}
+			return l._id == item._id;
+		});
+		
+    if (idx > -1) {
+      list.splice(idx, 1);
+    }
+    else {
+      list.push(item);
+    }
+	}
+
+	onDeletePost_($index){
+		if (this.resource.postBody instanceof Array){
+			this.resource.postBody.splice($index, 1);
+		}
 	}
 
 	textSelection(length){

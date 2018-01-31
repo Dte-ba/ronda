@@ -1,4 +1,8 @@
 .banner__dashboard--home {
 	background-color: $color-dashboard;
-	height: 40rem;
+	height: 43rem;
+}
+
+.banner__content {
+	transform: translateY(-50%);
 }

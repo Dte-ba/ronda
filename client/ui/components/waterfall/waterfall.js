@@ -112,7 +112,7 @@ class RdWaterfallController {
 				let childScope = this.$scope.$new(false);
 				childScope.item=item;
 				childScope.clicked = ($event) => {
-					if (!this.$scope.itemClick) {
+					if (!this.$scope.itemClick || item.type === 'addnew') {
 						return;
 					}
 					this.$scope.itemClick.apply(this.$scope.$parent, [$event, item]);

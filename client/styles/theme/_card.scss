@@ -86,8 +86,19 @@
 		font-size: 1.3rem;
 	}
 
-	&__owner{
+	&__owner {
 
+	}
+
+	&__status {
+		color: $color-grey;
+		line-height: 40px;
+		vertical-align: middle;
+		padding-left: 2rem;
+
+		i {
+			color: $color-grey;
+		}
 	}
 }
 

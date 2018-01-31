@@ -1,6 +1,13 @@
 <!-- content here -->
 <div class="post__content">
-	<div class="post__module" ng-repeat="module in $rdPostController.getModel()">
+	<div class="post__module" ng-show="module.moduleType !== undefined"  ng-repeat="module in $rdPostController.getModel()"  ng-class="{'post__module--editable': !$rdPostController.readonly}">
+		<div class="post__toolbar" layout="row">
+			<div flex></div>
+			<md-button ng-click="$rdPostController.deleteModule($index)" class="md-raised md-mini post__button--delete" aria-label="Eliminar módulo">
+				<md-icon md-font-icon="">delete</md-icon>
+			</md-button>
+		</div>
+		
 		<div class="post__divisor" ng-if="module.moduleType === 'divisor'" draggable="true"></div>
 		<div class="post__text" ng-if="module.moduleType === 'text'" draggable="true" ng-bind-html="module.content"></div>
 		<div class="post__image--gallery" ng-if="module.moduleType === 'image-gallery'" draggable="true" layout="column" layout-padding>

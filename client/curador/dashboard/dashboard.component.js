@@ -4,16 +4,32 @@ import CuradorComponent from '../curador.component';
 
 export default class DashboardComponent extends CuradorComponent {
   /*@ngInject*/
-  constructor($element,  $q, $http, $log, Restangular) {
+  constructor($element,  $q, $http, $log, $state, Restangular, Auth) {
     super({$element, $log});
     this.$q = $q;
     this.$http = $http;
     this.Restangular = Restangular;
+    this.$state = $state;
+    this.Auth = Auth;
 
     this.page = 0;
     this.limit = 20;
 
     this.Resources = this.Restangular.all('resources');
+
+    this.viewResource = ($event, resource) => { 
+      this.viewResource_($event, resource);
+    };
+
+    this.getUser();
+  }
+
+  getUser(){
+    this.Auth
+    .getCurrentUser()
+    .then(user => {
+      this.username = user.name;
+    });
   }
 
   fetchData(){
@@ -39,7 +55,6 @@ export default class DashboardComponent extends CuradorComponent {
             items.push(addNewItem);
           }
           
-          console.log(res);
           items = items.concat(res);
 
           let data = {
@@ -62,4 +77,12 @@ export default class DashboardComponent extends CuradorComponent {
 
   }
   
+  viewResource_($event, resource){
+    if (!resource){
+      return;
+    }
+
+    this.$state.go(`curador.recurso`, { uid: resource._id });
+
+  }
 }

@@ -5,8 +5,8 @@ import ResourceComponent from './resource.component';
 let routes = function($stateProvider) {
   'ngInject';
   $stateProvider
-    .state('curador.resource', {
-      url: '/tablero/resource/:uid',
+    .state('curador.recurso', {
+      url: '/tablero/recurso/:uid',
       template: '<curador-resource></curador-resource>'
     });
 }

@@ -109,6 +109,13 @@ class RdPostController {
 		return this.$scope.modules;
 	}
 
+	deleteModule($index){
+		//this.modules.splice($index, 1);
+		if (this.$scope.onDelete){
+			this.$scope.onDelete($index);
+		}
+	}
+
 	addDivisor($event) {
 		this.getModel().push({
 			moduleType: 'divisor',
@@ -178,7 +185,8 @@ function rdPost($log){
 		scope: {
 			'modules': '=',
 			'relative': '=',
-			'readonly': '='
+			'readonly': '=',
+			'onDelete': '='
 		},
 		template: require('./post.html')
 	}

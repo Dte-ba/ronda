@@ -54,4 +54,17 @@ resource-view {
 	&__border-bottom {
 		border-bottom: solid 1px $color-grey;
 	}
+
+	&__links {
+		background-color: $color-grey-light;
+		padding: 2rem 2rem;
+	}
+
+	&__resources--left {
+		width: 17rem;
+	}
+
+	&__resources--right {
+		width: 35rem;
+	}
 }

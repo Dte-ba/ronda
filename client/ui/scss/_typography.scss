@@ -70,6 +70,13 @@ h1, h2, h3, h4, h5, h6 {
 		font-size: $headpost-subtitle-font-size;
 	}
 
+	&--sidenav {
+		font-family: $font-family-secondary;
+		font-weight: $font-secondary-bold;
+		font-size: 2.6rem;
+		margin-bottom: 1rem;
+	}
+
 	a, strong {
 		font-family: inherit;
 		text-decoration: none;

@@ -19,7 +19,8 @@
 <rd-card data-rd-section="{{$ctrl.resource.type}}" ng-if="$ctrl.resource.type == 'herramienta'">
 		<rd-card-toolbar ng-if="$ctrl.editable">
 			<div layout="row">
-				<div flex>{{$state}}</div>
+				<div class="rd-card__status" flex ng-hide="$ctrl.resource.published == undefined"> <i class="fa fa-check-circle-o"></i>	Publicado</div>
+				<div class="rd-card__status" flex ng-show="$ctrl.resource.published == undefined"> <i class="fa fa-save"></i> Guardado</div>
 				<md-button ng-click="$ctrl.editResource()" class="bordered mini-button md-button md-ink-ripple rd-card__button--edit">
 					<div layout="row">
 							<md-icon class="mi-mode-edit"></md-icon> <span>Editar</span>
@@ -43,7 +44,7 @@
 					</div>
 					<div flex class="rd-card__body--custom">
 						<h1 class="rd-card__title--v1">{{$ctrl.resource.title}}</h1>
-						<p class="rd-card__paragraph">{{$ctrl.resource.summary}}</p>
+						<p class="rd-card__paragraph">{{$ctrl.resource.summary | truncate:140 }}</p>
 						<p><strong class="rd-card__updated rd__color--grey-light ">Actualizado <strong am-time-ago="$ctrl.resource.createdAt"></strong> </strong></p>
 						<p><strong class="rd-card__owner">{{$ctrl.resource.owner.name}}</strong></p>
 					</div>
@@ -56,7 +57,8 @@
 <rd-card data-rd-section="{{$ctrl.resource.type}}"  ng-if="$ctrl.resource.type == 'propuesta'">
 	<rd-card-toolbar ng-if="$ctrl.editable">
 		<div layout="row">
-			<div flex>{{$state}}</div>
+				<div class="rd-card__status" flex ng-hide="$ctrl.resource.published == undefined"> <i class="fa fa-check-circle-o"></i>	Publicado</div>
+				<div class="rd-card__status" flex ng-show="$ctrl.resource.published == undefined"> <i class="fa fa-save"></i> Guardado</div>
 			<md-button ng-click="$ctrl.editResource()" class="bordered mini-button md-button md-ink-ripple rd-card__button--edit">
 				<div layout="row">
 						<md-icon class="mi-mode-edit"></md-icon> <span>Editar</span>
@@ -78,7 +80,7 @@
 	</rd-card-header>
 	<rd-card-body>
 			<h1 class="rd-card__title--v1">{{$ctrl.resource.title}}</h1>
-			<p class="rd-card__paragraph">{{$ctrl.resource.summary}}</p>
+			<p class="rd-card__paragraph">{{$ctrl.resource.summary | truncate:140 }}</p>
 			<p><strong class="rd-card__updated rd__color--grey-light ">Actualizado <strong am-time-ago="$ctrl.resource.updatedAt"></strong> </strong></p>
 			<p><strong class="rd-card__owner">{{$ctrl.resource.owner.name}}</strong></p>
 	</rd-card-body>
@@ -91,7 +93,8 @@
 <rd-card data-rd-section="{{$ctrl.resource.type}}" ng-if="$ctrl.resource.type == 'actividad'">
 	<rd-card-toolbar ng-if="$ctrl.editable">
 		<div layout="row">
-			<div flex>{{$state}}</div>
+				<div class="rd-card__status" flex ng-hide="$ctrl.resource.published == undefined"> <i class="fa fa-check-circle-o"></i>	Publicado</div>
+				<div class="rd-card__status" flex ng-show="$ctrl.resource.published == undefined"> <i class="fa fa-save"></i> Guardado</div>
 			<md-button ng-click="$ctrl.editResource()" class="bordered mini-button md-button md-ink-ripple rd-card__button--edit">
 				<div layout="row">
 						<md-icon class="mi-mode-edit"></md-icon> <span>Editar</span>
@@ -115,7 +118,7 @@
 				</div>
 				<div flex class="rd-card__body--custom">
 					<h1 class="rd-card__title--v1">{{$ctrl.resource.title}}</h1>
-					<p class="rd-card__paragraph">{{$ctrl.resource.summary}}</p>
+					<p class="rd-card__paragraph">{{$ctrl.resource.summary | truncate:140 }}</p>
 					<p><strong class="rd-card__updated rd__color--grey-light ">Actualizado <strong am-time-ago="$ctrl.resource.createdAt"></strong> </strong></p>
 					<p><strong class="rd-card__owner">{{$ctrl.resource.owner.name}}</strong></p>
 				</div>
@@ -128,7 +131,8 @@
 <rd-card data-rd-section="{{$ctrl.resource.type}}" ng-if="$ctrl.resource.type == 'orientacion'">
 	<rd-card-toolbar ng-if="$ctrl.editable">
 		<div layout="row">
-			<div flex>{{$state}}</div>
+			<div class="rd-card__status" flex ng-hide="$ctrl.resource.published == undefined"> <i class="fa fa-check-circle-o"></i>	Publicado</div>
+			<div class="rd-card__status" flex ng-show="$ctrl.resource.published == undefined"> <i class="fa fa-save"></i> Guardado</div>
 			<md-button ng-click="$ctrl.editResource()" class="bordered mini-button md-button md-ink-ripple rd-card__button--edit">
 				<div layout="row">
 						<md-icon class="mi-mode-edit"></md-icon> <span>Editar</span>
@@ -152,7 +156,7 @@
 				</div>
 				<div flex class="rd-card__body--custom">
 					<h1 class="rd-card__title--v1">{{$ctrl.resource.title}}</h1>
-					<p class="rd-card__paragraph">{{$ctrl.resource.summary}}</p>
+					<p class="rd-card__paragraph">{{$ctrl.resource.summary | truncate:140 }}</p>
 					<p><strong class="rd-card__updated rd__color--grey-light ">Actualizado <strong am-time-ago="$ctrl.resource.createdAt"></strong> </strong></p>
 					<p><strong class="rd-card__owner">{{$ctrl.resource.owner.name}}</strong></p>
 				</div>
@@ -160,6 +164,45 @@
 			
 	</rd-card-body>
 </rd-card>
+
+<!-- Mediateca -->
+<rd-card data-rd-section="{{$ctrl.resource.type}}" ng-if="$ctrl.resource.type == 'mediateca'">
+		<rd-card-toolbar ng-if="$ctrl.editable">
+			<div layout="row">
+				<div class="rd-card__status" flex ng-hide="$ctrl.resource.published == undefined"> <i class="fa fa-check-circle-o"></i>	Publicado</div>
+				<div class="rd-card__status" flex ng-show="$ctrl.resource.published == undefined"> <i class="fa fa-save"></i> Guardado</div>
+				<md-button ng-click="$ctrl.editResource()" class="bordered mini-button md-button md-ink-ripple rd-card__button--edit">
+					<div layout="row">
+							<md-icon class="mi-mode-edit"></md-icon> <span>Editar</span>
+					</div>
+				</md-button>
+			</div>
+		</rd-card-toolbar>
+		<rd-card-header>
+				<div class="rd-card__header--wrapper" layout="row" layout-align="start center">
+						<span class="rd-card__icon--circle">
+							<i class="ri ri-3x ri-orientaciones"></i>
+						</span>
+						<span class="rd-card__header--type rd__text--caption">{{$ctrl.resource.typeCaption}}</span>
+						<span class="rd-card__header--level rd__text--caption">{{$ctrl.resource.nivel[0]}}</span>
+				</div>
+		</rd-card-header>
+		<rd-card-body>
+				<div layout="row">
+					<div class="rd-card__thumbnail">
+						<img ng-src="{{$ctrl.resource.thumbnail}}" alt="Miniatura del recurso" >
+					</div>
+					<div flex class="rd-card__body--custom">
+						<h1 class="rd-card__title--v1">{{$ctrl.resource.title}}</h1>
+						<p class="rd-card__paragraph">{{$ctrl.resource.summary | truncate:140 }}</p>
+						<p><strong class="rd-card__updated rd__color--grey-light ">Actualizado <strong am-time-ago="$ctrl.resource.createdAt"></strong> </strong></p>
+						<p><strong class="rd-card__owner">{{$ctrl.resource.owner.name}}</strong></p>
+					</div>
+				</div>
+				
+		</rd-card-body>
+	</rd-card>
+
 <!--
 <rd-card data-rd-section="{{$ctrl.resource.type}}"  ng-if="$ctrl.resource.type == 'herramienta'">
 		<rd-card-toolbar ng-if="$ctrl.editable">
