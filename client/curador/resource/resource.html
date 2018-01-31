@@ -131,40 +131,66 @@
 		</md-content>
 		
 		<md-content  class="dashboard__content" flex>
-				<div class="dropzone dz__custom dz-clickable"
-					 data-type="{{$ctrl.resource.type}}"
-					 options="$ctrl.dzOptionsSoftware"
-					 callbacks="$ctrl.dzCallbacksSoftware"
-					 methods="$ctrl.dzMethods"
-					 ng-dropzone
-					 ng-hide="$ctrl.resource.files.length > 0"></div>
-				<div ng-show="$ctrl.resource.files.length > 0">
-					<md-table-container class="table__files">
-						<table md-table multiple>
-							<thead md-head md-order="$ctrl.myOrder">
-								<tr md-row>
-									<th md-column>Nombre</th>
-									<th md-column md-numeric>Tamaño</th>
-								</tr>
-							</thead>
-							<tbody md-body>
-								<tr ng-repeat="file in $ctrl.resource.files">
-									<td md-cell><i class="{{file.icon}}"></i> <span>{{file.name}}</span></td>
-									<td md-cell><span>{{file.size | numeraljs:'0b'}}</span></td>
-								</tr>
-								<tr class="table__files--summary-cell">
-									<td md-cell></td>
-									<td md-cell><span class="table__files--summary">{{$ctrl.resource.files.length}} Archivos, Total: {{$ctrl.sumfiles($ctrl.resource.files) | numeraljs:'0b'}}</span></td>
-								</tr>
-							</tbody>
-						</table>
-					</md-table-container>
-					<div layout="row">
-						<span flex></span>
-						<md-button class="md-raised" ng-click="$ctrl.removeAllFiles()">Eliminar todos</md-button>
-						<md-button class="md-raised dz-clickable" ng-click="null"><i class="fa fa-upload"></i> Agregar</md-button>
+			<div class="dropzone dz__custom dz-clickable"
+					data-type="{{$ctrl.resource.type}}"
+					options="$ctrl.dzOptionsSoftware"
+					callbacks="$ctrl.dzCallbacksSoftware"
+					methods="$ctrl.dzMethods"
+					ng-dropzone
+					ng-hide="$ctrl.resource.files.length > 0"></div>
+			<div ng-show="$ctrl.resource.files.length > 0">
+				<md-table-container class="table__files">
+					<table md-table multiple>
+						<thead md-head md-order="$ctrl.myOrder">
+							<tr md-row>
+								<th md-column>Nombre</th>
+								<th md-column md-numeric>Tamaño</th>
+							</tr>
+						</thead>
+						<tbody md-body>
+							<tr ng-repeat="file in $ctrl.resource.files">
+								<td md-cell><i class="{{file.icon}}"></i> <span>{{file.name}}</span></td>
+								<td md-cell><span>{{file.size | numeraljs:'0b'}}</span></td>
+							</tr>
+							<tr class="table__files--summary-cell">
+								<td md-cell></td>
+								<td md-cell><span class="table__files--summary">{{$ctrl.resource.files.length}} Archivos, Total: {{$ctrl.sumfiles($ctrl.resource.files) | numeraljs:'0b'}}</span></td>
+							</tr>
+						</tbody>
+					</table>
+				</md-table-container>
+				<div layout="row">
+					<span flex></span>
+					<md-button class="md-raised" ng-click="$ctrl.removeAllFiles()">Eliminar todos</md-button>
+					<md-button class="md-raised dz-clickable" ng-click="null"><i class="fa fa-upload"></i> Agregar</md-button>
+				</div>
+			</div>
+			<div layout="row" layout-align="start" class="dashboard__row">
+				<div flex class="dashboard__box">
+					<h6 class="font-medium color-black-light margin">Recomendado para</h6>
+					<div flex="100" ng-repeat="item in $ctrl.accessibilities">
+						<md-checkbox ng-checked="$ctrl.exists(item, $ctrl.resource.accessibility)" ng-click="$ctrl.toggle(item, $ctrl.resource.accessibility)">
+							{{ item }}
+						</md-checkbox>
 					</div>
 				</div>
+				<div flex class="dashboard__box" ng-if="$ctrl.resource.type !== 'herramienta'">
+					<h6 class="font-medium color-black-light margin">Uso del Recurso</h6>
+					<div flex="100" ng-repeat="item in $ctrl.usabilities">
+						<md-checkbox ng-checked="$ctrl.exists(item, $ctrl.resource.usability)" ng-click="$ctrl.toggle(item, $ctrl.resource.usability)">
+							{{ item }}
+						</md-checkbox>
+					</div>
+				</div>
+				<div flex class="dashboard__box" ng-if="$ctrl.resource.type == 'herramienta'">
+					<h6 class="font-medium color-black-light margin">Plataformas</h6>
+					<div flex="100" ng-repeat="item in $ctrl.platforms">
+						<md-checkbox ng-checked="$ctrl.exists(item, $ctrl.resource.platform)" ng-click="$ctrl.toggle(item, $ctrl.resource.platform)">
+							{{ item }}
+						</md-checkbox>
+					</div>
+				</div>
+			</div>
 		</md-content>
 	</div>
 	

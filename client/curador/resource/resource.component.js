@@ -92,10 +92,16 @@ export default class ResourceComponent extends CuradorComponent {
 				let st = this.getCategory('software');
 				let at = this.getCategory('area');
 				let lt = this.getCategory('nivel');
+				let ac = this.getCategory('accessibility');
+				let us = this.getCategory('resource');
+				let os = this.getCategory('os');
 				
 				this.softwares = st.values;
 				this.areas = at.values;
 				this.niveles = lt.values;
+				this.accessibilities = ac.values;
+				this.usabilities = us.values;
+				this.platforms = os.values;
 				cb()
 			}
 		], err => {
@@ -159,7 +165,7 @@ export default class ResourceComponent extends CuradorComponent {
 	configureDropzone(Util){
 
 		var ctrl = this;
-    this.dzOptions = {
+   	 this.dzOptions = {
 			dictDefaultMessage: '<div class="dz-clickable"></div>',
       url : '/upload?relative=' + this.uid,
 			paramName : 'Imágen',

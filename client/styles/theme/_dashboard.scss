@@ -62,6 +62,10 @@
 			padding: $gutter/2;
 			padding-top: 0;
 		}
+
+		& .dz__custom {
+			margin-bottom: 1rem;
+		}
 	}
 
 	&__stepper {
@@ -127,7 +131,15 @@
 	}
 
 	&__box:not(:last-child) {
-		margin-bottom: 1rem;
+		margin-bottom: .5rem;
+	}
+
+	&__row .flex:not(:last-child) {
+		margin-right: .5rem;
+	}
+
+	&__row .flex:not(:first-child) {
+		margin-left: .5rem;
 	}
 }
 

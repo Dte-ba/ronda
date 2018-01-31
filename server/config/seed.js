@@ -67,7 +67,7 @@ export default function seedDatabaseIfNeeded() {
         caption: 'Area'
       },{
         type: 'os',
-        values: ['Android', 'Linux', 'Windows', 'Todos', 'Otros'],
+        values: ['Android', 'Linux', 'Windows'],
         caption: 'Sistema Operativo'
       },{
         type: 'resource',
@@ -75,7 +75,7 @@ export default function seedDatabaseIfNeeded() {
         caption: 'Tipo de recurso'
       },{
         type: 'accessibility',
-        values: ['Accesibilidad Auditiva', 'Accesibilidad Visual', 'Accesibilidad Motora', 'Todas'],
+        values: ['Accesibilidad Auditiva', 'Accesibilidad Visual', 'Accesibilidad Motora'],
         caption: 'Tipo de accesibilidad'
       },{
         type: 'software',

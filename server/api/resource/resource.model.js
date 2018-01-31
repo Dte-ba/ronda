@@ -15,6 +15,7 @@ var ResourceSchema = new Schema({
 		area: [String],
 		accessibility: [String],
 		usability: [String],
+		platform: [String],
 		category: Schema.Types.Mixed,
 		postBody: [{ moduleType: String, content: Schema.Types.Mixed }],
 		tags: [String],
