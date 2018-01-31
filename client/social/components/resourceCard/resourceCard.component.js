@@ -27,7 +27,7 @@ class ResourceCardController {
 	}
 
 	editResource(){
-		this.$state.go(`curador.${this.resource.type}`, { uid: this.resource._id });
+		this.$state.go(`curador.resource`, { uid: this.resource._id });
 	}
 }
 

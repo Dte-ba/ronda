@@ -15,24 +15,8 @@
 			"url": "/tablero/new"
 		},
 		{
-			"name": "propuesta",
-			"url": "/tablero/propuesta/:uid"
-		},
-		{
-			"name": "actividad",
-			"url": "/tablero/actividad/:uid"
-		},
-		{
-			"name": "herramienta",
-			"url": "/tablero/herramienta/:uid"
-		},
-		{
-			"name": "orientacion",
-			"url": "/tablero/orientacion/:uid"
-		},
-		{
-			"name": "mediateca",
-			"url": "/tablero/mediateca/:uid"
+			"name": "resource",
+			"url": "/tablero/resource/:uid"
 		}
 	]
 }

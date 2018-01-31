@@ -37,11 +37,23 @@
 			background: url('assets/img/dropzone-miniature.png') center center no-repeat;
 	}
 	
-	&__software &-default &-clickable {
+	&__custom[data-type="herramienta"] &-default &-clickable {
 		background: url('assets/img/dropzone-software.png') center center no-repeat;
 	}
 
-	&__propuesta &-default &-clickable {
+	&__custom[data-type="propuesta"] &-default &-clickable {
 		background: url('assets/img/dropzone-propuesta.png') center center no-repeat;
+	}
+
+	&__custom[data-type="actividad"] &-default &-clickable {
+		background: url('assets/img/dropzone-actividad.png') center center no-repeat;
+	}
+
+	&__custom[data-type="orientacion"] &-default &-clickable {
+		background: url('assets/img/dropzone-orientacion.png') center center no-repeat;
+	}
+
+	&__custom[data-type="mediateca"] &-default &-clickable {
+		background: url('assets/img/dropzone-mediateca	.png') center center no-repeat;
 	}
 }

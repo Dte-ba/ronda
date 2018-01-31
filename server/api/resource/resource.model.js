@@ -13,6 +13,8 @@ var ResourceSchema = new Schema({
 		thumbnail: String,
 		nivel: [String],
 		area: [String],
+		accessibility: [String],
+		usability: [String],
 		category: Schema.Types.Mixed,
 		postBody: [{ moduleType: String, content: Schema.Types.Mixed }],
 		tags: [String],

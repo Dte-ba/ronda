@@ -66,7 +66,7 @@ export default class NewComponent extends CuradorComponent {
       resource
         .post(data)
         .then(data => {
-          this.$state.go(`curador.${type}`, { uid: data._id });
+          this.$state.go(`curador.resource`, { uid: data._id });
         })
         .catch((err) => {
           this.$log.error(err)

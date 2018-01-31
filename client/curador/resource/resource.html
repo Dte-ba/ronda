@@ -5,7 +5,7 @@
 
 <div class="dashboard__toolbar" ng-hide="$ctrl.loading">
 	<rd-stepper class="dashboard__stepper" 
-							rd-section="herramientas" 
+							rd-section="{{$ctrl.resource.type}}" 
 							steps="$ctrl.steps"
 							can-next="$ctrl.canNext" 
 							on-finish="$ctrl.finish"
@@ -17,9 +17,9 @@
 
 <div class="dashboard__wrapper" ng-if="$ctrl.currentStep == 'ficha'" ng-hide="$ctrl.loading">
 	<div class="dashboard__container"  layout="row" layout-align="start stretch">
-		<md-content class="dashboard__sidenav sidenav__herramientas" ng-hide="$ctrl.currentStep === 'publicar'">
-			<h2 class="dashboard__sidenav--head color-herramientas">Herramientas</h2>
-			<md-input-container class="full-width">
+		<md-content class="dashboard__sidenav" data-type="{{$ctrl.resource.type}}">
+			<h2 class="dashboard__sidenav--head">{{$ctrl.headText}}</h2>
+			<md-input-container class="full-width" ng-if="$ctrl.resource.type == 'herramienta'">
 				<md-select ng-model="$ctrl.resource.category" placeholder="Seleccioná un tipo" required>
 					<md-option ng-value="soft" ng-repeat="soft in $ctrl.softwares">{{ soft }}</md-option>
 				</md-select>
@@ -28,7 +28,7 @@
 				<div class="dropzone dz__custom dz__thumbnail select-thumbnail dz-clickable" options="$ctrl.dzOptions" callbacks="$ctrl.dzCallbacks" methods="$ctrl.dzMethods" ng-dropzone
 						 ng-hide="$ctrl.resource.thumbnail !== ''"></div>
 				<div class="thumbnail thumbnail--rounded" ng-hide="$ctrl.resource.thumbnail == ''">
-					<img ng-src="{{$ctrl.resource.thumbnail}}" alt="Miniatura de la Herramienta">
+					<img ng-src="{{$ctrl.resource.thumbnail}}" alt="Miniatura del Recurso">
 					<md-button ng-click="$ctrl.editTumbnail()" class="mini-button md-button md-raised thumbnail__button--edit dz-tumbnail-clickable">
 						<div layout="row">
 								<md-icon class="mi-mode-edit"></md-icon> <span>Cambiar</span>
@@ -36,7 +36,7 @@
 					</md-button>
 				</div>
 			</md-content>
-			<md-content>
+			<md-content ng-if="$ctrl.resource.type !== 'mediateca'">
 				<md-expansion-panel class="option-panel">
 					
 					 <md-expansion-panel-collapsed>
@@ -66,7 +66,7 @@
 					
 				 </md-expansion-panel>
 			</md-content>
-			<md-content>
+			<md-content ng-if="$ctrl.resource.type !== 'mediateca'">
 				<md-expansion-panel class="option-panel">
 					
 					 <md-expansion-panel-collapsed>
@@ -116,14 +116,14 @@
 
 <div class="dashboard__wrapper" ng-if="$ctrl.currentStep == 'recurso'" ng-hide="$ctrl.loading">
 	<div class="dashboard__container"  layout="row" layout-align="start stretch">
-		<md-content class="dashboard__sidenav sidenav__herramientas" ng-hide="$ctrl.currentStep === 'publicar'">
+		<md-content class="dashboard__sidenav" data-type="{{$ctrl.resource.type}}">
 			<div layout="row" class="dashboard__sidenav--top">
 				<div class="thumbnail thumbnail--rounded thumbnail--50" ng-hide="$ctrl.resource.thumbnail == ''">
-					<img ng-src="{{$ctrl.resource.thumbnail}}" alt="Miniatura de la Herramienta">
+					<img ng-src="{{$ctrl.resource.thumbnail}}" alt="Miniatura del recurso">
 				</div>
 				<div flex class="dashboard__sidenav--head-resource">
-					<h2 class="dashboard__sidenav--head color-herramientas">Herramientas</h2>
-					<h2 class="dashboard__sidenav--subhead color-herramientas">{{$ctrl.resource.category}}</h2>
+					<h2 class="dashboard__sidenav--head">{{$ctrl.headText}}</h2>
+					<h2 class="dashboard__sidenav--subhead">{{$ctrl.resource.category}}</h2>
 				</div>
 			</div>
 			<h1 class="rd__headpost--title">{{$ctrl.resource.title}}</h1>
@@ -131,12 +131,13 @@
 		</md-content>
 		
 		<md-content  class="dashboard__content" flex>
-				<div class="dropzone dz__custom dz__software dz-clickable"
-						 options="$ctrl.dzOptionsSoftware"
-						 callbacks="$ctrl.dzCallbacksSoftware"
-						 methods="$ctrl.dzMethods"
-						 ng-dropzone
-						 ng-hide="$ctrl.resource.files.length > 0"></div>
+				<div class="dropzone dz__custom dz-clickable"
+					 data-type="{{$ctrl.resource.type}}"
+					 options="$ctrl.dzOptionsSoftware"
+					 callbacks="$ctrl.dzCallbacksSoftware"
+					 methods="$ctrl.dzMethods"
+					 ng-dropzone
+					 ng-hide="$ctrl.resource.files.length > 0"></div>
 				<div ng-show="$ctrl.resource.files.length > 0">
 					<md-table-container class="table__files">
 						<table md-table multiple>
@@ -167,6 +168,54 @@
 		</md-content>
 	</div>
 	
+</div>
+
+<div class="dashboard__wrapper" ng-if="$ctrl.currentStep == 'vinculo'" ng-hide="$ctrl.loading">
+    <div class="dashboard__container"  layout="row" layout-align="start stretch">
+		<md-content class="dashboard__sidenav" data-type="{{$ctrl.resource.type}}">
+			<div layout="row" class="dashboard__sidenav--top">
+				<div class="thumbnail thumbnail--rounded thumbnail--50" ng-hide="$ctrl.resource.thumbnail == ''">
+					<img ng-src="{{$ctrl.resource.thumbnail}}" alt="Miniatura de la Propuesta Pedagógica">
+				</div>
+				<div flex class="dashboard__sidenav--head-resource">
+					<h2 class="dashboard__sidenav--head color-propuestas">Propuesta Pedagógica</h2>
+					<h2 class="dashboard__sidenav--subhead color-propuestas">{{$ctrl.resource.category}}</h2>
+				</div>
+			</div>
+			<h1 class="rd__headpost--title">{{$ctrl.resource.title}}</h1>
+			<p class="rd__headpost">{{$ctrl.resource.summary}}</p>
+		</md-content>
+		
+		<md-content  class="dashboard__content" flex>
+			<div class="dashboard__box" ng-if="$ctrl.showViculo">
+				<h4 class="font-medium color-grey">Recursos contenidos en esta propuesta</h4>
+				<md-list ng-cloak>
+						<md-list-item ng-repeat="item in $ctrl.publisheds">
+							<div  layout="row" layout-padding>
+								<div>
+										<div class="thumbnail thumbnail--rounded thumbnail--50" ng-hide="item.thumbnail == ''">
+											<img ng-src="{{item.thumbnail}}" alt="Miniatura de la Propuesta Pedagógica">
+										</div>
+								</div>
+								<div flex>
+										<div class="color-{{item.type}}" layout="flex" layout-align="start center">
+											<i class="ri" ng-class="'ri-'+item.type"></i> <span>{{item.typeCaption}}</span>
+										</div>
+										<div><strong>{{item.title}}</strong></div>
+										<div><p>{{item.summary}}</p></div>
+								</div>
+								<md-checkbox class="md-secondary" ng-checked="$ctrl.existsObject(item, $ctrl.resource.links)" ng-click="$ctrl.toggleObject(item, $ctrl.resource.links)"
+														 aria-label="Agregar/quitar {{item.title}}"></md-checkbox>
+							</div>
+						</md-list-item>
+				</md-list>
+			</div>
+			<div class="dashboard__box">
+				<h4 class="color-grey font-medium">Palabras Claves</h4>
+				<md-chips ng-model="$ctrl.resource.tags" placeholder="Ingresá un tag">
+			</div>
+		</md-content>
+	</div>
 </div>
 
 <div class="dashboard__wrapper" ng-if="$ctrl.currentStep == 'publicar'" ng-hide="$ctrl.loading">
