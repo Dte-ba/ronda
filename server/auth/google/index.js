@@ -2,7 +2,7 @@
 
 import express from 'express';
 import passport from 'passport';
-import {setTokenCookie} from '../auth.service';
+import {setTokenCookie, isAuthenticated} from '../auth.service';
 
 var router = express.Router();
 
@@ -15,7 +15,8 @@ router
     ],
     session: false
   }))
-  .get('/success', (req, res) => {
+  .get('/success', isAuthenticated(), (req, res) => {
+    let user = req.user || {};
     res.end(`<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -24,6 +25,9 @@ router
     </head>
     <body>
       <script>
+        var event = new Event('closed');
+        event.userRole = '${user.role}';
+        window.dispatchEvent(event);
         window.close();
       </script>
     </body>
@@ -33,7 +37,7 @@ router
     failureRedirect: '/signup',
     session: false
   }), setTokenCookie, (req, res) => {
-    console.log(req);
+    //console.log(req);
     res.redirect('/auth/google/success');
   });
 

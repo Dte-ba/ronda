@@ -3,6 +3,7 @@
 import User from './user.model';
 import config from '../../config/environment';
 import jwt from 'jsonwebtoken';
+import _ from 'lodash';
 
 function validationError(res, statusCode) {
   statusCode = statusCode || 422;
@@ -108,6 +109,11 @@ export function me(req, res, next) {
     .then(user => { // don't ever give out the password or salt
       if(!user) {
         return res.status(401).end();
+      }
+      // remove google thing
+      if (user.provider === 'google'){
+        user.avatar = _.get(user, 'google.image.url');
+        //user.google = undefined;
       }
       res.json(user);
     })

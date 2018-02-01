@@ -1,11 +1,16 @@
 'use strict';
 import angular from 'angular';
+import $ from 'jquery';
 
 class CuradorHeaderComponent {
   /*@ngInject*/
-  constructor($element) {
+  constructor($scope, $element, Auth, $state) {
+    this.$scope = $scope;
     this.selected = '';
-    
+    this.Auth = Auth;
+    this.$state = $state;
+    this.showingDropdown = false;
+
     this.navbarItems = [
       { section: 'propuestas', icon: 'ri ri-propuestas', caption: 'Propuestas' },
       { section: 'actividades', icon: 'ri ri-actividades', caption: 'Actividades' },
@@ -13,6 +18,29 @@ class CuradorHeaderComponent {
       { section: 'orientaciones', icon: 'ri ri-orientaciones', caption: 'Orientaciones' },
       { section: 'mediateca', icon: 'ri ri-mediateca', caption: 'Mediateca' },
     ];
+
+    this.getUser();
+    this.handleClickOnWindow();
+  }
+
+  getUser(){
+    this.Auth
+      .getCurrentUser()
+      .then(user => {
+        this.user = user;
+      })
+      .catch(err => {
+        throw err;
+      });
+  }
+
+  handleClickOnWindow() {
+    $(window).click(() => {
+      if (this.showingDropdown){
+        this.showingDropdown = false;
+        this.$scope.$apply();
+      }
+    });
   }
   
   itemClicked(item) {
@@ -20,6 +48,16 @@ class CuradorHeaderComponent {
       return;
     }
     this.selected = item.section;
+  }
+
+  toggleProfile($event){
+    this.showingDropdown = !this.showingDropdown;
+    $event.stopPropagation();
+  }
+
+  logout(){
+    this.Auth.logout();
+    this.$state.go('app.login');
   }
 }
 

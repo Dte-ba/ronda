@@ -50,15 +50,28 @@ export default class LoginComponent extends AppComponent {
         return newWindow;
     }
 
-    let url = 'http://localhost:3000/auth/google';
+    let host = window.location.host;
+    let protocol = window.location.protocol;
+
+    let url = `${protocol}//${host}/auth/google`;
     let loginWindow = PopupCenter(url, 'Google Login', 350, 350);
 
-    let interval = setInterval(() => {
-      if (loginWindow.closed){
-        clearInterval(interval);
-        this.$state.go('curador.dashboard');
+    loginWindow.addEventListener('closed', e => { 
+      if (e.userRole == 'user'){
+        this.errors.login = 'El email no se encuentra habilitado.';
+        this.$scope.$apply();
+        return;
       }
-    }, 100);
+
+      this.$state.go('curador.dashboard');
+    }, false);
+    
+    //let interval = setInterval(() => {
+    //  if (loginWindow.closed){
+    //    clearInterval(interval);
+    //    this.$state.go('curador.dashboard');
+    //  }
+    //}, 100);
     
   }
   
