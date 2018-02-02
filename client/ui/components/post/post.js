@@ -119,6 +119,14 @@ class RdPostController {
 		}
 	}
 
+	editModule(module){
+		module.editing = true;
+	}
+
+	editedModule(module){
+		module.editing = false;
+	}
+
 	addDivisor($event) {
 		this.getModel().push({
 			moduleType: 'divisor',
@@ -176,6 +184,8 @@ class RdPostController {
 			}
     });
 	}
+
+
 }
 
 function rdPost($log){
