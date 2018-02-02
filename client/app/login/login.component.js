@@ -27,9 +27,11 @@ export default class LoginComponent extends AppComponent {
     this.$stateParams = $stateParams;
     this.loadingGoogle = false;
     this.$timeout = $timeout;
+    this.loading = false;
   }
 
   googleLogin(){
+    this.loading = true;
     function PopupCenter(url, title, w, h) {
         // Fixes dual-screen position                         Most browsers      Firefox
         var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
@@ -56,6 +58,7 @@ export default class LoginComponent extends AppComponent {
     let url = `${protocol}//${host}/auth/google`;
     let loginWindow = PopupCenter(url, 'Google Login', 350, 350);
 
+    /*
     loginWindow.addEventListener('closed', e => { 
       if (e.userRole == 'user'){
         this.errors.login = 'El email no se encuentra habilitado.';
@@ -65,13 +68,29 @@ export default class LoginComponent extends AppComponent {
 
       this.$state.go('curador.dashboard');
     }, false);
-    
-    //let interval = setInterval(() => {
-    //  if (loginWindow.closed){
-    //    clearInterval(interval);
-    //    this.$state.go('curador.dashboard');
-    //  }
-    //}, 100);
+
+    loginWindow.onunload = (e) => {
+      console.log('window unload');
+      console.log(loginWindow.user);
+      console.log(loginWindow.userRole);
+    };
+    */
+
+    let interval = setInterval(() => {
+      if (loginWindow.closed == true){
+        if (loginWindow.userRole == 'user'){
+          this.errors.login = 'El email no se encuentra habilitado.';
+          this.$scope.$apply();
+          return;
+        }
+
+        this.$timeout(() => {
+          //this.$state.go('curador.dashboard');
+          window.location.href = `${protocol}//${host}/tablero`;
+        }, 500);
+        clearInterval(interval);
+      }
+    }, 500);
     
   }
   

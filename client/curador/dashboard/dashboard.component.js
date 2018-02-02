@@ -28,6 +28,7 @@ export default class DashboardComponent extends CuradorComponent {
     this.Auth
     .getCurrentUser()
     .then(user => {
+      console.log(user);
       this.user = user;
       this.username = user.name;
     });

@@ -25,9 +25,7 @@ router
     </head>
     <body>
       <script>
-        var event = new Event('closed');
-        event.userRole = '${user.role}';
-        window.dispatchEvent(event);
+        window.userRole = '${user.role}';
         window.close();
       </script>
     </body>

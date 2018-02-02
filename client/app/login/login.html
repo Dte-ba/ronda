@@ -4,7 +4,10 @@
 			<img class="login__header--logo" src="/assets/ronda-logo.svg" alt="Logo">
 			<h1 class="login__header--title" >Inicia sesión</h1>
 		</div>
-		<form class="login__form"  name="loginForm" ng-submit="$ctrl.login(loginForm)" novalidate >
+		<div class="dashboard__loading" layout="row" layout-align="center center" ng-show="$ctrl.loading">
+			<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+		</div>
+		<form class="login__form"  name="loginForm" ng-submit="$ctrl.login(loginForm)" novalidate ng-hide="$ctrl.loading">
 				<div class="login__form--content">
 
 				<div class="login-form__group">
