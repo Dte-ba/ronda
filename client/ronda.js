@@ -33,6 +33,10 @@ import ngNumeraljs from 'angular-numeraljs';
 // Datatable
 import mdDataTable from 'angular-material-data-table';
 
+// drag and drop 
+import ngDragAndDrop from 'angular-drag-and-drop-lists';
+console.log(ngDragAndDrop);
+
 // configs
 import { rondaConfig, rondaRun } from './ronda.config';
 
@@ -66,6 +70,7 @@ let requirements = [
 	'thatisuday.dropzone',
 	'material.components.expansionPanels',
 	'ngNumeraljs',
+	'dndLists',
 	mdDataTable,
 	authModule,
 	app, 

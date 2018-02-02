@@ -64,7 +64,7 @@ export default class HomeComponent extends SocialComponent {
       }
     });
 
-    function DialogController($scope, $mdDialog, resource, Restangular) {
+    function DialogController($scope, $mdDialog, resource, Restangular, $timeout) {
       'ngInject';
       this.loading = true;
 
@@ -74,17 +74,18 @@ export default class HomeComponent extends SocialComponent {
         $mdDialog.hide();
       }
 
-      this.$onInit = () => {
-        this.Resource
-          .get()
-          .then(data => {
-            this.resource = data;
-            this.loading = false;
-          })
-          .catch(err => {
-            throw err;
-          });        
-      }
+      this.Resource
+        .get()
+        .then(data => {
+          this.resource = data;
+          this.loading = false;
+          $timeout(() => {
+            $scope.$apply();
+          });
+        })
+        .catch(err => {
+          throw err;
+        });      
 
       this.sumfiles = (files) => {
         return _.sumBy(files, 'size');

@@ -103,6 +103,9 @@ class RdPostController {
 		this.$scope.currentText = '';
 		this.textEditing = false;
 		this.mediaEditing = false;
+		this.models = {
+			selected: null
+		};
 	}
 
 	getModel(){

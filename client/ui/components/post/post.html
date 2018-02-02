@@ -1,6 +1,15 @@
 <!-- content here -->
-<div class="post__content">
-	<div class="post__module" ng-show="module.moduleType !== undefined"  ng-repeat="module in $rdPostController.getModel()"  ng-class="{'post__module--editable': !$rdPostController.readonly}">
+<ul class="post__content" dnd-list="$rdPostController.getModel()" ng-if="!$rdPostController.readonly">
+	<li class="post__module"
+			ng-show="module.moduleType !== undefined"
+			ng-repeat="module in $rdPostController.getModel()"
+			ng-class="{'post__module--editable': !$rdPostController.readonly}"
+			dnd-draggable="module"
+			dnd-effect-allowed="move"
+			dnd-moved="$rdPostController.getModel().splice($index, 1)"
+			dnd-selected="$rdPostController.models.selected = module"
+			ng-class="{selected: $rdPostController.models.selected === module}">
+
 		<div class="post__toolbar" layout="row">
 			<div flex></div>
 			<md-button ng-click="$rdPostController.deleteModule($index)" class="md-raised md-mini post__button--delete" aria-label="Eliminar módulo">
@@ -20,10 +29,38 @@
 					<img ng-src="{{image.src}}" alt="{{image.description}}">
 				</div>
 			</div>
-	</div>
-</div>
+	</li>
+</ul>
 
-<div class="post__actions--wrapper" ng-hide="$rdPostController.readonly">
+<ul class="post__content" ng-if="$rdPostController.readonly">
+		<li class="post__module"
+				ng-show="module.moduleType !== undefined"
+				ng-repeat="module in $rdPostController.getModel()"
+				ng-class="{'post__module--editable': !$rdPostController.readonly}">
+	
+			<div class="post__toolbar" layout="row">
+				<div flex></div>
+				<md-button ng-click="$rdPostController.deleteModule($index)" class="md-raised md-mini post__button--delete" aria-label="Eliminar módulo">
+					<md-icon md-font-icon="">delete</md-icon>
+				</md-button>
+			</div>
+			
+			<div class="post__divisor" ng-if="module.moduleType === 'divisor'" draggable="true"></div>
+			<div class="post__text" ng-if="module.moduleType === 'text'" draggable="true" ng-bind-html="module.content"></div>
+			<div class="post__image--gallery" ng-if="module.moduleType === 'image-gallery'" draggable="true" layout="column" layout-padding>
+				<div ng-repeat="image in module.content">
+					<img ng-src="{{image.src}}" alt="{{image.description}}">
+				</div>
+			</div>
+			<div class="post__image--grid" ng-if="module.moduleType === 'image-grid'" draggable="true" layout="row" layout-padding>
+					<div ng-repeat="image in module.content" flex="33">
+						<img ng-src="{{image.src}}" alt="{{image.description}}">
+					</div>
+				</div>
+		</li>
+	</ul>
+
+<div class="post__actions--wrapper" ng-if="!$rdPostController.readonly">
 	<div class="post__actions" layout="row" layout-align="center center">
 		<div class="post__actions--caption">
 			<i class="ri ri-mas"></i><span> Insertar módulo de:</span>
