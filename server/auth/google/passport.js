@@ -19,6 +19,8 @@ export function setup(User, config) {
       let gmail = profile.emails[0].value;
       if (availables.indexOf(gmail) > -1){
         role = 'curador';
+      } else {
+        return done(new Error("Usuario no habilitado"));
       }
     }
 
