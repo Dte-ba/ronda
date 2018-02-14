@@ -148,10 +148,13 @@ class RdPostController {
     })
     .then((add) => {
       if (add && !this.textEditing){
-				this.getModel().push({
-					moduleType: 'text',
-					content: this.$scope.currentText
-				});
+				if (_.trim(this.$scope.currentText) !== ''){
+					this.getModel().push({
+						moduleType: 'text',
+						content: this.$scope.currentText
+					});
+					this.$scope.currentText = '';
+				}
 			}
     });
 	}
