@@ -33,6 +33,9 @@ class RdWaterfallController {
 			// set sizes
 			this.initColumnsSizes_();
 			this.$element.addClass('rd-waterfall');
+			this.currentPage = 1;
+			this.limit = 20;
+			this.itemCount = 0;
 		}
 
 		$onInit(){
@@ -106,6 +109,7 @@ class RdWaterfallController {
 		}
 		
 		aggregate_(items) {
+			this.itemCount += items.length;
 
 			for (var i = 0; i < items.length; i++) {
 				let item = items[i];
@@ -134,6 +138,9 @@ class RdWaterfallController {
 			this.fetching_ = true;
 			this.$scope.fetch()
 					.then(data => {
+						this.currentPage = data.page;
+						this.limit = data.limit;
+						
 						if (data.items) {
 							this.aggregate_(data.items);
 						}
@@ -175,7 +182,7 @@ class RdWaterfallController {
 		}
 
 		nomoreItems() {
-			return true;
+			return (this.currentPage*this.limit) >= this.itemCount;
 		}
 }
 
