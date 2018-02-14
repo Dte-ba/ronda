@@ -6,7 +6,7 @@ import _ from 'lodash';
 
 export default class ResourceComponent extends CuradorComponent {
   /*@ngInject*/
-  constructor($scope, $element, $stateParams, Auth, Restangular, $log, Util, $timeout, $state, $mdDialog) {
+  constructor($scope, $element, $stateParams, Auth, Restangular, $log, Util, $timeout, $state, $mdDialog, $mdConstant) {
     super({$element, Restangular, $log});
 
 		this.$scope = $scope;
@@ -25,6 +25,9 @@ export default class ResourceComponent extends CuradorComponent {
 		this.Resource = this.Restangular.one('resources', this.uid)
 		this.Publisheds = this.Restangular.all('resources');
 
+		// tag separators
+		this.tagsKeys = [$mdConstant.KEY_CODE.ENTER, $mdConstant.KEY_CODE.COMMA];
+		
 		this.resource = { };
     	this.steps = [
 			{ name: 'ficha', 		caption: 'Ficha' },
