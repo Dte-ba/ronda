@@ -11,6 +11,7 @@
 		box-shadow: $whiteframe-shadow-2dp;
 		z-index: $navbar-z-index - 1;
 		position: sticky;
+		top: $navbar-height-scrolled;
 	}
 
 	&__wrapper {
