@@ -395,6 +395,7 @@ export default class ResourceComponent extends CuradorComponent {
 			.then(data => {
 				this.$log.log('published', data);
 				this.loading = false;
+				this.$state.go('curador.dashboard');
 			})
 			.catch(err => {
 				throw err;
