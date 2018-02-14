@@ -26,7 +26,10 @@ export default class HomeComponent extends SocialComponent {
     this.page++;
     let resources = this.Api.all('publisheds');
     resources
-        .getList({page: this.page, limit: this.limit })
+        .getList({
+          page: this.page, 
+          limit: this.limit
+        })
         .then(data => {
           let res = {
             page: data.$page,

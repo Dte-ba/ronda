@@ -27,7 +27,8 @@
 
 	&__step {
 		outline: none;
-
+		cursor: pointer;
+		
 		&--number {
 			display: inline-block;
 			height: 3.6rem;

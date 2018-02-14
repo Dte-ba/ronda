@@ -23,10 +23,10 @@ export function index(req, res, next) {
 										.find(query.query)
 										.populate('owner')
 										.populate('files')
+										.sort({'updatedAt': -1})
 										.skip(query.cursor.skip)
 										.limit(query.cursor.limit)
-										.sort(query.sort)
-										.select(query.select)
+										.select(query.cursor.select)
 										.exec();
 			next();
 		});

@@ -47,7 +47,7 @@ export default function seedDatabaseIfNeeded() {
     .then(() => {
       Category.create({
         type: 'nivel',
-        values: ['Inicial', 'Primaria', 'Primaria primer ciclo', 'Primaria segundo ciclo', 'Centro de formacion integral'],
+        values: ['Inicial', 'Secundaria', 'Primaria primer ciclo', 'Primaria segundo ciclo', 'Centro de formacion integral'],
         caption: 'Nivel'
       },{
         type: 'area',
@@ -80,7 +80,7 @@ export default function seedDatabaseIfNeeded() {
         caption: 'Tipo de accesibilidad'
       },{
         type: 'software',
-        values: ['Rampa Digital', 'Para crear y editar', 'Listo para usar', 'Soporte'],
+        values: ['Rampa Digital', 'Para crear y editar', 'Con contenido cerrado', 'Soporte'],
         caption: 'Tipo de software'
       },{
         type: 'orientacion',

@@ -77,10 +77,10 @@ class RdStepperController {
 		this.currentStepIndex_--;
 	}
 
-	finish(){
+	finish($event){
 		let finishFn = this.$scope.onFinish;
 		if (typeof finishFn === 'function'){
-			finishFn();
+			finishFn($event);
 		}
 	}
 
@@ -100,9 +100,9 @@ class RdStepperController {
 	}
 
 	goToStep(idx){
-		if (idx < this.currentStepIndex_){
+		//if (idx < this.currentStepIndex_){
 			this.currentStepIndex_ = idx;
-		}
+		//}
 	}
 
 	releaseSave(){

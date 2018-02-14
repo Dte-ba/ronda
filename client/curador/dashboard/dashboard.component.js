@@ -49,7 +49,12 @@ export default class DashboardComponent extends CuradorComponent {
     };
 
     this.Resources
-        .getList({page: this.page, limit: this.limit})
+        .getList({
+          page: this.page, 
+          limit: this.limit,
+          sort: 'updatedAt',
+          sortDir: 'DESC'
+        })
         .then(res => {
           let items = [];
           if (this.page === 1) {

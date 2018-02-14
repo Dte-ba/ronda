@@ -1,6 +1,6 @@
 <div class="banner__dashboard--home" layout="row" layout-align="center center">
 	<div class="banner__avatar">
-		<div class="banner__avatar--wrapper">
+		<div class="banner__avatar--wrapper" ng-show="$ctrl.user.google.image !== undefined">
 			<img ng-src="{{$ctrl.user.google.image.url}}" alt="Avatar">
 		</div>
 	</div>

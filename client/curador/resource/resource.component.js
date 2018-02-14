@@ -6,7 +6,7 @@ import _ from 'lodash';
 
 export default class ResourceComponent extends CuradorComponent {
   /*@ngInject*/
-  constructor($scope, $element, $stateParams, Auth, Restangular, $log, Util, $timeout, $state) {
+  constructor($scope, $element, $stateParams, Auth, Restangular, $log, Util, $timeout, $state, $mdDialog) {
     super({$element, Restangular, $log});
 
 		this.$scope = $scope;
@@ -20,6 +20,7 @@ export default class ResourceComponent extends CuradorComponent {
 		this.init = true;
 		this.isDelete = $stateParams.action === 'remove';
 		this.$state = $state;
+		this.$mdDialog = $mdDialog;
 
 		this.Resource = this.Restangular.one('resources', this.uid)
 		this.Publisheds = this.Restangular.all('resources');
@@ -154,17 +155,8 @@ export default class ResourceComponent extends CuradorComponent {
 			this.saveResource();
 		};
 
-		this.finish = () => {
-			this.loading = true;
-			this.resource
-				.post('publish')
-				.then(data => {
-					this.$log.log('published', data);
-					this.loading = false;
-				})
-				.catch(err => {
-					throw err;
-				});
+		this.finish = ($event) => {
+			this.publish();
 		}
 	}
 
@@ -211,7 +203,7 @@ export default class ResourceComponent extends CuradorComponent {
 			// add dropzone to ctrl
 			ctrl.dropzoneSoftware = this;
 		};
-		this.dzOptionsSoftware.acceptedFiles = 'application/*';
+		this.dzOptionsSoftware.acceptedFiles = undefined; //'*/*';
 		this.dzOptionsSoftware.maxFiles = Infinity;
 		this.dzOptionsSoftware.clickable = '.dz-clickable';
 
@@ -374,6 +366,34 @@ export default class ResourceComponent extends CuradorComponent {
 				this.$state.go('curador.dashboard');
 			})
 			.catch( err => {
+				throw err;
+			});
+	}
+	
+	publish(ev){
+		// Appending dialog to document.body to cover sidenav in docs app
+		var confirm = this.$mdDialog.confirm()
+					.title('¿Está seguro que desea hacer publico este recurso?')
+					.ariaLabel('Publicación del Recurso')
+					.targetEvent(ev)
+					.ok('Publicar')
+					.cancel('Cancelar');
+
+		this.$mdDialog.show(confirm).then(() => {
+			this.releasePublish();
+		}, () => {
+		});
+	}
+	
+	releasePublish(){
+		this.loading = true;
+		this.resource
+			.post('publish')
+			.then(data => {
+				this.$log.log('published', data);
+				this.loading = false;
+			})
+			.catch(err => {
 				throw err;
 			});
 	}

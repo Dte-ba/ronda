@@ -3,13 +3,17 @@
 	<md-progress-circular md-mode="indeterminate"></md-progress-circular>
 </div>
 
-<div class="dashboard__remove" ng-hide="$ctrl.loading && !$ctrl.isDelete">
-	<p class="dashboard__remove--legend">¿Esta seguro que desea eliminar el Recurso y todas sus relaciones?</p>
-	<md-button ng-click="$ctrl.deleteResource()" class="md-raised md-primary dashboard__remove--button" aria-label="Eliminar módulo">
-		Confirmar y Eliminar Recurso
-	</md-button>
+<!-- delete -->
+<div ng-if="$ctrl.isDelete">
+	<div class="dashboard__remove" ng-hide="$ctrl.loading">
+		<p class="dashboard__remove--legend">¿Esta seguro que desea eliminar el Recurso y todas sus relaciones?</p>
+		<md-button ng-click="$ctrl.deleteResource()" class="md-raised md-primary dashboard__remove--button" aria-label="Eliminar módulo">
+			Confirmar y Eliminar Recurso
+		</md-button>
+	</div>
 </div>
 
+<!-- toolbar -->
 <div class="dashboard__toolbar" ng-hide="$ctrl.loading">
 	<rd-stepper class="dashboard__stepper" 
 							rd-section="{{$ctrl.resource.type}}" 
@@ -22,6 +26,7 @@
 							></rd-stepper>
 </div>
 
+<!-- STEP FICHA -->
 <div class="dashboard__wrapper" ng-if="$ctrl.currentStep == 'ficha'" ng-hide="$ctrl.loading">
 	<div class="dashboard__container"  layout="row" layout-align="start stretch">
 		<md-content class="dashboard__sidenav" data-type="{{$ctrl.resource.type}}">
@@ -121,6 +126,7 @@
 	</div>
 </div>
 
+<!-- STEP RECURSO -->
 <div class="dashboard__wrapper" ng-if="$ctrl.currentStep == 'recurso'" ng-hide="$ctrl.loading">
 	<div class="dashboard__container"  layout="row" layout-align="start stretch">
 		<md-content class="dashboard__sidenav" data-type="{{$ctrl.resource.type}}">
@@ -203,6 +209,7 @@
 	
 </div>
 
+<!-- STEP VINCULO -->
 <div class="dashboard__wrapper" ng-if="$ctrl.currentStep == 'vinculo'" ng-hide="$ctrl.loading">
     <div class="dashboard__container"  layout="row" layout-align="start stretch">
 		<md-content class="dashboard__sidenav" data-type="{{$ctrl.resource.type}}">
@@ -299,6 +306,7 @@
 	</div>
 </div>
 
+<!-- STEP PUBLICAR -->
 <div class="dashboard__wrapper" ng-if="$ctrl.currentStep == 'publicar'" ng-hide="$ctrl.loading">
 	<div class="dashboard__preview--header bg-primary">
 		<h2><i class="fa fa-angle-down"></i> Previsualización <i class="fa fa-angle-down"></i></h2>
