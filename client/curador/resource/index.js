@@ -6,7 +6,7 @@ let routes = function($stateProvider) {
   'ngInject';
   $stateProvider
     .state('curador.recurso', {
-      url: '/tablero/recurso/:uid',
+      url: '/tablero/recurso/:uid/:action?',
       template: '<curador-resource></curador-resource>'
     });
 }

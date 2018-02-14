@@ -6,7 +6,7 @@ import _ from 'lodash';
 
 export default class ResourceComponent extends CuradorComponent {
   /*@ngInject*/
-  constructor($scope, $element, $stateParams, Auth, Restangular, $log, Util, $timeout) {
+  constructor($scope, $element, $stateParams, Auth, Restangular, $log, Util, $timeout, $state) {
     super({$element, Restangular, $log});
 
 		this.$scope = $scope;
@@ -18,7 +18,9 @@ export default class ResourceComponent extends CuradorComponent {
 		this.Util = Util;
 		this.$timeout = $timeout;
 		this.init = true;
-	
+		this.isDelete = $stateParams.action === 'remove';
+		this.$state = $state;
+
 		this.Resource = this.Restangular.one('resources', this.uid)
 		this.Publisheds = this.Restangular.all('resources');
 
@@ -361,5 +363,18 @@ export default class ResourceComponent extends CuradorComponent {
 
 	sumfiles(files){
 		return _.sumBy(files, 'size');
+	}
+
+	deleteResource(){
+		this
+			.Resource
+			.remove()
+			.then( data => {
+				//console.log(data);
+				this.$state.go('curador.dashboard');
+			})
+			.catch( err => {
+				throw err;
+			});
 	}
 }

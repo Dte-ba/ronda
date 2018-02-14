@@ -81,7 +81,6 @@ export function show(req, res, next) {
  */
 export function destroy(req, res, next) {
 	req.result =  Resource.findByIdAndRemove(req.params.id).exec();
-	req.statusCode = 204;
 	next();
 }
 

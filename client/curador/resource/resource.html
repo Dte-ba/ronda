@@ -3,6 +3,13 @@
 	<md-progress-circular md-mode="indeterminate"></md-progress-circular>
 </div>
 
+<div class="dashboard__remove" ng-hide="$ctrl.loading && !$ctrl.isDelete">
+	<p class="dashboard__remove--legend">¿Esta seguro que desea eliminar el Recurso y todas sus relaciones?</p>
+	<md-button ng-click="$ctrl.deleteResource()" class="md-raised md-primary dashboard__remove--button" aria-label="Eliminar módulo">
+		Confirmar y Eliminar Recurso
+	</md-button>
+</div>
+
 <div class="dashboard__toolbar" ng-hide="$ctrl.loading">
 	<rd-stepper class="dashboard__stepper" 
 							rd-section="{{$ctrl.resource.type}}" 

@@ -25,6 +25,7 @@ var ResourceSchema = new Schema({
 		published: { type: Schema.Types.ObjectId, ref: 'Published' },
 		links: [{ type: Schema.Types.ObjectId, ref: 'Published' }],
 		step: String,
+		deleted: { type:Boolean, default: false }
 	}, ops);
 
 registerEvents(ResourceSchema);

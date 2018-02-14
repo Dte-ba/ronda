@@ -71,6 +71,15 @@
 		}
 	}
 
+	&__button--delete {
+		color: $color-black-light !important;
+		border-color: $color-grey !important;
+		min-width: 4rem;
+		md-icon {
+			color: $color-black-light !important;
+		}
+	}
+
 	&__toolbar {
 		border-bottom: solid 1px $color-grey-light;
 	}

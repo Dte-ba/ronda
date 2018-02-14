@@ -47,7 +47,8 @@
 				{ "name": "files", "type": "[{ type: Schema.Types.ObjectId, ref: 'File' }]" },
 				{ "name": "published", "type": "{ type: Schema.Types.ObjectId, ref: 'Published' }"},
 				{ "name": "links", "type": "[{ type: Schema.Types.ObjectId, ref: 'Published' }]" },
-				{ "name": "step", "type": "String" }
+				{ "name": "step", "type": "String" },
+				{ "name": "deleted", "type": "{ type: Boolean, default: false }" }
 			]
 		},
 		{
@@ -77,7 +78,8 @@
 				{ "name": "owner", "type": "{ type: Schema.Types.ObjectId, ref: 'User' }" },
 				{ "name": "collaborators", "type": "[{ type: Schema.Types.ObjectId, ref: 'User' }]" },
 				{ "name": "files", "type": "[{ type: Schema.Types.ObjectId, ref: 'File' }]" },
-				{ "name": "links", "type": "[{ type: Schema.Types.ObjectId, ref: 'Published' }]" }
+				{ "name": "links", "type": "[{ type: Schema.Types.ObjectId, ref: 'Published' }]" },
+				{ "name": "deleted", "type": "{ type:Boolean, default: false }" }
 			]
 		}
 	]
