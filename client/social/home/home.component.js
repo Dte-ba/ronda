@@ -5,12 +5,13 @@ import _ from 'lodash';
 
 export default class HomeComponent extends SocialComponent {
   /*@ngInject*/
-  constructor($element, $q, $http, Restangular, $mdDialog) {
+  constructor($element, $q, $http, Restangular, $mdDialog, $stateParams) {
     super({$element});
     this.$http = $http;
     this.$q = $q;
     this.Api = Restangular;
     this.$mdDialog = $mdDialog;
+    this.$stateParams = $stateParams;
 
     this.page = 0;
     this.limit = 20;
@@ -18,6 +19,36 @@ export default class HomeComponent extends SocialComponent {
     this.viewResource = ($event, resource) => { 
       this.viewResource_($event, resource);
     };
+
+    this.sectionName = this.$stateParams.seccion;
+    let sections = {
+      'propuestas': {
+        caption:  '<h1>Propuestas <br /><small>pedagógicas</small></h1> <p>Abiertas y flexibles que sirven para planificar tu clase inslusiva.</p>',
+        image: '/assets/img/banner/propuestas_image.png',
+        back: '/assets/img/banner/propuestas_back.png',
+      },
+      'actividades': {
+        caption:  '<h1>_Actividades <br />accesibles</h1> <p>Que utilizan herramientas y software de apoyo. Podés adaptarlas a tu propuesta.</p>',
+        image: '/assets/img/banner/actividades_image.png',
+        back: '/assets/img/banner/actividades_back.png',
+      },
+      'herramientas': {
+        caption:  '<h1>Herramientas_</h1> <p>Software para actividades, rampas digitales y entornos editables.</p>',
+        image: '/assets/img/banner/herramientas_image.png',
+        back: '/assets/img/banner/herramientas_back.png',
+      },
+      'orientaciones': {
+        caption:  '<h1>_Orientaciones</h1> <p>Con tutoriales y documentación que sirven de apoyo para tus prácticas.</p>',
+        image: '/assets/img/banner/orientaciones_image.png',
+        back: '/assets/img/banner/orientaciones_back.png',
+      },
+      'mediateca': {
+        caption: '<h1>Mediateca_</h1> <p>Recursos digitales para mirar, leer y escuchar.</p>' ,
+        image: '/assets/img/banner/mediateca_image.png',
+        back: '/assets/img/banner/mediateca_back.png',
+      }
+    };
+    this.section = sections[this.sectionName];
   }
 
   fetchData(){

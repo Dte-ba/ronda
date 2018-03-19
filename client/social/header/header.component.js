@@ -3,9 +3,11 @@ import angular from 'angular';
 
 class HeaderComponent {
   /*@ngInject*/
-  constructor($element) {
+  constructor($element, $state, $stateParams) {
     this.selected = '';
-    
+    this.$stateParams = $stateParams;
+    this.$state = $state;
+
     this.navbarItems = [
       { section: 'propuestas', icon: 'ri ri-propuestas', caption: 'Propuestas' },
       { section: 'actividades', icon: 'ri ri-actividades', caption: 'Actividades' },
@@ -14,11 +16,16 @@ class HeaderComponent {
       { section: 'mediateca', icon: 'ri ri-mediateca', caption: 'Mediateca' },
     ];
   }
+
+  $onInit(){
+    this.selected = this.$stateParams.seccion;
+  }
   
   itemClicked(item) {
     if (this.selected === item.section){
       return;
     }
+    this.$state.go('.', { seccion: item.section });
     this.selected = item.section;
   }
 }

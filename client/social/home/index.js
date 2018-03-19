@@ -6,8 +6,14 @@ let routes = function($stateProvider) {
   'ngInject';
   $stateProvider
     .state('social.home', {
-      url: '/',
-      template: '<social-home></social-home>'
+      url: '/?seccion',
+      template: '<social-home></social-home>',  
+      params: {
+        seccion: {
+            value: '',
+            dynamic: true
+         }
+      }
     });
 }
 

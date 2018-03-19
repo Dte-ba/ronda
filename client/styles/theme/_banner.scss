@@ -12,4 +12,128 @@
     color: white;
     font-size: 2.4rem;
   }
+
+  &__home {
+    //background-color: $color-primary;
+    height: 43rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+
+    &::before {
+      position: absolute;
+      content: '';
+      width: 448px;
+      height: 400px;
+    }
+
+    &--legend {
+      position: absolute;
+      
+      h1 {
+        text-align: right;
+
+        small {
+          color: inherit;
+        }
+      }
+
+      p {
+        padding-left: 3rem;
+      }
+    }
+
+    &[section="propuestas"] {
+      background-color: $color-propuestas;
+      background-image: url(/assets/img/banner/propuestas_back.png);
+
+      &::before {
+        left: 30rem;
+        background-image: url(/assets/img/banner/propuestas_image.png);
+      }
+    }
+
+    &[section="propuestas"] &--legend {
+      width: 20rem;
+      right: 60rem;
+      top: 10rem;
+
+      h1, p {
+        color: $color-white;
+      }
+    }
+
+    &[section="actividades"] {
+      background-image: url(/assets/img/banner/actividades_back.png);
+
+      &::before {
+        right: 30rem;
+        background-image: url(/assets/img/banner/actividades_image.png);
+      }
+    }
+
+    &[section="actividades"] &--legend {
+      width: 30rem;
+      left: 40rem;
+      top: 10rem;
+
+      h1 { color: $color-actividades; }
+      p { color: $color-grey; text-align: right; }
+    }
+
+    &[section="herramientas"] {
+      background-image: url(/assets/img/banner/herramientas_back.png);
+
+      &::before {
+        left: 30rem;
+        background-image: url(/assets/img/banner/herramientas_image.png);
+      }
+    }
+
+    &[section="herramientas"] &--legend {
+      width: 30rem;
+      right: 50rem;
+      top: 16rem;
+
+      h1 { color: $color-herramientas; }
+      p { color: $color-grey; }
+    }
+
+    &[section="orientaciones"] {
+      background-image: url(/assets/img/banner/orientaciones_back.png);
+
+      &::before {
+        right: 30rem;
+        background-image: url(/assets/img/banner/orientaciones_image.png);
+      }
+    }
+
+    &[section="orientaciones"] &--legend {
+      width: 30rem;
+      left: 40rem;
+      top: 16rem;
+
+      h1 { color: $color-orientaciones; }
+      p { color: $color-grey; }
+    }
+
+    &[section="mediateca"] {
+      background-image: url(/assets/img/banner/mediateca_back.png);
+
+      &::before {
+        left: 30rem;
+        background-image: url(/assets/img/banner/mediateca_image.png);
+      }
+    }
+
+    &[section="mediateca"] &--legend {
+      width: 30rem;
+      right: 50rem;
+      top: 16rem;
+
+      h1 { color: $color-mediateca; }
+      p { color: $color-grey; }
+    }
+  }
 }
+
