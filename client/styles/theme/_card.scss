@@ -271,10 +271,28 @@
 }
 
 .rd-card[data-rd-section="mediateca"],
+.rd-card[rd-section="mediateca"],
+.rd-card[data-rd-section="mediateca"],
 .rd-card[rd-section="mediateca"] {
 	.rd-card {
+	
+		&__thumbnail {
+			position: relative;
+			height: 7rem;
+			width: 7rem;
+			overflow: hidden;
+			border-radius: $border-radius-default;
 
-		&__header:before {
+			img {
+				display: block;
+				margin: 0 auto;
+				width: 100%;
+				height: auto;
+				border-radius: $border-radius-default;
+			}
+		}
+
+		&__body:before {
 			content: '';
 			position: absolute;
 			top: 0px;
@@ -284,7 +302,7 @@
 			background-color: $color-mediateca;
 			border-radius: 100px;
 		}
-		
+
 		&__footer {
 			display: none;
 		}

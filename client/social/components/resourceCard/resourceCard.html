@@ -196,10 +196,10 @@
 		<rd-card-header>
 				<div class="rd-card__header--wrapper" layout="row" layout-align="start center">
 						<span class="rd-card__icon--circle">
-							<i class="ri ri-3x ri-orientaciones"></i>
+							<i class="ri ri-3x" ng-class="'ri-'+$ctrl.resource.type"></i>
 						</span>
 						<span class="rd-card__header--type rd__text--caption">{{$ctrl.resource.typeCaption}}</span>
-						<span class="rd-card__header--level rd__text--caption">{{$ctrl.resource.nivel[0]}}</span>
+						<!--<span class="rd-card__header--level rd__text--caption">{{$ctrl.resource.category}}</span>-->
 				</div>
 		</rd-card-header>
 		<rd-card-body>
@@ -216,8 +216,7 @@
 				</div>
 				
 		</rd-card-body>
-	</rd-card>
-
+</rd-card>
 <!--
 <rd-card data-rd-section="{{$ctrl.resource.type}}"  ng-if="$ctrl.resource.type == 'herramienta'">
 		<rd-card-toolbar ng-if="$ctrl.editable">

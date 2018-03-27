@@ -20,6 +20,10 @@ class RdStepperController {
 		this.currentStepIndex_ = 0;
 		this.steps = this.$scope.steps;
 
+		this.$scope.$watch(() => { return this.$scope.steps }, (value) => {
+			this.steps = this.$scope.steps;
+		});
+
 		this.$scope.$watch(() => { return this.currentStepIndex_ }, (value) => {
 			this.releaseEnterStep(value);
 		});

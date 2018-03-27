@@ -117,7 +117,7 @@ export default class HomeComponent extends SocialComponent {
 
       this.Resource = Restangular.one('publisheds', resource._id);
       
-      $scope.closeDialog = function() {
+      this.closeDialog = function() {
         $mdDialog.hide();
       }
 
@@ -132,11 +132,7 @@ export default class HomeComponent extends SocialComponent {
         })
         .catch(err => {
           throw err;
-        });      
-
-      this.sumfiles = (files) => {
-        return _.sumBy(files, 'size');
-      }
+        });
     }
   }
 }

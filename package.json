@@ -1,6 +1,6 @@
 {
   "name": "ronda",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "Ronda es un proyecto de contenidos digitales con fines educativos para que todos podamos participar y acceder.",
   "main": "server/index.js",
   "scripts": {

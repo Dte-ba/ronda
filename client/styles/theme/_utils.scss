@@ -4,7 +4,7 @@
 	}
 
 	.bg-#{$key} {
-		background-color: map-get($section, color);
+		background-color: map-get($section, color) !important;
 	}
 }
 

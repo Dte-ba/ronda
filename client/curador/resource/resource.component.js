@@ -29,7 +29,7 @@ export default class ResourceComponent extends CuradorComponent {
 		this.tagsKeys = [$mdConstant.KEY_CODE.ENTER, $mdConstant.KEY_CODE.COMMA];
 		
 		this.resource = { };
-    	this.steps = [
+		this.steps = [
 			{ name: 'ficha', 		caption: 'Ficha' },
 			{ name: 'recurso', 	caption: 'Recurso' },
 			{ name: 'vinculo', caption: 'Vínculo' },
@@ -208,7 +208,8 @@ export default class ResourceComponent extends CuradorComponent {
 		};
 		this.dzOptionsSoftware.acceptedFiles = undefined; //'*/*';
 		this.dzOptionsSoftware.maxFiles = Infinity;
-		this.dzOptionsSoftware.clickable = '.dz-clickable';
+		this.dzOptionsSoftware.dictDefaultMessage = '<div class="dz-clickable"></div>';
+		this.dzOptionsSoftware.clickable = '.dz-software-clickable';
 
 		this.dzCallbacksSoftware = {
       'addedfile' : (file) => {
@@ -237,16 +238,27 @@ export default class ResourceComponent extends CuradorComponent {
 		.get()
 		.then(data => {
 			this.resource = data;
+
 			if (typeof this.resource.area == 'string'){
 				this.resource.area = [];
 			}
+
 			if (typeof this.resource.nivel == 'string'){
 				this.resource.nivel = [];
 			}
+
 			if (this.resource.step){
 				let idx = _.findIndex(this.steps, { name: this.resource.step });
 				this.initStepIndex = idx === -1 ? undefined : idx;
-				
+			}
+
+			if (this.resource.type === 'mediateca'){
+				this.steps = [
+					{ name: 'ficha', 		caption: 'Ficha' },
+					//{ name: 'recurso', 	caption: 'Recurso' },
+					//{ name: 'vinculo', caption: 'Vínculo' },
+					{ name: 'publicar', caption: 'Publicar' },
+				];
 			}
 
 			let captions = {
