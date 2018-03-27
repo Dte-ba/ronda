@@ -36,6 +36,9 @@ import mdDataTable from 'angular-material-data-table';
 // drag and drop 
 import ngDragAndDrop from 'angular-drag-and-drop-lists';
 
+// SEO metatags
+import ngMeta from 'ng-meta';
+
 // configs
 import { rondaConfig, rondaRun } from './ronda.config';
 
@@ -70,6 +73,7 @@ let requirements = [
 	'material.components.expansionPanels',
 	'ngNumeraljs',
 	'dndLists',
+	'ngMeta',
 	mdDataTable,
 	authModule,
 	app, 

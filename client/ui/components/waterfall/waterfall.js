@@ -182,7 +182,17 @@ class RdWaterfallController {
 		}
 
 		nomoreItems() {
+			if (this.itemCount === 0 ){
+				return true;
+			}
+			if (!(this.currentPage*this.limit)){
+				return true;
+			}
 			return (this.currentPage*this.limit) >= this.itemCount;
+		}
+
+		showMoreVisible(){
+			return this.loadingIsVisible() || this.nomoreItems();
 		}
 }
 
@@ -205,7 +215,7 @@ function rdWaterfall(){
 				return `
 				<div class="rd-waterfall__wrapper"></div>
 				<div class="rd-waterfall__actions">
-					<md-button class="rd-waterfall__button--load-more md-raised md-primary" ng-click="$rdWaterfallCtrl.fetch()" ng-hide="$rdWaterfallCtrl.loadingIsVisible() || $rdWaterfallCtrl.nomoreItems()">{{$rdWaterfallCtrl.loadMoreText}}</md-button>
+					<md-button class="rd-waterfall__button--load-more md-raised md-primary" ng-click="$rdWaterfallCtrl.fetch()" ng-hide="$rdWaterfallCtrl.showMoreVisible()">{{$rdWaterfallCtrl.loadMoreText}}</md-button>
 					<div layout="row" layout-sm="column" layout-align="space-around" ng-if="$rdWaterfallCtrl.loadingIsVisible()">
 						<md-progress-circular md-mode="indeterminate"></md-progress-circular>
 					</div>

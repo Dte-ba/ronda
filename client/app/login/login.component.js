@@ -18,7 +18,7 @@ export default class LoginComponent extends AppComponent {
   $state;
 
   /*@ngInject*/
-  constructor($scope, $element, $q, $http, Auth, $state, $stateParams, $timeout) {
+  constructor($scope, $element, $q, $http, Auth, $state, $stateParams, $timeout, ngMeta) {
     super({$element});
     this.$scope = $scope;
     this.$http = $http;
@@ -28,6 +28,9 @@ export default class LoginComponent extends AppComponent {
     this.loadingGoogle = false;
     this.$timeout = $timeout;
     this.loading = false;
+
+    ngMeta.setTitle('Login');
+    ngMeta.setTag('description', 'Inicio de sesion en el entorno Ronda.');
   }
 
   googleLogin(){

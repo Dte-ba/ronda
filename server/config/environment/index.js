@@ -40,7 +40,7 @@ var all = {
 
   // Secret for session, you will want to change this and make it an environment variable
   secrets: {
-    session: secret.SESSION_SECRET
+    session: secret().SESSION_SECRET
   },
 
   // MongoDB connection options
@@ -53,8 +53,8 @@ var all = {
   },
 
   google: {
-    clientID: process.env.GOOGLE_ID || secret.GOOGLE_ID,
-    clientSecret: process.env.GOOGLE_SECRET || secret.GOOGLE_SECRET,
+    clientID: process.env.GOOGLE_ID || secret().GOOGLE_ID,
+    clientSecret: process.env.GOOGLE_SECRET || secret().GOOGLE_SECRET,
     callbackURL: `http://localhost:3000/auth/google/callback`
   }
 };

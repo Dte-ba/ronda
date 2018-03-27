@@ -32,35 +32,62 @@
       
       h1 {
         text-align: right;
+        font-family: $font-family-secondary;
 
-        small {
+        small, strong {
           color: inherit;
+          font-family: $font-family-secondary;
+        }
+
+        strong {
+          font-weight: $font-secondary-extra-bold;
         }
       }
 
       p {
-        padding-left: 3rem;
+        font-size: 126%;
       }
+    }
+
+    &[section="home"] {
+      background-image: url(/assets/img/banner/index_back.png);
+
+      &::before {
+        left: 30rem;
+        background-image: url(/assets/img/banner/index_image.png);
+      }
+    }
+
+    &[section="home"] &--legend {
+      width: 42rem;
+      right: 40rem;
+      top: 10rem;
+
+      h1 { color: $color-white; }
+      p { color: $color-grey; text-align: right; }
+
     }
 
     &[section="propuestas"] {
       background-color: $color-propuestas;
-      background-image: url(/assets/img/banner/propuestas_back.png);
+      background-image: url(/assets/img/banner/propuesta_back.png);
 
       &::before {
         left: 30rem;
-        background-image: url(/assets/img/banner/propuestas_image.png);
+        background-image: url(/assets/img/banner/propuesta_image.png);
       }
     }
 
     &[section="propuestas"] &--legend {
-      width: 20rem;
-      right: 60rem;
+      width: 30rem;
+      right: 50rem;
       top: 10rem;
 
       h1, p {
         color: $color-white;
       }
+      
+      p {  }
     }
 
     &[section="actividades"] {

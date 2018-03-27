@@ -10,7 +10,7 @@ let routes = function($stateProvider) {
       template: '<social-home></social-home>',  
       params: {
         seccion: {
-            value: '',
+            value: null,
             dynamic: true
          }
       }

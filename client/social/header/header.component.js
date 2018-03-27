@@ -3,7 +3,7 @@ import angular from 'angular';
 
 class HeaderComponent {
   /*@ngInject*/
-  constructor($element, $state, $stateParams) {
+  constructor($element, $state, $stateParams, $rootScope) {
     this.selected = '';
     this.$stateParams = $stateParams;
     this.$state = $state;
@@ -15,6 +15,12 @@ class HeaderComponent {
       { section: 'orientaciones', icon: 'ri ri-orientaciones', caption: 'Orientaciones' },
       { section: 'mediateca', icon: 'ri ri-mediateca', caption: 'Mediateca' },
     ];
+
+    $rootScope.$on('$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) => {
+      if (!toParams.seccion){
+        this.selected = '';
+      }
+    });
   }
 
   $onInit(){

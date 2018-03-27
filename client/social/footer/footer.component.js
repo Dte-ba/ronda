@@ -1,10 +1,11 @@
 'use strict';
 import angular from 'angular';
+import $ from 'jquery';
 
 class FooterComponent {
   /*@ngInject*/
   constructor($element) {
-    this.message = 'Hello';
+    this.version = $('meta[name=version]').attr("content");;
   }
 }
 

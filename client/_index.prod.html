@@ -5,14 +5,18 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+	<meta	name="version" content="%%GULP_INJECT_VERSION%%">
+	
 	<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
   <link rel="manifest" href="assets/manifest.json">
   <link rel="mask-icon" href="assets/safari-pinned-tab.svg" color="#5bbad5">
 	<meta name="theme-color" content="#ffffff">
-	<title>Ronda</title>
+	
+	<title ng-bind="ngMeta.title"></title>   
+	<meta name="author" content="{{ngMeta['author']}}" />
+	<meta name="description" content="{{ngMeta.description}}" />
 
 	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css">
@@ -34,7 +38,7 @@
 		<!-- Angular Material Library -->
 		<script src="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
  		<!-- UI-Router -->
-		<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.3/angular-ui-router.min.js"></script>
 		<!-- Loading bar -->
 		<script src="//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js"></script>
 		<!-- Lodash -->
@@ -50,5 +54,17 @@
 		<script src="//cdnjs.cloudflare.com/ajax/libs/ng-quill/3.5.1/ng-quill.min.js"></script>
 		<!-- Restangular -->
 		<script src="//cdnjs.cloudflare.com/ajax/libs/restangular/1.6.1/restangular.min.js"></script>
+		<!-- ngMeta -->
+		<script src="//cdnjs.cloudflare.com/ajax/libs/ng-meta/1.0.2/ngMeta.min.js"></script>
+		
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-116459535-1"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'UA-116459535-1');
+		</script>
 </body>
 </html>

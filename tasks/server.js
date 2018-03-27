@@ -34,11 +34,14 @@ export default (gulp, plugins, config) => {
 
 	
 	gulp.task('server:copy', () => {
-		gulp.src(path.join(config.root, '/client/assets/*.*'))
+		gulp.src(path.join(config.root, '/client/assets/**/*.*'))
 				.pipe(gulp.dest('./dist/client/assets/'));
 		
 		gulp.src(path.join(config.root, '/client/favicon.ico'))
 				.pipe(gulp.dest('./dist/client/'));
+
+		gulp.src(path.join(config.root, '/*.json'))
+				.pipe(gulp.dest('./dist/'));
 	});
 	
 	gulp.task('server:generate:index', (cb) => {

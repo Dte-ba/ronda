@@ -4,7 +4,7 @@ import CuradorComponent from '../curador.component';
 
 export default class DashboardComponent extends CuradorComponent {
   /*@ngInject*/
-  constructor($element,  $q, $http, $log, $state, Restangular, Auth) {
+  constructor($element,  $q, $http, $log, $state, Restangular, Auth, ngMeta) {
     super({$element, $log});
     this.$q = $q;
     this.$http = $http;
@@ -22,6 +22,7 @@ export default class DashboardComponent extends CuradorComponent {
     };
 
     this.getUser();
+    ngMeta.setTitle('Tablero');
   }
 
   getUser(){

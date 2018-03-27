@@ -9,7 +9,11 @@ import Published from './published.model';
  */
 export function index(req, res, next) {
 	var query = req.querymen;
-	
+	var type = req.query.type;
+
+	if (type){
+		query.query.type = type;
+	}
 	Published
 		.find({})
 		.count()

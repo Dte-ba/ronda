@@ -9,3 +9,16 @@
 		}
 	}
 }
+
+.navbar__dashboard {
+	background-color: $color-dashboard-black;
+
+	.navbar__logo--scrolled img {
+		height: 73px;
+	}
+
+	.rd-navbar__nav--navigation {
+		display: block !important;
+		opacity: 1 !important;
+	}
+}

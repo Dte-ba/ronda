@@ -20,6 +20,7 @@ import session from 'express-session';
 import fileUpload from 'express-fileupload';
 import connectMongo from 'connect-mongo';
 import mongoose from 'mongoose';
+
 var MongoStore = connectMongo(session);
 
 export default function(app) {

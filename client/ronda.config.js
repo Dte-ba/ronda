@@ -169,7 +169,7 @@ let theme = ($mdThemingProvider) => {
   */
 };
 
-export function rondaConfig($urlRouterProvider, $locationProvider, $mdThemingProvider, RestangularProvider) {
+export function rondaConfig($urlRouterProvider, $locationProvider, $mdThemingProvider, RestangularProvider, ngMetaProvider) {
   'ngInject';
   
   $locationProvider.html5Mode(true);
@@ -221,12 +221,22 @@ export function rondaConfig($urlRouterProvider, $locationProvider, $mdThemingPro
 
   $mdThemingProvider.theme('default')
     .primaryPalette('ronda');
+
+  // SEO
+
+	ngMetaProvider.useTitleSuffix(true);
+  ngMetaProvider.setDefaultTitle('');
+  ngMetaProvider.setDefaultTitleSuffix(' | Ronda');
+  ngMetaProvider.setDefaultTag('author', 'Dirección de Innovacion y Tecnologia Educativa - Buenos Aires');
+  ngMetaProvider.setDefaultTag('description', 'Plataforma de contenidos digitales con fines educativos para que todos podamos participar y acceder.');
 }
 
-export function rondaRun($cookies, $rootScope, $state, amMoment){
+export function rondaRun($cookies, $rootScope, $state, amMoment, ngMeta){
   'ngInject';
   
   amMoment.changeLocale('es');
+
+  ngMeta.init();
 
   // expose $state
   $rootScope.$state = $state;

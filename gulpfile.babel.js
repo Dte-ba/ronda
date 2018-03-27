@@ -58,8 +58,10 @@ gulp.task('build', cb => {
 					'clean:dist', 
 					'inject'
 			],
+			'bump:build',
 			'webpack:dist',
 			'server:dist',
+			'bump:inject',
 			cb
 	);
 });

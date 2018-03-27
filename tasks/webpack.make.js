@@ -13,6 +13,9 @@ const OptimizeCSSClassnamesPlugin = require('optimize-css-classnames-plugin');
 var fs = require('fs');
 var path = require('path');
 
+// get current version of package
+let version = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'))).version;
+
 module.exports = function makeWebpackConfig(options) {
     /**
      * Environment type
@@ -70,6 +73,7 @@ module.exports = function makeWebpackConfig(options) {
             'ng-quill': "'ngQuill'",
             'dropzone': 'Dropzone',
             'ngdropzone': "'thatisuday.dropzone'",
+            'ng-meta': "'ng-meta'",
             //'md-steppers': "'md-steppers'",
             'jquery': 'jQuery',
             'lodash': '_'
@@ -131,6 +135,7 @@ module.exports = function makeWebpackConfig(options) {
                 'ng-quill',
                 'dropzone',
                 'ngdropzone',
+                'ng-meta',
                 //'md-steppers',
                 'jquery',
                 'lodash'
@@ -246,7 +251,8 @@ module.exports = function makeWebpackConfig(options) {
                 html5: true,
                 preserveLineBreaks: true,
                 collapseWhitespace: true
-            }
+            },
+            version: version
         }
         config.plugins.push(
           new HtmlWebpackPlugin(htmlConfig),
