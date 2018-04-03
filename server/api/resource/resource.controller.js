@@ -3,6 +3,7 @@
 import Resource from './resource.model';
 import Published from '../published/published.model';
 import async from 'async';
+import _ from 'lodash';
 
 /**
  * Get list of resources
@@ -10,9 +11,43 @@ import async from 'async';
  */
 export function index(req, res, next) {
 	var query = req.querymen;
-	
+	let qq = req.query.q;
+	let q = {};
+	if (qq){
+  	// convert to regex
+		let keywords = _.escapeRegExp(qq);
+		let patterns = [
+			{ s: /[aáà]/ig, v: '[aáà]' },
+			{ s: /[eéè]/ig, v: '[eéè]' },
+			{ s: /[iíì]/ig, v: '[iíì]' },
+			{ s: /[oóò]/ig, v: '[oóò]' },
+			{ s: /[uúù]/ig, v: '[uúù]' },
+		];
+
+		_.each(patterns, p => {
+			keywords = keywords.replace(p.s, p.v);
+		});
+
+		let k = new RegExp(keywords, 'i');
+
+		q = { $or: [
+				{ type: { $regex: k, $options: 'i' } },
+				{ title: { $regex: k, $options: 'i' } },
+				{ summary: { $regex: k, $options: 'i' } },
+				{ nivel: { $regex: k, $options: 'i' } },
+				{ area: { $regex: k, $options: 'i' } },
+				{ accessibility: { $regex: k, $options: 'i' } },
+				{ usability: { $regex: k, $options: 'i' } },
+				{ platform: { $regex: k, $options: 'i' } },
+				{ category: { $regex: k, $options: 'i' } },
+				{ 'postBody.content': { $regex: k, $options: 'i' } },
+				{ tags: { $regex: k, $options: 'i' } },
+			]
+		};
+	}
+
 	Resource
-		.find({})
+		.find(q)
 		.count()
 		.exec((err, count) => {
 			if (err){
@@ -20,10 +55,10 @@ export function index(req, res, next) {
 			}
 			req.totalItems = count;
 			req.result = Resource
-										.find(query.query)
+										.find(q)
 										.populate('owner')
 										.populate('files')
-										.sort({'updatedAt': -1})
+										.sort(query.cursor.sort)
 										.skip(query.cursor.skip)
 										.limit(query.cursor.limit)
 										.select(query.cursor.select)

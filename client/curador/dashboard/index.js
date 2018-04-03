@@ -6,9 +6,16 @@ let routes = function($stateProvider) {
   'ngInject';
   $stateProvider
     .state('curador.dashboard', {
-      url: '/tablero',
+      url: '/tablero?search',
       template: '<curador-dashboard></curador-dashboard>',
-      authenticate: 'curador'
+      authenticate: 'curador',
+      params: {
+        search: {
+          value: '',
+          squash: true
+        }
+      },
+      reloadOnSearch: false
     });
 }
 

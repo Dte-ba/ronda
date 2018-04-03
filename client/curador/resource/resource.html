@@ -121,6 +121,11 @@
 						<textarea ng-model="$ctrl.resource.summary" required></textarea>
 					</md-input-container>
 			</div>
+
+			<div class="dashboard__box" ng-if="$ctrl.resource.type == 'mediateca'">
+					<h4 class="color-grey font-medium">Palabras Claves</h4>
+					<md-chips ng-model="$ctrl.resource.tags" placeholder="Ingresá un tag" md-separator-keys="$ctrl.tagsKeys">
+				</div>
 			<rd-post modules="$ctrl.resource.postBody" relative="$ctrl.uid" on-delete="$ctrl.onDeletePost" ng-if="$ctrl.resource.type !== 'mediateca'"></rd-post>
 		</md-content>
 
@@ -159,7 +164,27 @@
 						<md-button class="md-raised dz-clickable" ng-click="null"><i class="fa fa-upload"></i> Agregar</md-button>
 					</div>
 				</div>
-			</md-content>
+
+
+			<div layout="row" layout-align="start" class="dashboard__row" ng-if="$ctrl.resource.type == 'mediateca'">
+					<div flex class="dashboard__box">
+						<h6 class="font-medium color-black-light margin">Uso del Recurso</h6>
+						<div flex="100" ng-repeat="item in $ctrl.usabilities">
+							<md-checkbox ng-checked="$ctrl.exists(item, $ctrl.resource.usability)" ng-click="$ctrl.toggle(item, $ctrl.resource.usability)">
+								{{ item }}
+							</md-checkbox>
+						</div>
+					</div>
+					<div flex class="dashboard__box">
+						<h6 class="font-medium color-black-light margin">Recomendado para</h6>
+						<div flex="100" ng-repeat="item in $ctrl.accessibilities">
+							<md-checkbox ng-checked="$ctrl.exists(item, $ctrl.resource.accessibility)" ng-click="$ctrl.toggle(item, $ctrl.resource.accessibility)">
+								{{ item }}
+							</md-checkbox>
+						</div>
+					</div>
+				</div>
+		</md-content>
 	</div>
 </div>
 

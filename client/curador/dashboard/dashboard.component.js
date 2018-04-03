@@ -4,13 +4,14 @@ import CuradorComponent from '../curador.component';
 
 export default class DashboardComponent extends CuradorComponent {
   /*@ngInject*/
-  constructor($element,  $q, $http, $log, $state, Restangular, Auth, ngMeta) {
+  constructor($element, $rootScope, $q, $http, $log, $stateParams, $state, Restangular, Auth, ngMeta) {
     super({$element, $log});
     this.$q = $q;
     this.$http = $http;
     this.Restangular = Restangular;
     this.$state = $state;
     this.Auth = Auth;
+    this.$rootScope = $rootScope;
 
     this.page = 0;
     this.limit = 20;
@@ -23,6 +24,32 @@ export default class DashboardComponent extends CuradorComponent {
 
     this.getUser();
     ngMeta.setTitle('Tablero');
+    this.searchText = $stateParams.search;
+
+    this.$rootScope.$on('filterChange', (event, searchText) => {
+      if (this.searchText !== searchText) {
+        this.page = 0;
+        this.searchText = searchText;
+        $state.go('.', { search: searchText }, {notify: false});
+      }
+    });
+
+
+		let keywords = 'hola';
+		keywords = _.escapeRegExp(keywords);
+		let patterns = [
+			{ s: /[aáà]/ig, v: '(a|á|à)' },
+			{ s: /[eéè]/ig, v: '(e|é|è)' },
+			{ s: /[iíì]/ig, v: '(i|í|ì)' },
+			{ s: /[oóò]/ig, v: '(o|ó|ò)' },
+			{ s: /[uúù]/ig, v: '(u|ú|ù)' },
+		];
+
+		_.each(patterns, p => {
+			keywords = keywords.replace(p.s, p.v);
+		});
+
+		console.log(keywords);
   }
 
   getUser(){
@@ -49,12 +76,16 @@ export default class DashboardComponent extends CuradorComponent {
       ]
     };
 
+    let q;
+    if (this.searchText){
+      q = this.searchText
+    }
     this.Resources
         .getList({
+          q: q,
           page: this.page, 
           limit: this.limit,
-          sort: 'updatedAt',
-          sortDir: 'DESC'
+          sort: 'updatedAt'
         })
         .then(res => {
           let items = [];

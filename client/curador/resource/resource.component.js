@@ -6,7 +6,7 @@ import _ from 'lodash';
 
 export default class ResourceComponent extends CuradorComponent {
   /*@ngInject*/
-  constructor($scope, $element, $stateParams, Auth, Restangular, $log, Util, $timeout, $state, $mdDialog, $mdConstant) {
+  constructor($scope, $element, $stateParams, Auth, Restangular, $log, Util, $timeout, $state, $mdDialog, $mdConstant, ngMeta) {
     super({$element, Restangular, $log});
 
 		this.$scope = $scope;
@@ -21,6 +21,7 @@ export default class ResourceComponent extends CuradorComponent {
 		this.isDelete = $stateParams.action === 'remove';
 		this.$state = $state;
 		this.$mdDialog = $mdDialog;
+		this.ngMeta = ngMeta;
 
 		this.Resource = this.Restangular.one('resources', this.uid)
 		this.Publisheds = this.Restangular.all('resources');
@@ -172,7 +173,8 @@ export default class ResourceComponent extends CuradorComponent {
 			paramName : 'Imágen',
 			maxFiles: 1,
 			clickable: '.dz-tumbnail-clickable',
-      maxFilesize : 100,
+			maxFilesize : 1024,
+			timeout: 18000000,
       acceptedFiles : 'image/*',
       addRemoveLinks : false,
 			headers: Util.getHeaders(),
@@ -238,6 +240,10 @@ export default class ResourceComponent extends CuradorComponent {
 		.get()
 		.then(data => {
 			this.resource = data;
+
+
+			this.ngMeta.setTitle(this.resource.title);
+			this.ngMeta.setTag('description', this.resource.summary);
 
 			if (typeof this.resource.area == 'string'){
 				this.resource.area = [];

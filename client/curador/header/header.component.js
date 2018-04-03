@@ -4,12 +4,18 @@ import $ from 'jquery';
 
 class CuradorHeaderComponent {
   /*@ngInject*/
-  constructor($scope, $element, Auth, $state) {
+  constructor($rootScope, $scope, $element, $stateParams, Auth, $state) {
     this.$scope = $scope;
     this.selected = '';
     this.Auth = Auth;
     this.$state = $state;
     this.showingDropdown = false;
+    this.$rootScope = $rootScope;
+
+    this.isDisabled = false;
+    this.noCache = true;
+    this.selectedItem;
+    this.searchText =  $stateParams.search || '';
 
     this.navbarItems = [
       { section: 'propuestas', icon: 'ri ri-propuestas', caption: 'Propuestas' },
@@ -21,6 +27,19 @@ class CuradorHeaderComponent {
 
     this.getUser();
     this.handleClickOnWindow();
+
+  }
+
+  searchTextChange(searchText){
+    this.$rootScope.$emit('filterChange', searchText);
+  }
+  
+  selectedItemChange(item){
+
+  }
+
+  querySearch(searchText){
+    return [];
   }
 
   getUser(){
