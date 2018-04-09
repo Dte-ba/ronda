@@ -36,6 +36,11 @@
 					<md-option ng-value="soft" ng-repeat="soft in $ctrl.softwares">{{ soft }}</md-option>
 				</md-select>
 			</md-input-container>
+			<md-input-container class="full-width" ng-if="$ctrl.resource.type == 'orientacion'">
+				<md-select ng-model="$ctrl.resource.category" placeholder="Seleccioná un tipo" required>
+					<md-option ng-value="orientacion" ng-repeat="orientacion in $ctrl.orientaciones">{{ orientacion }}</md-option>
+				</md-select>
+			</md-input-container>
 			<md-content class="thumbnail__container">
 				<div class="dropzone dz__custom dz__thumbnail select-thumbnail dz-tumbnail-clickable" options="$ctrl.dzOptions" callbacks="$ctrl.dzCallbacks" methods="$ctrl.dzMethods" ng-dropzone
 						 ng-hide="$ctrl.resource.thumbnail !== ''"></div>
@@ -340,7 +345,7 @@
 					 </md-expansion-panel>
 				</md-content>
 				<md-list ng-cloak>
-						<md-list-item ng-repeat="item in $ctrl.publisheds | filterByText:$ctrl.filterText">
+						<md-list-item ng-repeat="item in $ctrl.publisheds">
 							<div  layout="row" layout-padding>
 								<div>
 										<div class="thumbnail thumbnail--rounded thumbnail--50" ng-hide="item.thumbnail == ''">

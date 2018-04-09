@@ -75,6 +75,19 @@ export default class HomeComponent extends SocialComponent {
           type: this.section ? this.section.type : undefined
         })
         .then(data => {
+          let captions = {
+            'propuesta': 'Propuesta pedagógica',
+            'actividad': 'Actividad accesible',
+            'herramienta': 'Herramienta',
+            'orientacion': 'Orientación',
+            'mediateca': 'Mediateca',
+          };
+
+          data = _.map(data, p =>{
+            p.typeCaption = captions[p.type];
+            return p;
+          });
+          
           let res = {
             page: data.$page,
             items: data,
@@ -124,6 +137,20 @@ export default class HomeComponent extends SocialComponent {
       this.Resource
         .get()
         .then(data => {
+
+          let captions = {
+            'propuesta': 'Propuesta pedagógica',
+            'actividad': 'Actividad accesible',
+            'herramienta': 'Herramienta',
+            'orientacion': 'Orientación',
+            'mediateca': 'Mediateca',
+          };
+
+          data.links = _.map(data.links, p =>{
+            p.typeCaption = captions[p.type];
+            return p;
+          });
+
           this.resource = data;
           this.loading = false;
           $timeout(() => {

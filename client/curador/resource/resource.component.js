@@ -45,12 +45,16 @@ export default class ResourceComponent extends CuradorComponent {
 		this.onDeletePost = ($index) => {
 			this.onDeletePost_($index);
 		};
+
+		this.$scope.$watch(() => { return this.filterText }, (value) => {
+			this.refreshUI(true);
+		});
 	}
 
 	$onInit(){
 	}
 
-	refreshUI(){
+	refreshUI(forceApply){
 		let captions = {
 			'propuesta': 'Propuesta pedagógica',
 			'actividad': 'Actividad',
@@ -61,15 +65,22 @@ export default class ResourceComponent extends CuradorComponent {
 
 		this.headText = captions[this.resource.type];
 		this.showViculo = ['propuesta', 'actividad', 'orientacion' ].indexOf(this.resource.type) > -1;
-		this.getPublisheds();
+		this.getPublisheds(forceApply);
 	}
 
-	getPublisheds(){
+	getPublisheds(forceApply){
 		if (!this.showViculo){
 			return;
 		}
+    let q;
+    if (this.filterText){
+      q = this.filterText
+		}
+
 		this.Publisheds
-			.getList()
+			.getList({
+				q: q
+			})
 			.then(publisheds => {
 				let filtered = _.filter(publisheds, p => {
 					return p._id !== this.uid;
@@ -87,6 +98,10 @@ export default class ResourceComponent extends CuradorComponent {
 					p.typeCaption = captions[p.type];
 					return p;
 				});
+
+				if (forceApply){
+					//this.$scope.$apply();
+				}
 			});
 	}
 
@@ -106,6 +121,7 @@ export default class ResourceComponent extends CuradorComponent {
 				let ac = this.getCategory('accessibility');
 				let us = this.getCategory('resource');
 				let os = this.getCategory('os');
+				let or = this.getCategory('orientacion');
 				
 				this.softwares = st.values;
 				this.areas = at.values;
@@ -113,6 +129,7 @@ export default class ResourceComponent extends CuradorComponent {
 				this.accessibilities = ac.values;
 				this.usabilities = us.values;
 				this.platforms = os.values;
+				this.orientaciones = or.values;
 				cb()
 			}
 		], err => {

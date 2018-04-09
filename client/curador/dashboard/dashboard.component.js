@@ -33,23 +33,6 @@ export default class DashboardComponent extends CuradorComponent {
         $state.go('.', { search: searchText }, {notify: false});
       }
     });
-
-
-		let keywords = 'hola';
-		keywords = _.escapeRegExp(keywords);
-		let patterns = [
-			{ s: /[aáà]/ig, v: '(a|á|à)' },
-			{ s: /[eéè]/ig, v: '(e|é|è)' },
-			{ s: /[iíì]/ig, v: '(i|í|ì)' },
-			{ s: /[oóò]/ig, v: '(o|ó|ò)' },
-			{ s: /[uúù]/ig, v: '(u|ú|ù)' },
-		];
-
-		_.each(patterns, p => {
-			keywords = keywords.replace(p.s, p.v);
-		});
-
-		console.log(keywords);
   }
 
   getUser(){

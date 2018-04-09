@@ -1,7 +1,7 @@
 'use strict';
 
 import Published from './published.model';
-
+import _ from 'lodash';
 
 /**
  * Get list of publisheds
@@ -9,13 +9,51 @@ import Published from './published.model';
  */
 export function index(req, res, next) {
 	var query = req.querymen;
+	let qq = req.query.q;
 	var type = req.query.type;
+	let q = {};
+	if (qq){
+  	// convert to regex
+		let keywords = _.escapeRegExp(qq);
+		let patterns = [
+			{ s: /[aáà]/ig, v: '[aáà]' },
+			{ s: /[eéè]/ig, v: '[eéè]' },
+			{ s: /[iíì]/ig, v: '[iíì]' },
+			{ s: /[oóò]/ig, v: '[oóò]' },
+			{ s: /[uúù]/ig, v: '[uúù]' },
+		];
 
-	if (type){
-		query.query.type = type;
+		_.each(patterns, p => {
+			keywords = keywords.replace(p.s, p.v);
+		});
+
+		let k = new RegExp(keywords, 'i');
+
+		q = { $or: [
+				{ type: { $regex: k, $options: 'i' } },
+				{ title: { $regex: k, $options: 'i' } },
+				{ summary: { $regex: k, $options: 'i' } },
+				{ nivel: { $regex: k, $options: 'i' } },
+				{ area: { $regex: k, $options: 'i' } },
+				{ accessibility: { $regex: k, $options: 'i' } },
+				{ usability: { $regex: k, $options: 'i' } },
+				{ platform: { $regex: k, $options: 'i' } },
+				{ category: { $regex: k, $options: 'i' } },
+				{ 'postBody.content': { $regex: k, $options: 'i' } },
+				{ tags: { $regex: k, $options: 'i' } },
+			]
+		};
 	}
+	
+	if (type){
+		q['$and'] = [ { type: type } ];
+		if (q['$or']) {
+			q['$or'].type = undefined; 
+		}
+	}
+
 	Published
-		.find({})
+		.find(q)
 		.count()
 		.exec((err, count) => {
 			if (err){
@@ -23,11 +61,11 @@ export function index(req, res, next) {
 			}
 			req.totalItems = count;
 			req.result = Published
-										.find(query.query)
+										.find(q)
+										.sort(query.cursor.sort)
 										.skip(query.cursor.skip)
 										.limit(query.cursor.limit)
-										.sort(query.sort)
-										.select(query.select)
+										.select(query.cursor.select)
 										.exec();
 			next();
 		});
