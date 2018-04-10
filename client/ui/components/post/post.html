@@ -30,7 +30,7 @@
 		
 		<!-- text -->
 		<div ng-if="module.moduleType === 'text'">
-			<div class="post__text"   ng-bind-html="module.content" ng-hide="module.editing"></div>
+			<div class="post__text ql-editor"   ng-bind-html="module.content" ng-hide="module.editing"></div>
 			<div class="post__text post__text--editor" ng-show="module.editing">
 				<ng-quill-editor ng-model="module.content"></ng-quill-editor>
 			</div>

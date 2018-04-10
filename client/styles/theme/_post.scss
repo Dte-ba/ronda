@@ -102,6 +102,12 @@
 	}
 }
 
+.post__text {
+	&--editor {
+		padding-top: 48px;
+	}
+}
+
 .post-media {
 
 	&__image--edition {
