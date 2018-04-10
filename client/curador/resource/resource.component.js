@@ -395,12 +395,25 @@ export default class ResourceComponent extends CuradorComponent {
 	}
 
 	deleteResource(){
+		let Published = this.Restangular.one('publisheds', this.uid)
+		this.loading = true;
+		
 		this
 			.Resource
 			.remove()
 			.then( data => {
-				//console.log(data);
-				this.$state.go('curador.dashboard');
+				if (this.resource.published) {
+					Published
+					.remove()
+					.then( data => {
+						this.$state.go('curador.dashboard');
+					})
+					.catch( err => {
+						throw err;
+					});
+				} else {
+					this.$state.go('curador.dashboard');
+				}
 			})
 			.catch( err => {
 				throw err;

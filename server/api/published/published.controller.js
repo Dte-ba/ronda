@@ -2,6 +2,9 @@
 
 import Published from './published.model';
 import _ from 'lodash';
+import zip from 'express-zip';
+import config from '../../config/environment';
+import path from 'path';
 
 /**
  * Get list of publisheds
@@ -110,6 +113,27 @@ export function show(req, res, next) {
 								.populate('links')
 								.exec();
 	next();
+}
+
+/**
+ * Download files
+ * restriction: ''
+ */
+export function download(req, res, next) {
+  var publishedId = req.params.id;
+
+	Published
+		.findById(publishedId)
+		.populate('files')
+		.exec()
+		.then(p => {
+			res.zip(p.files.map(f => {
+				return {
+					path: path.join(config.uploads, f.relative),
+					name: f.name
+				}
+			}), `${p.title}.zip`);
+		});
 }
 
 export function relations(req, res, next) {
