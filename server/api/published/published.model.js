@@ -6,6 +6,7 @@ import {registerEvents} from './published.events';
 
 var ops = {};
 ops.timestamps = true;
+
 var PublishedSchema = new Schema({
 		type: String,
 		title: String,

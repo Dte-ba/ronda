@@ -28,6 +28,9 @@ class CuradorHeaderComponent {
     this.getUser();
     this.handleClickOnWindow();
 
+    $rootScope.$on('$stateChangeSuccess', () => {
+      this.searchText =  $stateParams.search || '';
+    });
   }
 
   searchTextChange(searchText){

@@ -55,6 +55,10 @@
 		@include opacity-transition();
 	}
 
+	&__search  .rd-navbar__nav--navigation {
+		opacity: 1 !important;
+		display: block !important;
+	}
 }
 
 // ronda-ui navbar selector

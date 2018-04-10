@@ -24,6 +24,12 @@ class RdNavbarController {
 
 		let clsScrolled = 'rd-navbar--scrolled';
 		this.isCompact = this.$scope.rdCompact;
+		this.$scope.$watch(() => { return this.$scope.rdCompact; }, (rdCompact) => {
+			this.isCompact = this.$scope.rdCompact;
+			if (this.isCompact) {
+				this.$element.addClass(clsScrolled);
+			}	
+    });
 		if (this.isCompact) {
 			this.$element.addClass(clsScrolled);
 		}
@@ -75,7 +81,7 @@ function RdNavbar($window){
 		controller: RdNavbarController,
 		controllerAs: '$rdNavbarController',
 		scope: {
-			rdCompact: '@'
+			rdCompact: '='
 		},
 		transclude: {
 			'items': 'rdNavbarNavigation',

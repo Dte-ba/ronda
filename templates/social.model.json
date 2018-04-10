@@ -11,6 +11,10 @@
 			"url": "/"
 		},
 		{
+			"name": "buscar",
+			"url": "/buscar/:filtro"
+		},
+		{
 			"name": "ver",
 			"url": "/ver/:uid"
 		}

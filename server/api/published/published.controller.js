@@ -112,6 +112,14 @@ export function show(req, res, next) {
 	next();
 }
 
+export function relations(req, res, next) {
+  var publishedId = req.params.id;
+
+	req.result = Published
+								.find({ links: publishedId })
+								.exec();
+	next();
+}
 
 /**
  * Deletes a published

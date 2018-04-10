@@ -7,6 +7,12 @@ class HeaderComponent {
     this.selected = '';
     this.$stateParams = $stateParams;
     this.$state = $state;
+    this.$rootScope = $rootScope;
+
+    this.isDisabled = false;
+    this.noCache = true;
+    this.selectedItem;
+    this.searchText =  $stateParams.search || '';
 
     this.navbarItems = [
       { section: 'propuestas', icon: 'ri ri-propuestas', caption: 'Propuestas' },
@@ -17,6 +23,7 @@ class HeaderComponent {
     ];
 
     $rootScope.$on('$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) => {
+      this.searchText =  $stateParams.search || '';
       if (!toParams.seccion){
         this.selected = '';
       }
@@ -27,6 +34,18 @@ class HeaderComponent {
     this.selected = this.$stateParams.seccion;
   }
   
+  selectedItemChange(item){
+
+  }
+
+  querySearch(searchText){
+    return [];
+  }
+
+  searchTextChange(searchText){
+    this.$rootScope.$emit('filterHomeChange', searchText);
+  }
+
   itemClicked(item) {
     if (this.selected === item.section){
       return;

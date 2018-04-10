@@ -18,9 +18,9 @@ export default class DashboardComponent extends CuradorComponent {
 
     this.Resources = this.Restangular.all('resources');
 
-    //this.viewResource = ($event, resource) => { 
-    //  this.viewResource_($event, resource);
-    //};
+    this.viewResource = ($event, resource) => { 
+      this.viewResource_($event, resource);
+    };
 
     this.getUser();
     ngMeta.setTitle('Tablero');
@@ -30,7 +30,7 @@ export default class DashboardComponent extends CuradorComponent {
       if (this.searchText !== searchText) {
         this.page = 0;
         this.searchText = searchText;
-        $state.go('.', { search: searchText }, {notify: false});
+        this.$state.go('.', { search: searchText }, {notify: false});
       }
     });
   }
@@ -63,6 +63,7 @@ export default class DashboardComponent extends CuradorComponent {
     if (this.searchText){
       q = this.searchText
     }
+    
     this.Resources
         .getList({
           q: q,

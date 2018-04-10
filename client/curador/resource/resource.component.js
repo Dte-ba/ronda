@@ -258,7 +258,6 @@ export default class ResourceComponent extends CuradorComponent {
 		.then(data => {
 			this.resource = data;
 
-
 			this.ngMeta.setTitle(this.resource.title);
 			this.ngMeta.setTag('description', this.resource.summary);
 
