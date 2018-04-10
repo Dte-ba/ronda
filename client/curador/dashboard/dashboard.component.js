@@ -18,9 +18,9 @@ export default class DashboardComponent extends CuradorComponent {
 
     this.Resources = this.Restangular.all('resources');
 
-    this.viewResource = ($event, resource) => { 
-      this.viewResource_($event, resource);
-    };
+    //this.viewResource = ($event, resource) => { 
+    //  this.viewResource_($event, resource);
+    //};
 
     this.getUser();
     ngMeta.setTitle('Tablero');

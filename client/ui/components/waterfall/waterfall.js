@@ -34,6 +34,9 @@ class RdWaterfallController {
 			this.$scope.$watch(() => { return this.$scope.searchText }, (value) => {
 				if (this.searchText !== value) {
 					this.searchText = value;
+					if (this.searchText == undefined && value  == undefined ) {
+						return;
+					}
 					//reset & fetch
 					this.reset();
 					this.fetch();
@@ -156,7 +159,8 @@ class RdWaterfallController {
 					.then(data => {
 						this.currentPage = data.page;
 						this.limit = data.limit;
-						
+						this.total = data.count;
+
 						if (data.items) {
 							this.aggregate_(data.items);
 						}
@@ -198,13 +202,13 @@ class RdWaterfallController {
 		}
 
 		nomoreItems() {
-			if (this.itemCount === 0 ){
+			if (this.itemCount === 0 || this.itemCount >= this.total){
 				return true;
 			}
 			if (!(this.currentPage*this.limit)){
 				return true;
 			}
-			return (this.currentPage*this.limit) >= this.itemCount;
+			return (this.currentPage*this.limit) >= this.total;
 		}
 
 		showMoreVisible(){

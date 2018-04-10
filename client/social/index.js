@@ -9,6 +9,7 @@ import resourceCard from './components/resourceCard/resourceCard.component';
 import resourceView from './components/resourceView/resourceView.component';
 import modalView from './components/modalView/modalView.component';
 import home from './home';
+import ver from './ver';
 import filters from './social.filter';
 
 // config to providers
@@ -21,6 +22,7 @@ let requirements = [
 	resourceView,
 	modalView,
 	home,
+	ver,
 	filters
 ];
 

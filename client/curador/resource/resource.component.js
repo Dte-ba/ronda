@@ -278,7 +278,7 @@ export default class ResourceComponent extends CuradorComponent {
 			if (this.resource.type === 'mediateca'){
 				this.steps = [
 					{ name: 'ficha', 		caption: 'Ficha' },
-					//{ name: 'recurso', 	caption: 'Recurso' },
+					{ name: 'recurso', 	caption: 'Recurso' },
 					//{ name: 'vinculo', caption: 'Vínculo' },
 					{ name: 'publicar', caption: 'Publicar' },
 				];

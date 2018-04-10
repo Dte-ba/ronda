@@ -16,9 +16,9 @@ export default class HomeComponent extends SocialComponent {
     this.page = 0;
     this.limit = 20;
 
-    this.viewResource = ($event, resource) => { 
-      this.viewResource_($event, resource);
-    };
+    //this.viewResource = ($event, resource) => { 
+    //  this.viewResource_($event, resource);
+    //};
 
     this.sectionName = this.$stateParams.seccion || 'home';
     let sections = {
@@ -82,16 +82,17 @@ export default class HomeComponent extends SocialComponent {
             'orientacion': 'Orientación',
             'mediateca': 'Mediateca',
           };
-
+          let total = data.$total;
           data = _.map(data, p =>{
             p.typeCaption = captions[p.type];
             return p;
           });
           
           let res = {
-            page: data.$page,
+            count: total,
             items: data,
-            total: data.$total
+            page: this.page,
+            limit: this.limit
           };
   
           def.resolve(res);

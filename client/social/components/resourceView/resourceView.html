@@ -59,19 +59,41 @@
 					<h1 flex class="rd__headpost  rd__headpost--title text-uppercase">Contiene {{$ctrl.resource.links.length}} recursos</h1>	
 					<md-list ng-cloak>
 							<md-list-item ng-repeat="item in $ctrl.resource.links">
-								<div  layout="row" layout-padding>
-									<div>
-											<div class="thumbnail thumbnail--rounded thumbnail--50" ng-hide="item.thumbnail == ''">
-												<img ng-src="{{item.thumbnail}}" alt="Miniatura de la Propuesta Pedagógica">
+								<div ng-if="$ctrl.isPublished == false" layout="row">
+										<div layout="row" layout-padding layout-align="start center">
+											<div>
+													<div class="thumbnail thumbnail--rounded thumbnail--50" ng-hide="item.thumbnail == ''">
+														<img ng-src="{{item.thumbnail}}" alt="Miniatura de la {{item.typeCaption}}">
+													</div>
 											</div>
-									</div>
-									<div flex>
-											<div class="color-{{item.type}}" layout="flex" layout-align="start center">
-												<i class="ri" ng-class="'ri-'+item.type"></i> <span>{{item.typeCaption}}</span>
+											<div flex>
+													<div layout="row" layout-align="start center">
+														<div><strong>{{item.title}}</strong> | </div>
+														<div class="color-{{item.type}}" layout="row" layout-align="start center">
+															<i class="ri" ng-class="'ri-'+item.type"></i> <span>{{item.typeCaption}}</span>
+														</div>
+													</div>
+													<div><p>{{item.summary | truncate:140}}</p></div>
 											</div>
-											<div><strong>{{item.title}}</strong></div>
-											<div><p>{{item.summary | truncate:140}}</p></div>
-									</div>
+										</div>
+								</div>
+								<div ng-if="$ctrl.isPublished == true"  flex layout="row">
+										<a class="rview__link" flex layout="row" layout-padding layout-align="start center" ui-sref="social.ver({ uid: item._id })">
+											<div>
+													<div class="thumbnail thumbnail--rounded thumbnail--50" ng-hide="item.thumbnail == ''">
+														<img ng-src="{{item.thumbnail}}" alt="Miniatura de la {{item.typeCaption}}">
+													</div>
+											</div>
+											<div flex>
+													<div layout="row" layout-align="start center">
+														<div><strong>{{item.title}}</strong> | </div>
+														<div class="color-{{item.type}}" layout="row" layout-align="start center">
+															<i class="ri" ng-class="'ri-'+item.type"></i> <span>{{item.typeCaption}}</span>
+														</div>
+													</div>
+													<div><p>{{item.summary | truncate:140}}</p></div>
+											</div>
+										</a>
 								</div>
 							</md-list-item>
 					</md-list>

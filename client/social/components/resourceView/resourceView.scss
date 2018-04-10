@@ -60,6 +60,17 @@ resource-view {
 		padding: 2rem 2rem;
 	}
 
+	&__link {
+		border: solid 1px transparent;
+		text-decoration: none;
+		border-radius: $border-radius-default;
+		color: $color-black;
+		
+		&:hover {
+			border-color: $color-black-light;
+		}
+	}
+
 	&__resources--left {
 		width: 17rem;
 	}
