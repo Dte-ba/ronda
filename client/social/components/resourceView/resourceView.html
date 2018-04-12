@@ -8,10 +8,10 @@
 			</div>	
 			<div class="rview__content" flex>
 				<div class="rview__content--bar bg-{{$ctrl.resource.type}}"></div>
-				<div layout="column" layout-padding>
-					<h1 flex class="rd__headpost  rd__headpost--title">{{$ctrl.resource.title}}</h1>
-					<p flex class="paragraph post__test">{{$ctrl.resource.summary}}</p>
-					<rd-post flex modules="$ctrl.resource.postBody" relative="$ctrl.uid" readonly="true"></rd-post>	
+				<div layout="column">
+					<h1 flex class="rd__headpost  rd__headpost--title rview__head">{{$ctrl.resource.title}}</h1>
+					<p flex class="paragraph post__test rview__summary">{{$ctrl.resource.summary}}</p>
+					<rd-post flex class="rview__post" modules="$ctrl.resource.postBody" relative="$ctrl.uid" readonly="true"></rd-post>	
 				</div>
 			</div>
 		</div>
@@ -42,12 +42,16 @@
 										<md-icon md-font-icon="ri-mochila" class="ri ri-3x"></md-icon>
 								</md-button>-->
 						</div>
-						<div><md-button class="rview__button md-raised md-primary">Ver Presentación</md-button></div>
-						<div ng-if="$ctrl.resource.files.length"><md-button class="rview__button md-raised md-primary" 
-									ng-href="/api/publisheds/{{$ctrl.resource._id}}/download"
-									target="_blank">Descargar</md-button></div>
-						<div ng-if="$ctrl.resource.files.length">
-							<div class="text-center"><span class="text-uppercase color-grey">{{$ctrl.resource.files.length}} Archivos | {{$ctrl.sumfiles($ctrl.resource.files) | numeraljs:'0b'}}</span></div>
+						<div ng-if="$ctrl.resource.type == 'propuesta'">
+							<md-button class="rview__button md-raised md-primary">Ver Presentación</md-button>
+						</div>
+						<div  ng-if="$ctrl.resource.type !== 'propuesta'">
+							<div ng-if="$ctrl.resource.files.length"><md-button class="rview__button md-raised md-primary" 
+										ng-href="/api/publisheds/{{$ctrl.resource._id}}/download"
+										target="_blank">Descargar</md-button></div>
+							<div ng-if="$ctrl.resource.files.length">
+								<div class="text-center"><span class="text-uppercase color-grey">{{$ctrl.resource.files.length}} Archivos | {{$ctrl.sumfiles($ctrl.resource.files) | numeraljs:'0b'}}</span></div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -58,7 +62,8 @@
 		<div class="rview__resources--left"></div>
 		<div flex>
 			<div class="rview__links" ng-if="$ctrl.resource.links.length > 0">
-					<h3 flex class="text-uppercase">Vinculado a {{$ctrl.resource.links.length}} materiales</h3>	
+					<h3 flex class="text-uppercase" ng-if="$ctrl.resource.type !== 'propuesta'">Vinculado a {{$ctrl.resource.links.length}} materiales</h3>	
+					<h3 flex class="text-uppercase" ng-if="$ctrl.resource.type == 'propuesta'">Esta Propuesta Pedagógica contiene {{$ctrl.resource.links.length}} materiales</h3>	
 					<md-list ng-cloak>
 							<md-list-item ng-repeat="item in $ctrl.resource.links">
 								<div ng-if="$ctrl.isPublished == false" layout="row">
@@ -100,48 +105,50 @@
 							</md-list-item>
 					</md-list>
 			</div>
-			<div class="rview__links" ng-if="$ctrl.resource.relations.length > 0">
-					<h3 flex class="text-uppercase">Contenido en {{$ctrl.resource.relations.length}} materiales</h3>	
-					<md-list ng-cloak>
-							<md-list-item ng-repeat="item in $ctrl.resource.relations">
-								<div ng-if="$ctrl.isPublished == false" layout="row">
-										<div layout="row" layout-padding layout-align="start center">
-											<div>
-													<div class="thumbnail thumbnail--rounded thumbnail--50" ng-hide="item.thumbnail == ''">
-														<img ng-src="{{item.thumbnail}}" alt="Miniatura de la {{item.typeCaption}}">
-													</div>
-											</div>
-											<div flex>
-													<div layout="row" layout-align="start center">
-														<div><strong>{{item.title}}</strong> | </div>
-														<div class="color-{{item.type}}" layout="row" layout-align="start center">
-															<i class="ri" ng-class="'ri-'+item.type"></i> <span>{{item.typeCaption}}</span>
+			<div ng-if="$ctrl.resource.type !== 'propuesta'">
+				<div class="rview__links" ng-if="$ctrl.resource.relations.length > 0">
+						<h3 flex class="text-uppercase">Contenido en {{$ctrl.resource.relations.length}} materiales</h3>	
+						<md-list ng-cloak>
+								<md-list-item ng-repeat="item in $ctrl.resource.relations">
+									<div ng-if="$ctrl.isPublished == false" layout="row">
+											<div layout="row" layout-padding layout-align="start center">
+												<div>
+														<div class="thumbnail thumbnail--rounded thumbnail--50" ng-hide="item.thumbnail == ''">
+															<img ng-src="{{item.thumbnail}}" alt="Miniatura de la {{item.typeCaption}}">
 														</div>
-													</div>
-													<div><p>{{item.summary | truncate:140}}</p></div>
-											</div>
-										</div>
-								</div>
-								<div ng-if="$ctrl.isPublished == true"  flex layout="row">
-										<a class="rview__link" flex layout="row" layout-padding layout-align="start center" ui-sref="social.ver({ uid: item._id })">
-											<div>
-													<div class="thumbnail thumbnail--rounded thumbnail--50" ng-hide="item.thumbnail == ''">
-														<img ng-src="{{item.thumbnail}}" alt="Miniatura de la {{item.typeCaption}}">
-													</div>
-											</div>
-											<div flex>
-													<div layout="row" layout-align="start center">
-														<div><strong>{{item.title}}</strong> | </div>
-														<div class="color-{{item.type}}" layout="row" layout-align="start center">
-															<i class="ri" ng-class="'ri-'+item.type"></i> <span>{{item.typeCaption}}</span>
+												</div>
+												<div flex>
+														<div layout="row" layout-align="start center">
+															<div><strong>{{item.title}}</strong> | </div>
+															<div class="color-{{item.type}}" layout="row" layout-align="start center">
+																<i class="ri" ng-class="'ri-'+item.type"></i> <span>{{item.typeCaption}}</span>
+															</div>
 														</div>
-													</div>
-													<div><p>{{item.summary | truncate:140}}</p></div>
+														<div><p>{{item.summary | truncate:140}}</p></div>
+												</div>
 											</div>
-										</a>
-								</div>
-							</md-list-item>
-					</md-list>
+									</div>
+									<div ng-if="$ctrl.isPublished == true"  flex layout="row">
+											<a class="rview__link" flex layout="row" layout-padding layout-align="start center" ui-sref="social.ver({ uid: item._id })">
+												<div>
+														<div class="thumbnail thumbnail--rounded thumbnail--50" ng-hide="item.thumbnail == ''">
+															<img ng-src="{{item.thumbnail}}" alt="Miniatura de la {{item.typeCaption}}">
+														</div>
+												</div>
+												<div flex>
+														<div layout="row" layout-align="start center">
+															<div><strong>{{item.title}}</strong> | </div>
+															<div class="color-{{item.type}}" layout="row" layout-align="start center">
+																<i class="ri" ng-class="'ri-'+item.type"></i> <span>{{item.typeCaption}}</span>
+															</div>
+														</div>
+														<div><p>{{item.summary | truncate:140}}</p></div>
+												</div>
+											</a>
+									</div>
+								</md-list-item>
+						</md-list>
+				</div>
 			</div>
 		</div>
 		<div class="rview__resources--right"></div>

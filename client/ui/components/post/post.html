@@ -37,12 +37,12 @@
 		</div>
 		
 		<!-- media -->
-		<div class="post__image--gallery" ng-if="module.moduleType === 'image-gallery'"  layout="column" layout-padding>
+		<div class="post__image--gallery" ng-if="module.moduleType === 'image-gallery'"  layout="column">
 			<div ng-repeat="image in module.content">
 				<img ng-src="{{image.src}}" alt="{{image.description}}">
 			</div>
 		</div>
-		<div class="post__image--grid" ng-if="module.moduleType === 'image-grid'"  layout="row" layout-padding>
+		<div class="post__image--grid" ng-if="module.moduleType === 'image-grid'"  layout="row">
 				<div ng-repeat="image in module.content" flex="33">
 					<img ng-src="{{image.src}}" alt="{{image.description}}">
 				</div>
@@ -58,12 +58,14 @@
 			
 			<div class="post__divisor" ng-if="module.moduleType === 'divisor'" ></div>
 			<div class="post__text" ng-if="module.moduleType === 'text'"  ng-bind-html="module.content"></div>
-			<div class="post__image--gallery" ng-if="module.moduleType === 'image-gallery'"  layout="column" layout-padding>
-				<div ng-repeat="image in module.content">
-					<img ng-src="{{image.src}}" alt="{{image.description}}">
+			<div class="post__image--gallery" ng-if="module.moduleType === 'image-gallery'" layout="column">
+				<div ng-repeat="image in module.content" layout="row">
+					<div flex="75">
+						<img ng-src="{{image.src}}" alt="{{image.description}}">
+					</div>
 				</div>
 			</div>
-			<div class="post__image--grid" ng-if="module.moduleType === 'image-grid'"  layout="row" layout-padding>
+			<div class="post__image--grid" ng-if="module.moduleType === 'image-grid'"  layout="row">
 					<div ng-repeat="image in module.content" flex="33">
 						<img ng-src="{{image.src}}" alt="{{image.description}}">
 					</div>

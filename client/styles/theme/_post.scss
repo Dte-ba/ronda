@@ -1,7 +1,6 @@
 .post {
 	
 	&__content {
-		padding: .3rem;
 		list-style: none;
 	}
 
@@ -65,7 +64,10 @@
 	&__module {
 		position: relative;
 		border: solid 1px transparent;
-		padding: 2rem 1rem;
+				
+		&:not(:last-child) {
+			margin-bottom: 3rem;
+		}
 	}
 
 	&__module--editable:hover {
@@ -94,7 +96,7 @@
 	}
 
 	&__content {
-		padding: 1rem;
+		//padding: 1rem;
 	}
 
 	&--editor {
@@ -105,6 +107,11 @@
 .post__text {
 	&--editor {
 		padding-top: 48px;
+	}
+
+	p, span, strong {
+		text-align: justify;
+		line-height: 22px !important;		
 	}
 }
 
