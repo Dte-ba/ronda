@@ -84,7 +84,7 @@ export default function seedDatabaseIfNeeded() {
         caption: 'Tipo de software'
       },{
         type: 'orientacion',
-        values: ['Tutoriales', 'Documentación', 'Recomendaciones de uso de soft', 'Enlaces de interes', 'Documentación de apoyo'],
+        values: ['Tutoriales', 'Documentación', 'Recomendaciones de uso de soft', 'Enlaces de interés', 'Documentación de apoyo'],
         caption: 'Tipo de Orientación'
       })
       .then(() => console.log('finished populating categories'))
