@@ -14,7 +14,8 @@
 		font-weight: $font-primary-light;
 		font-size: 1.9rem;
 		line-height: 2.3rem;
-
+		text-align: justify;
+		
 		&:not(:last-child) {
 			margin-bottom: 2rem;
 		}

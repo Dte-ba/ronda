@@ -32,14 +32,14 @@ export default class HomeComponent extends SocialComponent {
         caption:  '<h1><span class="font-primary-regular">Propuestas</span><br/>pedagógicas</h1> <p>Dinámicas, flexibles y transversales. Para diseñar tu clase  integrando  nuevas experiencias de aprendizaje.</p>',
         image: '/assets/img/banner/propuesta_image.png',
         title: 'Propuestas pedagógicas',
-        description: 'Propuestas pedagógicas Dinámicas, flexibles y transversales. Para diseñar tu clase  integrando  nuevas experiencias de aprendizaje.',
+        description: 'Propuestas pedagógicas Dinámicas, flexibles y transversales.<br />Para diseñar tu clase  integrando  nuevas experiencias de aprendizaje.',
         type: 'propuesta'
       },
       'actividades': {
         caption:  '<h1>_Actividades <br />accesibles</h1> <p>Diseñadas  para  participar , interactuar y aprender  en el aula  inclusiva.</p>',
         image: '/assets/img/banner/actividades_image.png',
         title: 'Actividades accesibles',
-        description: 'Actividades accesibles diseñadas  para  participar , interactuar y aprender  en el aula  inclusiva.',
+        description: 'Actividades accesibles diseñadas  para  participar, interactuar y aprender  en el aula  inclusiva.',
         type: 'actividad'
       },
       'herramientas': {

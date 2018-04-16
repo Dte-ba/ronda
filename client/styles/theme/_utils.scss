@@ -1,6 +1,6 @@
 @each $key, $section in $sections {
 	.color-#{$key} {
-		color: map-get($section, color);
+		color: map-get($section, color) !important;
 	}
 
 	.bg-#{$key} {
