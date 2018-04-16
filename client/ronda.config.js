@@ -231,8 +231,12 @@ export function rondaConfig($urlRouterProvider, $locationProvider, $mdThemingPro
   ngMetaProvider.setDefaultTag('description', 'Plataforma de contenidos digitales con fines educativos para que todos podamos participar y acceder.');
 }
 
-export function rondaRun($cookies, $rootScope, $state, amMoment, ngMeta){
+export function rondaRun($cookies, $rootScope, $state, amMoment, ngMeta, $window){
   'ngInject';
+
+  $rootScope.$on("$stateChangeSuccess", function (event, currentRoute, previousRoute) {
+    $window.scrollTo(0, 0);
+  });
   
   amMoment.changeLocale('es');
 
