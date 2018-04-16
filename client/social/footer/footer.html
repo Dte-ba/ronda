@@ -1,6 +1,6 @@
 <footer>
 	<div class="sitemap">
-		<div class="sitemap__content" layout="row" layout-align="start center" layout-xs="column">
+		<div class="sitemap__content" layout="row" layout-align="start center" layout-sm="column" layout-xs="column">
 			<div flex="5"></div>
 			<div class="sitemap__logo">
 				<img src="/assets/ronda-logo-footer.svg"></img>
@@ -11,7 +11,12 @@
 				<!--<a class="sitemap__link">Contacto</a>
 				<a class="sitemap__link">Créditos</a>-->
 			</div>
-			<div><small>Ronda {{$ctrl.version}} | Copyright &copy; 2017-2018 - Dirección de Innovación y Tecnología Educativa - Buenos Aires</small></div>
+			<div>
+				<div layout="row" layout-xs="column" layout-align-xs="center center">
+					<div><small>Ronda {{$ctrl.version}}</small> <small class="footer__version--divider" ng-hide="$ctrl.$mdMedia('xs')">|</small></div>
+					<div><small> Copyright &copy; 2017-2018 - DiTE</small></div>
+				</div>
+			</div>
 			<div flex="5"></div>
 		</div>
 	</div>

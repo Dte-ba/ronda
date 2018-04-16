@@ -4,8 +4,10 @@ import $ from 'jquery';
 
 class FooterComponent {
   /*@ngInject*/
-  constructor($element) {
+  constructor($element, $mdMedia) {
     this.version = $('meta[name=version]').attr("content");;
+
+    this.$mdMedia = $mdMedia;
   }
 }
 
