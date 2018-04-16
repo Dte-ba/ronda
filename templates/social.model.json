@@ -17,6 +17,14 @@
 		{
 			"name": "ver",
 			"url": "/ver/:uid"
+		},
+		{
+			"name": "guia",
+			"url": "/guia"
+		},
+		{
+			"name": "institucional",
+			"url": "/institucional"
 		}
 	]
 }

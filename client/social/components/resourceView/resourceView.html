@@ -42,8 +42,8 @@
 										<md-icon md-font-icon="ri-mochila" class="ri ri-3x"></md-icon>
 								</md-button>-->
 						</div>
-						<div ng-if="$ctrl.resource.type == 'propuesta'">
-							<md-button class="rview__button md-raised md-primary">Ver Presentación</md-button>
+						<div ng-if="$ctrl.resource.type == 'propuesta'" >
+							<md-button class="rview__button md-raised md-primary" ng-if="$ctrl.resource.files.length" target="_blank" ng-href="/api/publisheds/{{$ctrl.resource._id}}/download">Ver Presentación</md-button>
 						</div>
 						<div  ng-if="$ctrl.resource.type !== 'propuesta'">
 							<div ng-if="$ctrl.resource.files.length"><md-button class="rview__button md-raised md-primary" 

@@ -47,7 +47,7 @@ export default function seedDatabaseIfNeeded() {
     .then(() => {
       Category.create({
         type: 'nivel',
-        values: ['Inicial', 'Secundaria', 'Primaria primer ciclo', 'Primaria segundo ciclo', 'Centro de formacion integral'],
+        values: ['Inicial', 'Secundaria', 'Primaria primer ciclo', 'Primaria segundo ciclo', 'Centro de Formación Integral'],
         caption: 'Nivel'
       },{
         type: 'area',

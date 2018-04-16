@@ -2,6 +2,36 @@
 
 Ronda es un proyecto de contenidos digitales con fines educativos para que todos podamos participar y acceder.
 
+## Para desarrolladores
+
+Copiar y editar el archivo `server/config/secret.example.js` -> `server/config/secret.js` con las variables correspondientes
+
+Instalar `gulp`
+
+```
+#:npm install -g gulp
+```
+
+Instalar dependencias
+
+```
+#:npm install gulp
+```
+
+Iniciar el servidor de desarrollo
+
+```
+#:gulp server
+```
+
+Crear un build
+
+```
+#:gulp build
+```
+
+NOTA: La primera ves es setear la variable `seedDB:true` del `server/config/environment/development.js` para crear datos necesario en la base de datos
+
 ## Licencia
 
 MIT License
