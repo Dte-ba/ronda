@@ -38,10 +38,15 @@
 </div>
 <div class="institucional" layout="row" layout-padding layout-align="center top">
 	<div flex="70" flex-md="80" flex-sm="80" flex-xs="80" >
-		<h6>Equipo del Proyecto Ronda</h6>
+
+		<div layout="row"><h4 class="team--head">Autoridades</h4></div>
+		<div>
+			<ul class="team--list">
+				<li ng-repeat="person in $ctrl.teamBA"><span><strong>{{person.name}}</strong> {{person.cargo}}</span></li>
+			</ul>
+		</div>
 		
 		<div layout="row"><h4 class="team--head">Equipo técnico-pedagógico</h4></div>
-
 		<p>
 			Coordinador de contenidos educativos {{$ctrl.coordinador}} <br />
 			Contenidistas de  Educación  Especial  <br />
@@ -85,7 +90,7 @@
 	<div layout="row" layout-padding layout-align="center top">
 		<div flex="70" flex-md="80" flex-sm="80" flex-xs="80" >
 			<p>Para más información comunicate con nosotros a</p>
-			<p><strong><a href="mailto:ronda@abc.gob.ar">ronda@abc.gob.ar</a></strong></p>
+			<p class="ronda-mail"><strong><a href="mailto:ronda@abc.gob.ar"><i class="fa fa-envelope"></i>	ronda@abc.gob.ar</a></strong></p>
 		</div>
 	</div>
 </div>
