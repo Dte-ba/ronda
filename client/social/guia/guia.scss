@@ -7,29 +7,30 @@
 		font-family: $font-family-primary;
 		font-weight: $font-primary-light;
 		font-size: 1.9rem;
-		line-height: 2.3rem;
+		line-height: 2.5rem;
 		text-align: justify;
-		margin-bottom: 2rem;
+		margin-bottom: 3rem;
+		margin-top: 3rem;
 
 		&.text-center {
 			text-align: center !important;
 		}
 
 		&.color-propuesta {
-			font-size: 2.1rem;
-			line-height: 2.5rem;
+			font-size: 2.4rem;
+			line-height: 2.6rem;
 			color: $color-propuestas !important;
 		}
 
 		&.color-actividad {
-			font-size: 2.1rem;
-			line-height: 2.5rem;
+			font-size: 2.4rem;
+			line-height: 2.6rem;
 			color: $color-actividades !important;
 		}
 
 		&.color-herramienta {
-			font-size: 2.1rem;
-			line-height: 2.5rem;
+			font-size: 2.4rem;
+			line-height: 2.6rem;
 			color: $color-herramientas !important;
 		}
 	}
@@ -43,6 +44,7 @@
 		text-align: center;
 		padding: 3rem 0;
 		color: $color-white;
+		margin-bottom: 5rem;
 
 		h2 {
 			font-family: $font-family-secondary;
@@ -67,7 +69,6 @@
 	padding: 1rem;
 	font-family: $font-family-secondary;
 	font-weight: $font-secondary-bold;
-	margin-bottom: 1rem;
 
 	&:not(:last-child) {
 		margin-right: 1rem;

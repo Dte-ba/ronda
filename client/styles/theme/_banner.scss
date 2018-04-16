@@ -107,7 +107,7 @@
       padding-right: 4rem;
       text-align: left;
       h1 { color: $color-actividades; }
-      p { color: $color-white;}
+      p { color: $color-black-light;}
     }
 
     &[section="actividades"] &--image {
@@ -124,7 +124,7 @@
       padding-right: 4rem;
       text-align: right;
       h1 { color: $color-herramientas; }
-      p { color: $color-white; }
+      p { color: $color-black-light;}
     }
 
     &[section="herramientas"] &--image {
@@ -142,7 +142,7 @@
       text-align: left;
 
       h1 { color: $color-orientaciones; }
-      p { color: $color-white; }
+      p { color: $color-black-light;}
     }
 
     &[section="orientaciones"] &--image {
@@ -159,7 +159,7 @@
       padding-right: 7rem;
       text-align: right;
       h1 { color: $color-mediateca; }
-      p { color: $color-white; }
+      p { color: $color-black-light;}
     }
 
     &[section="mediateca"] &--image {
