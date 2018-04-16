@@ -56,6 +56,7 @@
     // Banner home
     &[section="home"] {
       background-image: url(/assets/img/banner/index_back.png);
+      background-color: $color-primary-dark;
     }
 
     &[section="home"] &--legend {
@@ -67,6 +68,12 @@
 
     &[section="home"] &--image {
       float: left;
+    }
+
+    // Banner institucional
+    &[section="institucional"] {
+      background-image: url(/assets/img/banner/institucional_back.png);
+      background-color: $color-primary-dark;
     }
 
     // Banner propuestas
@@ -217,6 +224,11 @@
         padding-top: .5rem;
       }
 
+      &[section="institucional"] p {
+        font-size: 1.7rem;
+		    line-height: 1.7rem;
+      }
+
       // propuestas
       &[section="propuestas"] &--legend {
         width: 40rem;
@@ -293,6 +305,17 @@
         padding-top: .5rem;
       }
 
+      &[section="institucional"] p {
+        font-size: 1.4rem;
+		    line-height: 1.4rem;
+        width: 80%;
+        margin: 0 auto;
+      }
+      
+      &[section="institucional"] .institucional--logo {
+        margin-top: -30px;
+      }
+      
       &[section="home"] &--legend p {
         display: none;
       }

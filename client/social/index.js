@@ -11,6 +11,8 @@ import modalView from './components/modalView/modalView.component';
 import home from './home';
 import buscar from './buscar';
 import ver from './ver';
+import guia from './guia';
+import institucional from './institucional';
 import filters from './social.filter';
 
 // config to providers
@@ -25,6 +27,8 @@ let requirements = [
 	home,
 	buscar,
 	ver,
+	guia,
+	institucional,
 	filters
 ];
 
