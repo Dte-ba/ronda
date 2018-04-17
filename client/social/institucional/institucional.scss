@@ -17,6 +17,10 @@
 		text-align: justify;
 		margin-bottom: 3rem;
 		margin-top: 3rem;
+
+		small {
+			font-size: .9em !important;
+		}
 	}
 
 	&--banner {
@@ -99,10 +103,10 @@
 		font-family: $font-family-primary;
 		font-weight: $font-primary-light;
 		font-size: 1.9rem;
-		line-height: 2.3rem;
-
+		line-height: 2.5rem;
 		span {
 			color: $color-black-light;
+			font-size: inherit;
 		}
 	}
 }

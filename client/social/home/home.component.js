@@ -36,7 +36,7 @@ export default class HomeComponent extends SocialComponent {
         type: 'propuesta'
       },
       'actividades': {
-        caption:  '<h1>_Actividades <br />accesibles</h1> <p>Diseñadas  para  participar , interactuar y aprender  en el aula  inclusiva.</p>',
+        caption:  '<h1>_Actividades <br />accesibles</h1> <p>Diseñadas  para  participar, interactuar y aprender  en el aula  inclusiva.</p>',
         image: '/assets/img/banner/actividades_image.png',
         title: 'Actividades accesibles',
         description: 'Actividades accesibles diseñadas  para  participar, interactuar y aprender  en el aula  inclusiva.',
