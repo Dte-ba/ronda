@@ -31,6 +31,8 @@ export default function(app) {
 
   // robots & sitemap
   let map = sitemap({
+    http: 'https',
+    url: 'ronda.abc.gob.ar',
     map: {
         '/institucional': ['get'],
         '/guia': ['get'],
