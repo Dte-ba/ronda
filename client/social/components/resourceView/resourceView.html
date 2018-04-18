@@ -1,20 +1,40 @@
 <div class="rview" >
 	<div class="rview__wrapper" layout="row" layout-align="start stretch">
-		<div class="rview__container"  layout="row" layout-align="start stretch" flex>
-			<div class="rview__sidenav--icon">
-				<div class="rview__sidenav--icon--head">
-						<i class="ri color-{{$ctrl.resource.type}} ri-6x" ng-class="'ri-'+$ctrl.resource.type"></i>
+		<!-- Container -->
+		<div flex>
+			<div class="rview__container" layout="row" layout-align="start stretch" flex>
+				<div class="rview__sidenav--icon">
+					<div class="rview__sidenav--icon--head">
+							<i class="ri color-{{$ctrl.resource.type}} ri-6x" ng-class="'ri-'+$ctrl.resource.type"></i>
+					</div>
 				</div>
-			</div>	
-			<div class="rview__content" flex>
-				<div class="rview__content--bar bg-{{$ctrl.resource.type}}"></div>
-				<div layout="column">
-					<h1 flex class="rd__headpost  rd__headpost--title rview__head">{{$ctrl.resource.title}}</h1>
-					<p flex class="paragraph post__test rview__summary">{{$ctrl.resource.summary}}</p>
-					<rd-post flex class="rview__post" modules="$ctrl.resource.postBody" relative="$ctrl.uid" readonly="true"></rd-post>	
+				<div class="rview__ficha">
+					<div class="rview__image--responsive">
+						<div class="thumbnail thumbnail--rounded">
+							<img ng-src="{{$ctrl.resource.thumbnail}}" alt="Miniatura">
+						</div>
+					</div>
+					<div class="rview__content">
+						<div class="rview__icon--responsive" layout="row" layout-align="start center">
+								<i class="ri color-{{$ctrl.resource.type}} ri-4x" ng-class="'ri-'+$ctrl.resource.type"></i>
+								<h5 class="color-{{$ctrl.resource.type}}">{{$ctrl.resource.typeCaption}}</h5>
+						</div>
+						<div class="rview__content--bar bg-{{$ctrl.resource.type}}"></div>
+						<div layout="column">
+							<h1 flex class="rd__headpost  rd__headpost--title rview__head">{{$ctrl.resource.title}}</h1>
+							<p flex class="paragraph post__test rview__summary">{{$ctrl.resource.summary}}</p>
+							<rd-post flex class="rview__post" modules="$ctrl.resource.postBody" relative="$ctrl.uid" readonly="true"></rd-post>	
+						</div>
+					</div>
 				</div>
 			</div>
+			<!-- Links -->
+			<resource-links resource="$ctrl.resource" flex is-published="$ctrl.isPublished"></resource-links>
+			<div class="rview__logo--bottom">
+				<i class="ri ri-ronda ri-4x" aria-hidden="true"></i>
+			</div>
 		</div>
+		<!-- Sidenav -->
 		<div class="rview__sidenav">
 				<div layout="column" layout-padding>
 					<div flex>
@@ -56,101 +76,5 @@
 					</div>
 				</div>
 		</div>
-	</div>
-
-	<div class="rview__resources" layout="row" layout-align="start stretch">
-		<div class="rview__resources--left"></div>
-		<div flex>
-			<div class="rview__links" ng-if="$ctrl.resource.links.length > 0">
-					<h3 flex class="text-uppercase" ng-if="$ctrl.resource.type !== 'propuesta'">Vinculado a {{$ctrl.resource.links.length}} materiales</h3>	
-					<h3 flex class="text-uppercase" ng-if="$ctrl.resource.type == 'propuesta'">Esta Propuesta Pedagógica contiene {{$ctrl.resource.links.length}} materiales</h3>	
-					<md-list ng-cloak>
-							<md-list-item ng-repeat="item in $ctrl.resource.links">
-								<div ng-if="$ctrl.isPublished == false" layout="row">
-										<div layout="row" layout-padding layout-align="start center">
-											<div>
-													<div class="thumbnail thumbnail--rounded thumbnail--50" ng-hide="item.thumbnail == ''">
-														<img ng-src="{{item.thumbnail}}" alt="Miniatura de la {{item.typeCaption}}">
-													</div>
-											</div>
-											<div flex>
-													<div layout="row" layout-align="start center">
-														<div><strong>{{item.title}}</strong> | </div>
-														<div class="color-{{item.type}}" layout="row" layout-align="start center">
-															<i class="ri" ng-class="'ri-'+item.type"></i> <span>{{item.typeCaption}}</span>
-														</div>
-													</div>
-													<div><p>{{item.summary | truncate:140}}</p></div>
-											</div>
-										</div>
-								</div>
-								<div ng-if="$ctrl.isPublished == true"  flex layout="row">
-										<a class="rview__link" flex layout="row" layout-padding layout-align="start center" ui-sref="social.ver({ uid: item._id })">
-											<div>
-													<div class="thumbnail thumbnail--rounded thumbnail--50" ng-hide="item.thumbnail == ''">
-														<img ng-src="{{item.thumbnail}}" alt="Miniatura de la {{item.typeCaption}}">
-													</div>
-											</div>
-											<div flex>
-													<div layout="row" layout-align="start center">
-														<div><strong>{{item.title}}</strong> | </div>
-														<div class="color-{{item.type}}" layout="row" layout-align="start center">
-															<i class="ri" ng-class="'ri-'+item.type"></i> <span>{{item.typeCaption}}</span>
-														</div>
-													</div>
-													<div><p>{{item.summary | truncate:140}}</p></div>
-											</div>
-										</a>
-								</div>
-							</md-list-item>
-					</md-list>
-			</div>
-			<div ng-if="$ctrl.resource.type !== 'propuesta'">
-				<div class="rview__links" ng-if="$ctrl.resource.relations.length > 0">
-						<h3 flex class="text-uppercase">Contenido en {{$ctrl.resource.relations.length}} materiales</h3>	
-						<md-list ng-cloak>
-								<md-list-item ng-repeat="item in $ctrl.resource.relations">
-									<div ng-if="$ctrl.isPublished == false" layout="row">
-											<div layout="row" layout-padding layout-align="start center">
-												<div>
-														<div class="thumbnail thumbnail--rounded thumbnail--50" ng-hide="item.thumbnail == ''">
-															<img ng-src="{{item.thumbnail}}" alt="Miniatura de la {{item.typeCaption}}">
-														</div>
-												</div>
-												<div flex>
-														<div layout="row" layout-align="start center">
-															<div><strong>{{item.title}}</strong> | </div>
-															<div class="color-{{item.type}}" layout="row" layout-align="start center">
-																<i class="ri" ng-class="'ri-'+item.type"></i> <span>{{item.typeCaption}}</span>
-															</div>
-														</div>
-														<div><p>{{item.summary | truncate:140}}</p></div>
-												</div>
-											</div>
-									</div>
-									<div ng-if="$ctrl.isPublished == true"  flex layout="row">
-											<a class="rview__link" flex layout="row" layout-padding layout-align="start center" ui-sref="social.ver({ uid: item._id })">
-												<div>
-														<div class="thumbnail thumbnail--rounded thumbnail--50" ng-hide="item.thumbnail == ''">
-															<img ng-src="{{item.thumbnail}}" alt="Miniatura de la {{item.typeCaption}}">
-														</div>
-												</div>
-												<div flex>
-														<div layout="row" layout-align="start center">
-															<div><strong>{{item.title}}</strong> | </div>
-															<div class="color-{{item.type}}" layout="row" layout-align="start center">
-																<i class="ri" ng-class="'ri-'+item.type"></i> <span>{{item.typeCaption}}</span>
-															</div>
-														</div>
-														<div><p>{{item.summary | truncate:140}}</p></div>
-												</div>
-											</a>
-									</div>
-								</md-list-item>
-						</md-list>
-				</div>
-			</div>
-		</div>
-		<div class="rview__resources--right"></div>
 	</div>
 </div>

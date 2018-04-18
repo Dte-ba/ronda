@@ -1,0 +1,61 @@
+resource-links {
+	display: block;
+	margin-top: 5rem;
+	padding-left: 17rem;
+	border-top: solid 1px $color-grey;
+
+	// responsive
+	@include respond(big-desktop){
+	
+	}
+	
+	@include respond(tab-land){
+		padding-left: 2rem;
+	}
+	
+	@include respond(tab-port){
+		
+	}
+	
+	@include respond(phone){
+		
+	}
+}
+
+.rview {
+	&__link {
+		border: solid 1px transparent;
+		text-decoration: none;
+		border-radius: $border-radius-default;
+		color: $color-black;
+		
+		&:hover {
+			border-color: $color-black-light;
+		}
+	}
+
+	&__logo--bottom {
+		padding: 5rem 0;
+		text-align: center;
+		i {
+			color: $color-primary;
+		}
+	}
+
+	// responsive
+	@include respond(big-desktop){
+	
+	}
+	
+	@include respond(tab-land){
+
+	}
+	
+	@include respond(tab-port){
+		
+	}
+	
+	@include respond(phone){
+		
+	}
+}

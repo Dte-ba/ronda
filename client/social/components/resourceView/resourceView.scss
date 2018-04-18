@@ -6,7 +6,7 @@ resource-view {
 
 	&__wrapper {
 		border-radius: $border-radius-default;
-		background-color: rgba($color-white, .8);
+		background-color: $color-white;
 	}
 
 	&__content {
@@ -68,27 +68,75 @@ resource-view {
 		border-bottom: solid 1px $color-grey;
 	}
 
-	&__links {
-		background-color: $color-grey-light;
-		padding: 2rem 2rem;
-	}
+	&__icon--responsive {
+		display: none;
 
-	&__link {
-		border: solid 1px transparent;
-		text-decoration: none;
-		border-radius: $border-radius-default;
-		color: $color-black;
-		
-		&:hover {
-			border-color: $color-black-light;
+		i {
+			padding: 1rem;
+			background: $color-white;
+			border-radius: 50%;
 		}
 	}
 
-	&__resources--left {
-		width: 17rem;
+	&__image--responsive {
+		display: none;
 	}
 
-	&__resources--right {
-		width: 35rem;
+	// responsive
+	@include respond(big-desktop){
+		&__icon--responsive {
+			display: none;
+		}
 	}
+	
+	@include respond(tab-land){
+		&__icon--responsive {
+			display: flex;
+		}
+
+		&__content--bar{
+			display: none;
+		}
+
+		&__sidenav--icon {
+			display: none;
+		}
+	}
+	
+	@include respond(tab-port){
+		&__image--responsive {
+			display: block;
+		}
+
+		&__content{
+			margin-top: -4rem;
+		}
+		
+		&__sidenav {
+			display: none;
+		}
+
+		&__icon--responsive {
+			display: flex;
+		}
+	}
+	
+	@include respond(phone){
+		&__image--responsive {
+			display: block;
+		}
+
+		&__content{
+			margin-top: -3rem;
+		}
+
+		&__sidenav {
+			display: none;
+		}
+
+		&__icon--responsive {
+			display: flex;
+		}
+	}
+	
 }

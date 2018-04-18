@@ -122,7 +122,11 @@
 	}
 
 	&__preview {
-		padding: 2.5rem;
+		padding: 0rem 5rem;
+
+		@include respond(phone) {
+			padding: 1rem;
+		}
 	}
 
 	&__box {

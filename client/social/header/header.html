@@ -1,5 +1,13 @@
-<header class="header">
-	<rd-navbar class="navbar" rd-compact="$ctrl.$state.includes('social.buscar')" ng-class="{'navbar__search' : $ctrl.$state.includes('social.buscar') }">
+<header class="header" >
+	<div ng-if="$ctrl.$state.includes('social.ver')">
+		<div class="nav__back">
+			<md-button class="md-link" ui-sref="social.home">&lt;	Volver al Home</md-button>
+		</div>
+	</div>
+	<rd-navbar class="navbar"
+						 rd-compact="$ctrl.$state.includes('social.buscar')"
+						 ng-class="{'navbar__search' : $ctrl.$state.includes('social.buscar') }"
+						 ng-hide="$ctrl.$state.includes('social.ver')">
 		<rd-navbar-brand>
 				<div class="navbar__logo">
 					<a ui-sref="social.home({seccion: null})">

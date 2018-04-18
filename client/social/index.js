@@ -7,6 +7,7 @@ import header from './header/header.component';
 import footer from './footer/footer.component';
 import resourceCard from './components/resourceCard/resourceCard.component';
 import resourceView from './components/resourceView/resourceView.component';
+import resourceLinks from './components/resourceLinks/resourceLinks.component';
 import modalView from './components/modalView/modalView.component';
 import home from './home';
 import buscar from './buscar';
@@ -23,6 +24,7 @@ let requirements = [
 	footer,
 	resourceCard,
 	resourceView,
+	resourceLinks,
 	modalView,
 	home,
 	buscar,
