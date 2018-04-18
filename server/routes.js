@@ -32,6 +32,9 @@ export default function(app) {
   // robots & sitemap
   let map = sitemap({
     map: {
+        '/institucional': ['get'],
+        '/guia': ['get'],
+        '/?seccion=actividades': ['get'],
         '/?seccion=propuestas': ['get'],
         '/?seccion=actividades': ['get'],
         '/?seccion=herramientas': ['get'],
@@ -39,7 +42,7 @@ export default function(app) {
         '/?seccion=mediateca': ['get']
     },
     route: {
-        '/?seccion=propuestas': {
+        '/guia': {
             //lastmod: '2014-06-20',
             changefreq: 'always',
             priority: 1.0,
