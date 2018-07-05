@@ -1,3 +1,29 @@
+
+
+@font-face {
+	font-family: Din;
+	src: url("/assets/fonts/DINNextRoundedLTPro-Regular.otf") format("opentype");
+}
+
+@font-face {
+	font-family: Din;
+	font-weight: 700;
+	src: url("/assets/fonts/DINNextRoundedLTPro-Bold.otf") format("opentype");
+}
+
+@font-face {
+	font-family: Din;
+	font-weight: 500;
+	src: url("/assets/fonts/DINNextRoundedLTPro-Medium.otf") format("opentype");
+}
+
+@font-face {
+	font-family: Din;
+	font-weight: 300;
+	src: url("/assets/fonts/DINNextRoundedLTPro-Bold.Light") format("opentype");
+}
+
+
 h1,
 h1 span { 
 	font-size: $h1-font-size;
@@ -105,7 +131,7 @@ h1, h2, h3, h4, h5, h6 {
 		color: inherit;
 	}
 
-	p.#{&} {
+	p.rd__headpost {
 		font-family: inherit;
 		font-weight: $font-secondary-bold;
 		font-size: $headpost-p-font-size;

@@ -1,7 +1,7 @@
 .rd-navbar {
 	display: block;
 	position: fixed;
-	top: 0;
+	top: 0px;
 	left: 0;
 	width: 100%;
 	min-width: $screen-min-width;
@@ -92,7 +92,13 @@
 		text-decoration: none;
 	}
 
+	&:not(&--scrolled) {
+		position: sticky;
+		top: 80px;	
+	}
+
 	// hide the menu when is not scrolled
+	
 	&:not(&--scrolled) &__menu-button {
 		opacity: 0;
 		visibility: hidden;

@@ -9,7 +9,7 @@ $ronda-font-path: '../fonts' !default;
 //
 
 $font-family-primary: Roboto, 'Helvetica Neue', sans-serif !default;
-$font-family-secondary: Dosis, 'Helvetica Neue', sans-serif !default;
+$font-family-secondary: Din, Dosis, 'Helvetica Neue', sans-serif !default;
 
 // Roboto weights
 $font-primary-light:      300 !default;
@@ -26,6 +26,7 @@ $font-secondary-medium:      500 !default;
 $font-secondary-semi-bold:   600 !default;
 $font-secondary-bold:        700 !default;
 $font-secondary-extra-bold:  800 !default;
+
 
 $font-weight-primary:   $font-primary-regular !default;
 $font-weight-secondary: $font-secondary-regular !default;

@@ -1,3 +1,36 @@
+.header {
+	
+	&__institucional {
+		position: sticky;
+		height: 80px;
+		display: block;
+		top: 20;
+		left: 0;
+		width: 100%;
+		min-width: $screen-min-width;
+		z-index: $navbar-z-index;
+		background-color: $color-ba-green;
+
+		&--content {
+			margin: 0 auto;
+			height: 80px;
+			width: calc((100% - #{$container-gutter}));
+		}
+	}
+}
+
+.header-dgcye {
+	color: $color-white;
+	padding-right: 4rem;
+	font-family: $font-family-secondary;
+	font-weight: $font-secondary-medium;
+	font-size: 2rem;
+}
+
+.header-ba-svg {
+	height: 50px;
+}
+
 // <rd-navbar-item />
 @each $key, $section in $sections {
 	.rd-navbar__item[data-rd-section="#{$key}"],

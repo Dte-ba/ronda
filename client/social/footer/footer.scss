@@ -1,5 +1,5 @@
 .sitemap {
-	background: $color-black-light;
+	background: #606060;//$color-black-light;
 	padding: 1rem;
 
 	&__content {
@@ -32,4 +32,8 @@
 		margin-left: 2px;
 		margin-right: 2px;
 	}
+}
+
+.footer-ba-svg {
+	height: 50px;
 }

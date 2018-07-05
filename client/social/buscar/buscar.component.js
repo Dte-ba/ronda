@@ -23,10 +23,13 @@ export default class BuscarComponent extends SocialComponent {
     this.sectionName = this.$stateParams.seccion || 'home';
     let sections = {
       'home': {
-        caption:  '<h1><span class="font-primary-regular">Un entorno</span><br/> de educación accesible</h1> <p>para compartir prácticas de enseñanza inclusivas pensadas desde la diversidad</p>',
+        caption:  '<h1><span>Educación<br/>accesible</h1> <p>para compartir prácticas<br/>de enseñanza inclusivas<br/> pensadas desde la diversidad</p>',
+        captionSm: '<h1><span>Educación accesible</h1> <p>para compartir prácticas de enseñanza inclusivas pensadas desde la diversidad</p>',
         image: '/assets/img/banner/index_image.png',
         title: 'Bienvenido',
         description: 'Ronda es un entorno de educación accesible para compartir prácticas de enseñanza inclusivas pensadas desde la diversidad',
+        orderImage: 0,
+        orderLegend: 1
       },
       'propuestas': {
         caption:  '<h1><span class="font-primary-regular">Propuestas</span><br/>pedagógicas</h1> <p>Dinámicas, flexibles y transversales. Para diseñar tu clase  integrando  nuevas experiencias de aprendizaje.</p>',
