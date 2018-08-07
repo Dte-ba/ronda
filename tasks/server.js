@@ -74,7 +74,7 @@ export default (gulp, plugins, config) => {
 		let cdnCss = [
 			'http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css',
 			'http://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css',
-			'http://cdn.quilljs.com/1.3.5/quill.snow.min.css',
+			'http://cdn.quilljs.com/1.3.5/quill.snow.css',
 			'http://cdnjs.cloudflare.com/ajax/libs/dropzone/5.2.0/min/dropzone.min.css',
 		];
 
