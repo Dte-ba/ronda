@@ -27,6 +27,6 @@ module.exports = {
   google: {
     clientID: process.env.GOOGLE_ID || secret.GOOGLE_ID,
     clientSecret: process.env.GOOGLE_SECRET || secret.GOOGLE_SECRET,
-    callbackURL: `https://ronda.abc.gob.ar/auth/google/callback`
+    callbackURL: `https://www.ronda.abc.gob.ar/auth/google/callback`
   }
 };

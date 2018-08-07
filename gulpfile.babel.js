@@ -66,5 +66,20 @@ gulp.task('build', cb => {
 	);
 });
 
+gulp.task('build:offline', cb => {
+	runSequence(
+			'codebot',
+			[
+					'clean:dist', 
+					'inject'
+			],
+			'bump:build',
+			'webpack:dist:offline',
+			'server:dist:offline',
+			'bump:inject',
+			cb
+	);
+});
+
 gulp.task('clean:tmp', () => del(['.tmp/**/*'], {dot: true}));
 gulp.task('clean:dist', () => del(['dist/**/*'], {dot: true}));

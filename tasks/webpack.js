@@ -27,4 +27,16 @@ export default (gulp, plugins, config) => {
 					})
 					.pipe(gulp.dest(`${config.dist}/client`));
 	});
+
+
+
+	gulp.task('webpack:dist:offline', function() {
+		const webpackDistConfig = makeWebpackConfig({ BUILD: true, OFFLINE: true });
+		return gulp.src(webpackDistConfig.entry.app)
+				.pipe(webpack(webpackDistConfig))
+				.on('error', (err) => {
+					this.emit('end'); // Recover from errors
+				})
+				.pipe(gulp.dest(`${config.dist}/client`));
+});
 }

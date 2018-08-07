@@ -1,6 +1,6 @@
 {
   "name": "ronda",
-  "version": "0.5.12",
+  "version": "0.5.17",
   "description": "Ronda es un proyecto de contenidos digitales con fines educativos para que todos podamos participar y acceder.",
   "main": "server/index.js",
   "scripts": {
@@ -36,6 +36,7 @@
     "express-zip": "^2.0.1",
     "fast-json-patch": "^2.0.6",
     "fs-extra": "^4.0.2",
+    "gulp-download": "0.0.1",
     "install": "^0.10.4",
     "jsonwebtoken": "^8.1.0",
     "lodash": "^4.17.4",
@@ -92,6 +93,7 @@
     "dropzone": "^5.2.0",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.5",
+    "font-awesome": "^4.7.0",
     "fontkit": "^1.7.7",
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.0",
@@ -125,6 +127,7 @@
     "ngdropzone": "^2.0.2",
     "node-sass": "^4.5.3",
     "nodemon": "^1.12.1",
+    "offline-plugin": "^5.0.5",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
     "optimize-css-classnames-html": "0.0.5",
     "optimize-css-classnames-plugin": "0.0.5",

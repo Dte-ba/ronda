@@ -15,7 +15,7 @@ Instalar `gulp`
 Instalar dependencias
 
 ```
-#:npm install gulp
+#:npm install
 ```
 
 Iniciar el servidor de desarrollo
@@ -30,7 +30,13 @@ Crear un build
 #:gulp build
 ```
 
-NOTA: La primera ves es setear la variable `seedDB:true` del `server/config/environment/development.js` para crear datos necesario en la base de datos
+Crear un offline build
+
+```
+#:gulp build:offline
+```
+
+NOTA: La primera vez es setear la variable `seedDB:true` del `server/config/environment/development.js` para crear datos necesario en la base de datos
 
 ## Licencia
 

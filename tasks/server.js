@@ -68,7 +68,31 @@ export default (gulp, plugins, config) => {
 								.pipe(gulp.dest(config.root + '/dist/server/'));
 	});
 
+	gulp.task('server:offline:css', () => {
+
+		// make auto
+		let cdnCss = [
+			'http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css',
+			'http://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css',
+			'http://cdn.quilljs.com/1.3.5/quill.snow.min.css',
+			'http://cdnjs.cloudflare.com/ajax/libs/dropzone/5.2.0/min/dropzone.min.css',
+		];
+
+		plugins.download(cdnCss)
+			.pipe(gulp.dest(config.root + '/dist/client/assets/styles/'));
+		
+		gulp.src(path.join(config.root, '/node_modules/font-awesome/fonts/*.*'))
+				.pipe(gulp.dest('./dist/client/assets/fonts/'));
+		
+		gulp.src(path.join(config.root, '/node_modules/font-awesome/css/font-awesome.min.css'))
+			.pipe(gulp.dest('./dist/client/assets/styles/'));
+
+	});
+	
+
 	gulp.task('server:dist', ['server:babel', 'server:generate:index', 'server:copy']);
+
+	gulp.task('server:dist:offline', ['server:babel', 'server:generate:index', 'server:offline:css', 'server:copy']);
 
 	function checkAppReady(cb) {
 		var options = {

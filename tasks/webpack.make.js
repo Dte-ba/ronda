@@ -1,14 +1,15 @@
 'use strict';
 /*eslint-env node*/
 var webpack = require('webpack');
-var autoprefixer = require('autoprefixer');
+//var autoprefixer = require('autoprefixer');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
-var WebpackCdnPlugin = require('webpack-cdn-plugin');
+//var WebpackCdnPlugin = require('webpack-cdn-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const OptimizeCSSClassnamesPlugin = require('optimize-css-classnames-plugin');
+//const OptimizeCSSClassnamesPlugin = require('optimize-css-classnames-plugin');
+//var OfflinePlugin = require('offline-plugin');
 
 var fs = require('fs');
 var path = require('path');
@@ -16,7 +17,9 @@ var path = require('path');
 // get current version of package
 let version = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'))).version;
 
+
 module.exports = function makeWebpackConfig(options) {
+
     /**
      * Environment type
      * BUILD is for generating minified builds
@@ -24,6 +27,7 @@ module.exports = function makeWebpackConfig(options) {
     var BUILD = !!options.BUILD;
     var DEV = !!options.DEV;
     var TEST = !!options.TEST;
+    var OFFLINE = !!options.OFFLINE;
 
     let externals = {};
     let cssRule = [
@@ -58,26 +62,29 @@ module.exports = function makeWebpackConfig(options) {
     const extractSCSS = new ExtractTextPlugin('[name].[hash].css');
 
     if (BUILD){
-        externals = {
-            'angular': "angular",
-            'angular-animate': "'ngAnimate'",
-            'angular-aria': "'ngAria'",
-            'angular-cookies': "'ngCookies'",
-            'angular-resource': "'ngResource'",
-            'angular-messages': "'ngMessages'",
-            'angular-sanitize': "'ngSanitize'",
-            'angular-material': "'ngMaterial'",
-            'angular-ui-router': "'ui.router'",
-            'angular-loading-bar': "'angular-loading-bar'",
-            'restangular': "'restangular'",
-            'ng-quill': "'ngQuill'",
-            'dropzone': 'Dropzone',
-            'ngdropzone': "'thatisuday.dropzone'",
-            'ng-meta': "'ng-meta'",
-            //'md-steppers': "'md-steppers'",
-            'jquery': 'jQuery',
-            'lodash': '_'
-        };
+        
+        if (!OFFLINE) {
+            externals = {
+                'angular': "angular",
+                'angular-animate': "'ngAnimate'",
+                'angular-aria': "'ngAria'",
+                'angular-cookies': "'ngCookies'",
+                'angular-resource': "'ngResource'",
+                'angular-messages': "'ngMessages'",
+                'angular-sanitize': "'ngSanitize'",
+                'angular-material': "'ngMaterial'",
+                'angular-ui-router': "'ui.router'",
+                'angular-loading-bar': "'angular-loading-bar'",
+                'restangular': "'restangular'",
+                'ng-quill': "'ngQuill'",
+                'dropzone': 'Dropzone',
+                'ngdropzone': "'thatisuday.dropzone'",
+                'ng-meta': "'ng-meta'",
+                //'md-steppers': "'md-steppers'",
+                'jquery': 'jQuery',
+                'lodash': '_'
+            };
+        }
 
         htmlLoader = [{
             loader: 'html-loader'
@@ -242,9 +249,16 @@ module.exports = function makeWebpackConfig(options) {
     // Reference: https://github.com/ampedandwired/html-webpack-plugin
     // Render index.html
     if(!TEST) {
+        let template = 'client/_index.html';
+        if (BUILD){
+            template = 'client/_index.prod.html';
+            if (OFFLINE) {
+                template = 'client/_index.offline.html';
+            }
+        }
         let htmlConfig = {
-            template: BUILD ? 'client/_index.prod.html' : 'client/_index.html',
-            filename: BUILD ? '../../dist/client/index.html' : '../../client/index.html',
+            template: template,
+            filename: '../../dist/client/index.html',
             alwaysWriteToDisk: !BUILD,
             minify: {
                 removeComments: true,
@@ -322,17 +336,19 @@ module.exports = function makeWebpackConfig(options) {
                 }
             })
         );
+
+        //if (OFFLINE) {
+        //    config.plugins.push(new OfflinePlugin({
+        //        externals: ['index.html'],
+        //    }))
+        //}
     }
 
     if(DEV) {
         config.plugins.push(
             // Reference: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
             // Define free global variables
-            new webpack.DefinePlugin({
-                'process.env': {
-                    NODE_ENV: '"development"'
-                }
-            })
+            new webpack.DefinePlugin()
         );
     }
 
