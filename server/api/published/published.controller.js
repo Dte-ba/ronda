@@ -127,12 +127,17 @@ export function download(req, res, next) {
 		.populate('files')
 		.exec()
 		.then(p => {
-			res.zip(p.files.map(f => {
-				return {
-					path: path.join(config.uploads, f.relative),
-					name: f.name
-				}
-			}), `${p.title}.zip`);
+			if (p.files.length === 1) {
+				const f = p.files[0];
+				res.download(path.join(config.uploads, f.relative), `${f.name}`);
+			} else {
+				res.zip(p.files.map(f => {
+					return {
+						path: path.join(config.uploads, f.relative),
+						name: f.name
+					}
+				}), `${p.title}.zip`);
+			}
 		});
 }
 

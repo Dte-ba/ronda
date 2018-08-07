@@ -348,7 +348,11 @@ module.exports = function makeWebpackConfig(options) {
         config.plugins.push(
             // Reference: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
             // Define free global variables
-            new webpack.DefinePlugin()
+            new webpack.DefinePlugin({
+                'process.env': {
+                    NODE_ENV: '"development"'
+                }
+            })
         );
     }
 
