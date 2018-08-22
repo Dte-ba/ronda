@@ -75,10 +75,16 @@
 				</div>
 			</div>
 			<div class="post__image--grid" ng-if="module.moduleType === 'image-grid'"  layout="row">
-					<div ng-repeat="image in module.content" flex="33">
-						<img ng-src="{{image.src}}" alt="{{image.description}}">
-					</div>
+				<div ng-repeat="image in module.content" flex="33">
+					<img ng-src="{{image.src}}" alt="{{image.description}}">
 				</div>
+			</div>
+			<div class="post__medios--video" ng-if="module.moduleType === 'medios'" layout="column">
+					<iframe ng-src="{{$rdPostController.trustSrc(module.content)}}" 
+									frameborder="0" allow="autoplay; encrypted-media"
+									allowfullscreen>
+					</iframe>
+			</div>
 		</li>
 	</ul>
 

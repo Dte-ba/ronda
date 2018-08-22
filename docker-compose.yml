@@ -5,13 +5,15 @@ services:
     container_name: mongo
     image: mongo
     volumes:
-      - ./data:/data/db
-    ports:
-      - "27017:27017"
+      - ./mongo-data:/data/db
   ronda:
-    image: ronda
+    image: delmosaurio/ronda:testing
     build: .
     environment:
       NODE_ENV: production
+      MONGODB_URI: "mongodb://mongo/ronda"
+      PORT: 3000
     ports:
       - 3000:3000
+    depends_on:
+      - mongo

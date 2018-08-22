@@ -45,3 +45,5 @@ server/auth/available-emails.json
 # uploads
 uploads/*
 !uploads/.gitkeep 
+
+mongo-data
