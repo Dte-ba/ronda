@@ -141,6 +141,14 @@
 
 }
 
+.post__medios--video {
+	iframe {
+		height: 400px;
+		width: 100%;
+	}
+	margin-bottom: 2rem;
+}
+
 // DRAG AND DROP
 .rd-post {
 

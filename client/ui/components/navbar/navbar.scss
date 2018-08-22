@@ -199,3 +199,10 @@
 		display: none;
 	}
 }
+
+@include respond(phone){
+	.rd-navbar__menu-button {
+		opacity: 1 !important;
+		visibility: visible !important;
+	}
+}

@@ -33,7 +33,7 @@ var all = {
   ip: process.env.IP || '0.0.0.0',
 
   // uploads folder
-  uploads: path.join(rootPath, 'uploads'),
+  uploads: process.env.UPLOADS_PATH || path.join(rootPath, 'uploads'),
 
   // Should we populate the DB with sample data?
   seedDB: false,

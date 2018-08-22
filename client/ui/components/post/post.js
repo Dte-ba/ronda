@@ -28,6 +28,26 @@ class TextDialogController {
 	}
 }
 
+class MediosDialogController {
+	/*@ngInject*/
+	constructor($scope, $mdDialog){
+		this.$scope = $scope;
+		this.$mdDialog = $mdDialog;
+	}
+
+	cancel(){
+		this.$mdDialog.hide(false);
+	}
+
+	aceptar(){
+		this.$mdDialog.hide(true);
+	}
+
+	clear(){
+		this.$scope.currentUrl = '';
+	}
+}
+
 class MediaDialogController {
 	/*@ngInject*/
 	constructor($scope, $mdDialog, Util, $timeout){
@@ -90,7 +110,7 @@ class MediaDialogController {
 
 class RdPostController {
 	/*@ngInject*/
-	constructor($scope, $element, $timeout, $mdDialog){
+	constructor($scope, $element, $timeout, $mdDialog, $sce){
 		this.$scope = $scope;
     this.$element = $element;
     this.$timeout = $timeout;
@@ -103,6 +123,8 @@ class RdPostController {
 		this.$scope.currentText = '';
 		this.textEditing = false;
 		this.mediaEditing = false;
+		this.mediosEditing = false;
+		this.$sce = $sce;
 		this.models = {
 			selected: null
 		};
@@ -188,6 +210,38 @@ class RdPostController {
     });
 	}
 
+	addMedios(ev) {
+
+		this.$mdDialog.show({
+			controller: MediosDialogController,
+			scope: this.$scope,
+			preserveScope: true,
+      template: require('./medios-dialog.tmpl.html'),
+      parent: angular.element(document.body),
+      targetEvent: ev,
+			clickOutsideToClose: false,
+			controllerAs: '$ctrl',
+			fullscreen: false, // Only for -xs, -sm breakpoints.
+    })
+    .then((add) => {
+      if (add && !this.mediosEditing){
+				if (_.trim(this.$scope.currentUrl) !== ''){
+					this.getModel().push({
+						moduleType: 'medios',
+						content: this.$scope.currentUrl
+					});
+					this.$scope.currentUrl = '';
+				}
+			}
+		});
+		
+	}
+
+	trustSrc = function(src) {
+		src = src || '';
+		var url = src.replace("watch?v=", "/embed/");
+    return this.$sce.trustAsResourceUrl(url);
+  }
 
 }
 

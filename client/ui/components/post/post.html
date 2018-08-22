@@ -43,10 +43,19 @@
 			</div>
 		</div>
 		<div class="post__image--grid" ng-if="module.moduleType === 'image-grid'"  layout="row">
-				<div ng-repeat="image in module.content" flex="33">
-					<img ng-src="{{image.src}}" alt="{{image.description}}">
-				</div>
+			<div ng-repeat="image in module.content" flex="33">
+				<img ng-src="{{image.src}}" alt="{{image.description}}">
 			</div>
+		</div>
+
+		<!-- medios -->
+		<div class="post__medios--video" ng-if="module.moduleType === 'medios'" layout="column">
+				<iframe ng-src="{{$rdPostController.trustSrc(module.content)}}" 
+								frameborder="0" allow="autoplay; encrypted-media"
+								allowfullscreen>
+				</iframe>
+		</div>
+			
 	</li>
 </ul>
 
@@ -82,11 +91,11 @@
 			<i class="ri ri-mas-texto"></i> Texto
 		</md-button>
 		<md-button class="md-raised post__button" layout="row" ng-click="$rdPostController.addMedia($event)">
-			<i class="ri ri-mas-imagen"></i> Media
+			<i class="ri ri-mas-imagen"></i> Imágenes
 		</md-button>
-		<!--<md-button class="md-raised post__button" layout="row">
+		<md-button class="md-raised post__button" layout="row" ng-click="$rdPostController.addMedios($event)">
 			<i class="ri ri-mas-medios"></i> Medios
-		</md-button>-->
+		</md-button>
 		<md-button class="md-raised post__button" layout="row" ng-click="$rdPostController.addDivisor($event)">
 			<i class="ri ri-divisor"></i> Divisor
 		</md-button>

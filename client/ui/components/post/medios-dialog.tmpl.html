@@ -1,0 +1,32 @@
+<md-dialog class="post-text__dialog" aria-label="Agregar módulo de texto">
+	<form ng-cloak>
+		<md-toolbar>
+			<div class="md-toolbar-tools post-text__toolbar">
+				<h2><i class="ri ri-mas-medios"></i> Insertar nuevo módulo de video</h2>
+			</div>
+		</md-toolbar>
+    
+    <div layout="row" layout-align="center center">
+      <div flex="80">
+        <md-content >
+          <md-input-container class="md-icon-float md-block">
+            <!-- Use floating label instead of placeholder -->
+            <label>URL Video</label>
+            <md-icon class="mi">videocam</md-icon>
+            <input type="url" ng-model="currentUrl" type="text">
+          </md-input-container>
+        </md-content>
+      </div>
+    </div>
+
+		<md-dialog-actions layout="row">
+			<span flex></span>
+			<md-button class="md-raised post__button" ng-click="$ctrl.aceptar()">
+				Aceptar
+			</md-button>
+			<md-button class="md-raised post__button" ng-click="$ctrl.cancel()">
+				Cancelar
+			</md-button>
+		</md-dialog-actions>
+	</form>
+</md-dialog>
