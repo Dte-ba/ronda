@@ -38,6 +38,14 @@ Crear un offline build
 
 NOTA: La primera vez es setear la variable `seedDB:true` del `server/config/environment/development.js` para crear datos necesario en la base de datos
 
+# Docker
+
+```
+gulp build
+
+docker-compose -d
+```
+
 ## Licencia
 
 MIT License
