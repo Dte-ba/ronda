@@ -64,7 +64,8 @@ class MediaDialogController {
     this.dzOptions = {
       url : '/upload?relative=' + this.$scope.relative,
       paramName : 'Imágen',
-      //maxFilesize : '10',
+	  //maxFilesize : '10',
+	  // maxFilesize : 1024 * 5,
       acceptedFiles : 'image/jpeg, images/jpg, image/png',
       addRemoveLinks : true,
       headers: Util.getHeaders()

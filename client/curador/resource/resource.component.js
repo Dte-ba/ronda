@@ -190,7 +190,7 @@ export default class ResourceComponent extends CuradorComponent {
 			paramName : 'Imágen',
 			maxFiles: 1,
 			clickable: '.dz-tumbnail-clickable',
-			maxFilesize : 1024,
+			maxFilesize : 1024 * 5,
 			timeout: 18000000,
       acceptedFiles : 'image/*',
       addRemoveLinks : false,

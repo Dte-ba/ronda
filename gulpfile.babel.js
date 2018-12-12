@@ -27,8 +27,8 @@ gulp.task('serve', cb => {
 	runSequence(
 			'codebot',
 			[
-					'clean:tmp', 
-					'inject'
+				'clean:tmp', 
+				'inject'
 			],
 			'webpack:dev',
 			'start:server',
