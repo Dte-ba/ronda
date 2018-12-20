@@ -88,9 +88,14 @@ export default (gulp, plugins, config) => {
 			.pipe(gulp.dest('./dist/client/assets/styles/'));
 
 	});
+
+	gulp.task('server:clean', function () {
+    return gulp.src(config.root + '/dist/server/config/secret.js')
+        .pipe(plugins.clean({force: true}));
+});
 	
 
-	gulp.task('server:dist', ['server:babel', 'server:generate:index', 'server:copy']);
+	gulp.task('server:dist', ['server:babel', 'server:generate:index', 'server:copy', 'server:clean']);
 
 	gulp.task('server:dist:offline', ['server:babel', 'server:generate:index', 'server:offline:css', 'server:copy']);
 

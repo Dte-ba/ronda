@@ -45,5 +45,8 @@ server/auth/available-emails.json
 # uploads
 uploads/*
 !uploads/.gitkeep 
+ronda-uploads
 
 mongo-data
+
+docker-compose.debug.yml

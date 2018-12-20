@@ -9,6 +9,26 @@ import Category from '../api/category/category.model';
 import config from './environment/';
 
 export default function seedDatabaseIfNeeded() {
+
+  // seed user password
+  const adminUser = process.env.ADMIN_USER;
+  const adminPWD = process.env.ADMIN_PWD;
+
+   if (adminUser && adminPWD) {
+    User.find({ email: adminUser })
+    .then(admin => {
+      User.create({
+        provider: 'local',
+        role: 'admin',
+        name: 'Admin',
+        email: 'admin@ronda',
+        password: 'admin'
+      })
+      .then(() => console.log('finished populating admin'))
+      .catch(err => console.log('error populating admin', err));
+    });
+   }
+
   if(!config.seedDB) {
     return;
   }

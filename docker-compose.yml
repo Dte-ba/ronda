@@ -5,7 +5,7 @@ services:
     container_name: mongo
     image: mongo
     volumes:
-      - ./mongo-data:/data/db
+      - mongo-ronda:/data/db
   ronda:
     image: delmosaurio/ronda:testing
     build: .
@@ -13,7 +13,18 @@ services:
       NODE_ENV: production
       MONGODB_URI: "mongodb://mongo/ronda"
       PORT: 3000
+      ADMIN_USER: "admin@ronda"
+      ADMIN_PWD: "admin"
+    volumes:
+      - ronda-uploads:/var/lib/uploads
+      - ./server/config/secret.js:/usr/src/app/server/config/secret.js
     ports:
       - 3000:3000
     depends_on:
       - mongo
+
+volumes:
+  mongo-ronda:
+    driver: local
+  ronda-uploads:
+    driver: local

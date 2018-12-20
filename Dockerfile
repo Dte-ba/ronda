@@ -15,6 +15,11 @@ RUN apk add --no-cache git \
 
 COPY dist/ .
 
+# Configure uploads
+VOLUME /var/lib/uploads
+
+ENV UPLOADS_PATH /var/lib/uploads
+
 EXPOSE 3000
 
 CMD ["node", "server/index.js"]
