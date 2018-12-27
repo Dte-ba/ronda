@@ -46,6 +46,18 @@ gulp build
 docker-compose -d
 ```
 
+# Docker Production
+
+Modificar el path `./server/config/secret.js` dentro de `docker-compose.prod.yml` con el correspondiente
+
+Modificar admin `ADMIN_USER: "admin@ronda"` con el correspondiente
+Modificar admin pwd `ADMIN_PWD: "SUPERSECRET"` con el correspondiente
+
+
+```
+sudo docker-compose -f docker-compose.prod.yml up -d
+```
+
 ## Licencia
 
 MIT License
